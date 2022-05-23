@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="mask-icon" href="/images/rocket_1222543_easyicon.net.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kebabshellgithub.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":80,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"slideLeftIn","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="面试题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 208道面试题">
+<meta property="og:url" content="https://kebabshellgithub.github.io/2020/05/03/%E5%AF%B9%E4%BA%8EJava-208%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9A%84%E8%BD%AC%E8%BD%BD%E5%92%8C%E8%A1%A5%E5%85%85/index.html">
+<meta property="og:site_name" content="秋早亦朝">
+<meta property="og:description" content="面试题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kebabshellgithub.github.io/18.png">
+<meta property="og:image" content="https://kebabshellgithub.github.io/20.png">
+<meta property="og:image" content="https://kebabshellgithub.github.io/24.png">
+<meta property="article:published_time" content="2020-05-03T16:33:38.000Z">
+<meta property="article:modified_time" content="2022-05-23T16:10:17.286Z">
+<meta property="article:author" content="KebabShell">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kebabshellgithub.github.io/18.png">
+
+
+<link rel="canonical" href="https://kebabshellgithub.github.io/2020/05/03/%E5%AF%B9%E4%BA%8EJava-208%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9A%84%E8%BD%AC%E8%BD%BD%E5%92%8C%E8%A1%A5%E5%85%85/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kebabshellgithub.github.io/2020/05/03/%E5%AF%B9%E4%BA%8EJava-208%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9A%84%E8%BD%AC%E8%BD%BD%E5%92%8C%E8%A1%A5%E5%85%85/","path":"2020/05/03/对于Java-208道面试题的转载和补充/","title":"Java 208道面试题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java 208道面试题 | 秋早亦朝</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?5e2684a539c5d87042f60cb2b8d78c36"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="秋早亦朝" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">秋早亦朝</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">KebabShell</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="KebabShell"
+      src="/images/hexo.jpg">
+  <p class="site-author-name" itemprop="name">KebabShell</p>
+  <div class="site-description" itemprop="description">纯个人记录</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KebabShellGitHub" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KebabShellGitHub" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kebabshell@163.com" title="E-Mail → mailto:kebabshell@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2837329130" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2837329130" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kebabshellgithub.github.io/2020/05/03/%E5%AF%B9%E4%BA%8EJava-208%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9A%84%E8%BD%AC%E8%BD%BD%E5%92%8C%E8%A1%A5%E5%85%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/hexo.jpg">
+      <meta itemprop="name" content="KebabShell">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋早亦朝">
+      <meta itemprop="description" content="纯个人记录">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java 208道面试题 | 秋早亦朝">
+      <meta itemprop="description" content="面试题">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java 208道面试题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-03 16:33:38" itemprop="dateCreated datePublished" datetime="2020-05-03T16:33:38+00:00">2020-05-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">面试题</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>转载自<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU3NDg0MTY0NQ==&mid=2247484222&idx=1&sn=6020dbe6bda41b6336fe17230ff930f2&chksm=fd2d757cca5afc6abad8691904ab2ce2fb9d281b5beddc844f26a3c9d3aa58e84534c64a5fde&mpshare=1&scene=1&srcid=0503YYBwTE0oaDOGwokrBCVM&sharer_sharetime=1588491352292&sharer_shareid=4f0af321b2b901e9fe2d498232abbdfa&key=487c7202d8381ef89d1067f387b44319fcb4c6c58edab2621394fdf239aad58e03897c12a67358765417293d542d0e14229d5c2bd47569b34703f47e95a639412b8528c45013139c5cbba04c4bbc5319&ascene=1&uin=MjQ2NzUxODg0MA==&devicetype=Windows+10&version=62080079&lang=zh_CN&exportkey=A2NzfchKFY6GIvokjYTjlLQ=&pass_ticket=Z1k6p72ydUN/GhgEdb0+p1TwmhDd8BcUBoCi37e9alvUO9FW2iLSknb8EtRQeVEw">这篇文章</a></p>
+<ol>
+<li><p>JDK 和 JRE 有什么区别？</p>
+<ul>
+<li>JDK是Java Development Kit(Java开发工具包)的简称，在开发的时候需要</li>
+<li>JRE是Java Runtime Environment(Java运行环境)的简称，运行Java程序只需要它</li>
+</ul>
+</li>
+<li><p><code>==</code> 和 <code>equals</code> 的区别</p>
+<p> <code>==</code>：对于基本类型(Java有8种基本类型，<code>byte</code>、<code>boolean</code>、<code>char</code>、<code>double</code>、<code>float</code>、<code>int</code>、<code>long</code>、<code>short</code>，而<code>String</code>是引用类型)，比较的是值；对于引用类型，比较的是引用<br> <code>equals</code>：<code>equals</code>本质上是<code>==</code></p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">this</span> == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 只是<code>String</code>和<code>Integer</code>等重写了<code>equals</code>方法，把它变成了值比较<br> 所以说自定义引用类型建议重写<code>equals</code>方法，建议也一起重写<code>hashcode</code>方法</p>
+</li>
+<li><p>两个对象的 hashCode()相同，则 equals()也一定为 true，对吗？<br> 错。<br> 如果两个对象equals相等，那么这两个对象的HashCode一定也相同<br> 如果两个对象的HashCode相同，不代表两个对象就相同，只能说明这两个对象在散列存储结构中，存放于同一个位置<br> 对于<code>hashcode</code>，请<a target="_blank" rel="noopener" href="https://www.cnblogs.com/whgk/p/6071617.html">参考这篇文章</a></p>
+</li>
+<li><p><code>final</code>在<code>Java</code>中有什么作用？</p>
+<ul>
+<li>final 修饰的类叫最终类，该类不能被继承。</li>
+<li>final 修饰的方法不能被重写。</li>
+<li>final 修饰的变量叫常量，常量必须初始化，初始化之后值就不能被修改</li>
+</ul>
+</li>
+<li><p><code>Java</code>中的<code>Math.round(-1.5)</code>等于多少？<br> 等于 -1，因为在数轴上取值时，中间值（0.5）向右取整，所以正 0.5 是往上取整，负 0.5 是直接舍弃。</p>
+</li>
+<li><p><code>String</code>属于基础的数据类型吗？<br> 见<code>2</code></p>
+</li>
+<li><p><code>Java</code>中操作字符串都有哪些类？它们之间有什么区别？<br> 操作字符串的类有：<code>String</code>、<code>StringBuffer</code>、<code>StringBuilder</code>。<br> <code>String</code>声明的是不可变的对象，每次操作都会生成新的<code>String</code>对象，然后将指针指向新的<code>String</code>对象，而<code>StringBuffer</code>、<code>StringBuilder</code>可以在原有对象的基础上进行操作，所以在经常改变字符串内容的情况下最好不要使用 <code>String</code>；<code>StringBuffer</code>比<code>StringBuilder</code>多了线程安全</p>
+</li>
+<li><p><code>String str=&quot;i&quot;</code>与<code>String str=new String(&quot;i&quot;)</code>一样吗？<br> 不一样，因为内存的分配方式不一样。<code>String str=&quot;i&quot;</code>的方式，<code>java</code>虚拟机会将其分配到常量池中；而 <code>String str=new String(&quot;i&quot;)</code> 则会被分到堆内存中。</p>
+</li>
+<li><p>如何将字符串反转？<br> 使用<code>StringBuilder</code>或者 <code>StringBuffer</code> 的 <code>reverse()</code> 方法</p>
+</li>
+<li><p><code>String</code> 类的常用方法都有那些？</p>
+<ul>
+<li>indexOf()：返回指定字符的索引。</li>
+<li>charAt()：返回指定索引处的字符。</li>
+<li>replace()：字符串替换。</li>
+<li>trim()：去除字符串两端空白。</li>
+<li>split()：分割字符串，返回一个分割后的字符串数组。</li>
+<li>getBytes()：返回字符串的 byte 类型数组。</li>
+<li>length()：返回字符串长度。</li>
+<li>toLowerCase()：将字符串转成小写字母。</li>
+<li>toUpperCase()：将字符串转成大写字符。</li>
+<li>substring()：截取字符串。</li>
+<li>equals()：字符串比较。</li>
+</ul>
+</li>
+<li><p>抽象类必须要有抽象方法吗？<br>no。</p>
+</li>
+<li><p>普通类和抽象类有哪些区别？<br>普通类不能包含抽象方法，抽象类可以包含抽象方法。<br>抽象类不能直接实例化，普通类可以直接实例化。</p>
+</li>
+<li><p>抽象类能使用 final 修饰吗？<br>不能，定义抽象类就是让其他类继承的，如果定义为 final 该类就不能被继承，这样彼此就会产生矛盾，所以 final 不能修饰抽象类</p>
+</li>
+<li><p>接口和抽象类有什么区别？<br>实现：抽象类的子类使用 extends 来继承；接口必须使用 implements 来实现接口。<br>构造函数：抽象类可以有构造函数；接口不能有。<br>main 方法：抽象类可以有 main 方法，并且我们能运行它；接口不能有 main 方法。<br>实现数量：类可以实现很多个接口；但是只能继承一个抽象类。<br>访问修饰符：接口中的方法默认使用 public 修饰；抽象类中的方法可以是任意访问修饰符。</p>
+</li>
+<li><p>java 中 IO 流分为几种？<br>按功能来分：输入流（input）、输出流（output）。<br>按类型来分：字节流和字符流。<br>字节流和字符流的区别是：字节流按 8 位传输以字节为单位输入输出数据，字符流按 16 位传输以字符为单位输入输出数据。(答案这么写，不过貌似debug会判断编码，8位或16位)</p>
+</li>
+<li><p>BIO、NIO、AIO 有什么区别？</p>
+<ul>
+<li>BIO：Block IO 同步阻塞式 IO，就是我们平常使用的传统 IO，它的特点是模式简单使用方便，并发处理能力低。</li>
+<li>NIO：New IO 同步非阻塞 IO，是传统 IO 的升级，客户端和服务器端通过 Channel（通道）通讯，实现了多路复用。</li>
+<li>AIO：Asynchronous IO 是 NIO 的升级，也叫 NIO2，实现了异步非堵塞 IO ，异步 IO 的操作基于事件和回调机制。</li>
+</ul>
+</li>
+<li><p>Files的常用方法都有哪些？</p>
+<ul>
+<li>Files.exists()：检测文件路径是否存在。</li>
+<li>Files.createFile()：创建文件。</li>
+<li>Files.createDirectory()：创建文件夹。</li>
+<li>Files.delete()：删除一个文件或目录。</li>
+<li>Files.copy()：复制文件。</li>
+<li>Files.move()：移动文件。</li>
+<li>Files.size()：查看文件个数。</li>
+<li>Files.read()：读取文件。</li>
+<li>Files.write()：写入文件。</li>
+</ul>
+</li>
+<li><p>java 容器都有哪些？<br><img src="/18.png" alt="容器"></p>
+</li>
+<li><p><code>Collection</code> 和 <code>Collections</code> 有什么区别？</p>
+<ul>
+<li><code>java.util.Collection</code> 是一个集合接口（集合类的一个顶级接口）。它提供了对集合对象进行基本操作的通用接口方法。<code>Collection</code>接口在<code>Java</code> 类库中有很多具体的实现。<code>Collection</code>接口的意义是为各种具体的集合提供了最大化的统一操作方式，其直接继承接口有<code>List</code>与<code>Set</code>。</li>
+<li><code>Collections</code>则是集合类的一个工具类&#x2F;帮助类，其中提供了一系列静态方法，用于对集合中元素进行排序、搜索以及线程安全等各种操作。</li>
+</ul>
+</li>
+<li><p><code>List</code>、<code>Set</code>、<code>Map</code> 之间的区别是什么？<br><img src="/20.png" alt="20"></p>
+</li>
+<li><p><code>HashMap</code> 和 <code>Hashtable</code> 有什么区别？</p>
+<ul>
+<li>hashMap去掉了HashTable 的contains方法，但是加上了containsValue（）和containsKey（）方法。</li>
+<li>hashTable同步的，而HashMap是非同步的，效率上逼hashTable要高。</li>
+<li>hashMap允许空键值，而hashTable不允许。<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/williamjie/p/9099141.html">这篇文章挺好</a></li>
+</ul>
+</li>
+<li><p>如何决定使用 <code>HashMap</code> 还是 <code>TreeMap</code>？<br>对于在Map中插入、删除和定位元素这类操作，HashMap是最好的选择。然而，假如你需要对一个有序的key集合进行遍历，TreeMap是更好的选择。基于你的collection的大小，也许向HashMap中添加元素会更快，将map换为TreeMap进行有序key的遍历。</p>
+</li>
+<li><p>说一下 <code>HashMap</code> 的实现原理？</p>
+<ul>
+<li>HashMap概述：HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。</li>
+<li>HashMap的数据结构：在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，HashMap也不例外。HashMap实际上是一个“链表散列”的数据结构，即数组和链表的结合体。</li>
+<li>当我们往Hashmap中put元素时,首先根据key的hashcode重新计算hash值,根绝hash值得到这个元素在数组中的位置(下标),如果该数组在该位置上已经存放了其他元素,那么在这个位置上的元素将以链表的形式存放,新加入的放在链头,最先加入的放入链尾.如果数组中该位置没有元素,就直接将该元素放到数组的该位置上。</li>
+<li>需要注意Jdk 1.8中对HashMap的实现做了优化,当链表中的节点数据超过八个之后,该链表会转为红黑树来提高查询效率,从原来的O(n)到O(logn)</li>
+</ul>
+</li>
+<li><p>说一下 <code>HashSet</code> 的实现原理？</p>
+<ul>
+<li>HashSet底层由HashMap实现</li>
+<li>HashSet的值存放于HashMap的key上</li>
+<li>HashSet的value统一为PRESENT<br><img src="/24.png" alt="24"></li>
+</ul>
+</li>
+<li><p><code>ArrayList</code> 和 <code>LinkedList</code> 的区别是什么？<br>最明显的区别是<code>ArrrayList</code>底层的数据结构是数组，支持随机访问，而 <code>LinkedList</code> 的底层数据结构是双向循环链表，不支持随机访问。使用下标访问一个元素，<code>ArrayList</code> 的时间复杂度是 O(1)，而 <code>LinkedList</code> 是 O(n)。顺序插入的速度ArrayList会快些，LinkedList的速度回稍慢一些。因为ArrarList只是在指定的位置上赋值即可，而LinkedList则需要创建Node对象，并且需要建立前后关联，如果对象较大的话，速度会慢一些。基于上面的理解LinkedList的占用的内存空间要大一些。</p>
+</li>
+<li><p>如何实现数组和 List 之间的转换？</p>
+<ul>
+<li>List转换成为数组：调用ArrayList的toArray方法。</li>
+<li>数组转换成为List：调用Arrays的asList方法。</li>
+</ul>
+</li>
+<li><p><code>ArrayList</code> 和 <code>Vector</code> 的区别是什么？</p>
+<ul>
+<li>Vector是同步的，而ArrayList不是。然而，如果你寻求在迭代的时候对列表进行改变，你应该使用CopyOnWriteArrayList。</li>
+<li>ArrayList比Vector快，它因为没有同步，不会过载。</li>
+<li>ArrayList更加通用，因为我们可以使用Collections工具类轻易地获取同步列表和只读列表。</li>
+<li>ArrayList与Vector都可以设置初始的空间大小。Vector可以指定增长因子，而ArrayList不行，而且两者默认扩容的大小也是不一样的，一个1.5倍；一个是2倍而且还可以指定。</li>
+</ul>
+</li>
+</ol>
+<p>为什么ArrayList的elementData是用transient修饰的<br>说明：ArrayList实现了Serializable接口，这意味着ArrayList是可以被序列化的，用transient修饰elementData意味着我不希望elementData数组被序列化<br>理解：序列化ArrayList的时候，ArrayList里面的elementData未必是满的，比方说elementData有10的大小，但是我只用了其中的3个，那么是否有必要序列化整个elementData呢？显然没有这个必要，因此ArrayList中重写了writeObject方法。<br>优点：这样做既提高了序列化的效率，减少了无意义的序列化；而且还减少了序列化后文件大小。<br>28. <code>Array</code> 和 <code>ArrayList</code> 有何区别？<br>    - Array可以容纳基本类型和对象，而ArrayList只能容纳对象。<br>    - Array没有提供ArrayList那么多功能，比如addAll、removeAll和iterator等。<br>29. 在 Queue 中 poll()和 remove()有什么区别？<br>    poll() 和 remove() 都是从队列中取出一个元素，但是 poll() 在获取元素失败的时候会返回空，但是 remove() 失败的时候会抛出异常。<br>30. 哪些集合类是线程安全的？<br>    - Vector：就比Arraylist多了个同步化机制（线程安全），因为效率较低，现在已经不太建议使用。在web应用中，特别是前台页面，往往效率（页面响应速度）是优先考虑的。<br>    - Statck：堆栈类，先进后出。<br>    - Hashtable：就比hashmap多了个线程安全。<br>    - Enumeration：枚举，相当于迭代器。<br>31. 迭代器 Iterator 是什么？<br>    迭代器是一种设计模式，它是一个对象，它可以遍历并选择序列中的对象，而开发人员不需要了解该序列的底层结构。迭代器通常被称为“轻量级”对象，因为创建它的代价小。<br>32. Iterator 怎么使用？有什么特点？<br>    Java中的Iterator功能比较简单，并且只能单向移动：<br>    (1) 使用方法iterator()要求容器返回一个Iterator。第一次调用Iterator的next()方法时，它返回序列的第一个元素。注意：iterator()方法是java.lang.Iterable接口,被Collection继承。<br>    (2) 使用next()获得序列中的下一个元素。<br>    (3) 使用hasNext()检查序列中是否还有元素。<br>    (4) 使用remove()将迭代器新返回的元素删除。<br>    Iterator是Java迭代器最简单的实现，为List设计的ListIterator具有更多的功能，它可以从两个方向遍历List，也可以从List中插入和删除元素。<br>33. Iterator 和 ListIterator 有什么区别？<br>    - Iterator可用来遍历Set和List集合，但是ListIterator只能用来遍历List。<br>    - Iterator对集合只能是前向遍历，ListIterator既可以前向也可以后向。<br>    - ListIterator实现了Iterator接口，并包含其他的功能，比如：增加元素，替换元素，获取前一个和后一个元素的索引，等等。<br>35. 并行和并发有什么区别？<br>    - 并行是指两个或者多个事件在同一时刻发生；而并发是指两个或多个事件在同一时间间隔发生。<br>    - 并行是在不同实体上的多个事件，并发是在同一实体上的多个事件。<br>    - 在一台处理器上“同时”处理多个任务，在多台处理器上同时处理多个任务。如hadoop分布式集群。<br>    - 所以并发编程的目标是充分的利用处理器的每一个核，以达到最高的处理性能。<br>36. 线程和进程的区别？</p>
+<p><em><strong>未完待续。。。</strong></em></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/05/01/%E4%BA%86%E8%A7%A3refreshContext/" rel="prev" title="refreshContext">
+                  <i class="fa fa-chevron-left"></i> refreshContext
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/05/12/Java%E5%9F%BA%E7%A1%80/" rel="next" title="Java基础">
+                  Java基础 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KebabShell</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

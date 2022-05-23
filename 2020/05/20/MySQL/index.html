@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="mask-icon" href="/images/rocket_1222543_easyicon.net.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kebabshellgithub.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":80,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"slideLeftIn","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL">
+<meta property="og:url" content="https://kebabshellgithub.github.io/2020/05/20/MySQL/index.html">
+<meta property="og:site_name" content="秋早亦朝">
+<meta property="og:description" content="MySQL">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/12/11/FTig3WpVDBNjdOv.png">
+<meta property="og:image" content="https://img.kebabshell.space/1062001-20180806105300673-894487905.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210105200559313.png">
+<meta property="og:image" content="https://img.kebabshell.space/16a95c0fe86555ed">
+<meta property="og:image" content="https://img.kebabshell.space/16a95c1084c440b4">
+<meta property="og:image" content="https://img.kebabshell.space/16a95c108ee1da43">
+<meta property="og:image" content="https://img.kebabshell.space/16a95c10f2e61ad5">
+<meta property="og:image" content="https://img.kebabshell.space/16a95c10e3449897">
+<meta property="og:image" content="https://img.kebabshell.space/image-20201220161710220.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210105181541756.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210105183755207.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210105191613506.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210105195626851.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210105195944180.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/11/3Ecsb8S1W6KYV9k.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20201214180025474.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20201214171050793.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210324135118187.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210324143558673.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210324143757095.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210324144128844.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210324144412280.png">
+<meta property="article:published_time" content="2020-05-20T16:42:16.000Z">
+<meta property="article:modified_time" content="2022-05-23T16:10:17.274Z">
+<meta property="article:author" content="KebabShell">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/12/11/FTig3WpVDBNjdOv.png">
+
+
+<link rel="canonical" href="https://kebabshellgithub.github.io/2020/05/20/MySQL/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kebabshellgithub.github.io/2020/05/20/MySQL/","path":"2020/05/20/MySQL/","title":"MySQL"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>MySQL | 秋早亦朝</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?5e2684a539c5d87042f60cb2b8d78c36"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="秋早亦朝" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">秋早亦朝</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">KebabShell</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="nav-number">1.</span> <span class="nav-text">存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB"><span class="nav-number">1.1.</span> <span class="nav-text">InnoDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MyISAM"><span class="nav-number">1.2.</span> <span class="nav-text">MyISAM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">常用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.</span> <span class="nav-text">MySQL系统数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql"><span class="nav-number">3.1.</span> <span class="nav-text">mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#information-schema"><span class="nav-number">3.2.</span> <span class="nav-text">information_schema</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#performance-schema"><span class="nav-number">3.3.</span> <span class="nav-text">performance_schema</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sys"><span class="nav-number">3.4.</span> <span class="nav-text">sys</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB-%E8%AF%A6"><span class="nav-number">4.</span> <span class="nav-text">InnoDB(详)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%90%8D%E8%AF%8D"><span class="nav-number">4.1.</span> <span class="nav-text">基本名词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">4.2.</span> <span class="nav-text">存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">4.2.1.</span> <span class="nav-text">表空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AE%B5"><span class="nav-number">4.2.2.</span> <span class="nav-text">段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%BA"><span class="nav-number">4.2.3.</span> <span class="nav-text">区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B5-x2F-%E5%9D%97"><span class="nav-number">4.2.4.</span> <span class="nav-text">页&#x2F;块</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A1%B5-B-tree-Node"><span class="nav-number">4.2.4.1.</span> <span class="nav-text">数据页 B-tree Node</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.2.4.1.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%8C"><span class="nav-number">4.2.5.</span> <span class="nav-text">行</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A1%8C%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.2.5.1.</span> <span class="nav-text">行格式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Compact"><span class="nav-number">4.2.5.1.1.</span> <span class="nav-text">Compact</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Redundant"><span class="nav-number">4.2.5.1.2.</span> <span class="nav-text">Redundant</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%BA%A2%E5%87%BA"><span class="nav-number">4.2.5.1.3.</span> <span class="nav-text">溢出</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Dynamic-%E4%B8%8E-Compressed"><span class="nav-number">4.2.5.1.4.</span> <span class="nav-text">Dynamic 与 Compressed</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">4.3.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E5%8F%B0%E7%BA%BF%E7%A8%8B"><span class="nav-number">4.4.</span> <span class="nav-text">后台线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98"><span class="nav-number">4.5.</span> <span class="nav-text">内存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%93%E5%86%B2%E6%B1%A0"><span class="nav-number">4.5.1.</span> <span class="nav-text">缓冲池</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E7%BC%93%E5%86%B2%E6%B1%A0"><span class="nav-number">4.5.1.1.</span> <span class="nav-text">管理缓冲池</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%81%9A%E6%97%A5%E5%BF%97%E7%BC%93%E5%86%B2"><span class="nav-number">4.5.2.</span> <span class="nav-text">重做日志缓冲</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Change-Buffer"><span class="nav-number">4.5.3.</span> <span class="nav-text">Change Buffer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Checkpoint"><span class="nav-number">4.5.4.</span> <span class="nav-text">Checkpoint</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E7%89%B9%E6%80%A75%E4%B8%AA"><span class="nav-number">4.6.</span> <span class="nav-text">关键特性5个</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Insert-Buffer"><span class="nav-number">4.6.1.</span> <span class="nav-text">Insert Buffer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Double-Write"><span class="nav-number">4.6.2.</span> <span class="nav-text">Double Write</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adaptive-Hash-Index"><span class="nav-number">4.6.3.</span> <span class="nav-text">Adaptive Hash Index</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Async-IO"><span class="nav-number">4.6.4.</span> <span class="nav-text">Async IO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Flush-Neighbor-Page"><span class="nav-number">4.6.5.</span> <span class="nav-text">Flush Neighbor Page</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE"><span class="nav-number">4.7.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">4.8.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#B-%E6%A0%91%E7%B4%A2%E5%BC%95"><span class="nav-number">4.8.1.</span> <span class="nav-text">B+ 树索引</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95"><span class="nav-number">4.8.1.1.</span> <span class="nav-text">聚簇索引</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95%E4%B8%8E%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95-%E6%B3%A8%E6%84%8F%E5%9B%9E%E8%A1%A8"><span class="nav-number">4.8.1.2.</span> <span class="nav-text">二级索引与联合索引( 注意回表 )</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">4.8.1.3.</span> <span class="nav-text">基本操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6"><span class="nav-number">4.8.1.4.</span> <span class="nav-text">适用条件</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#a%E3%80%81%E5%85%A8%E5%80%BC%E5%8C%B9%E9%85%8D"><span class="nav-number">4.8.1.4.1.</span> <span class="nav-text">a、全值匹配</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#b%E3%80%81%E5%8C%B9%E9%85%8D%E5%B7%A6%E8%BE%B9%E8%BF%9E%E7%BB%AD%E5%88%97"><span class="nav-number">4.8.1.4.2.</span> <span class="nav-text">b、匹配左边连续列</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c%E3%80%81%E5%8C%B9%E9%85%8D%E5%88%97%E5%89%8D%E7%BC%80"><span class="nav-number">4.8.1.4.3.</span> <span class="nav-text">c、匹配列前缀</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#d%E3%80%81%E5%8C%B9%E9%85%8D%E8%8C%83%E5%9B%B4%E5%80%BC"><span class="nav-number">4.8.1.4.4.</span> <span class="nav-text">d、匹配范围值</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#e%E3%80%81%E7%B2%BE%E7%A1%AE%E5%8C%B9%E9%85%8D%E6%9F%90%E4%B8%80%E5%88%97%E5%B9%B6%E8%8C%83%E5%9B%B4%E5%8C%B9%E9%85%8D%E5%8F%A6%E5%A4%96%E4%B8%80%E5%88%97"><span class="nav-number">4.8.1.4.5.</span> <span class="nav-text">e、精确匹配某一列并范围匹配另外一列</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#f%E3%80%81%E7%94%A8%E4%BA%8E%E6%8E%92%E5%BA%8F"><span class="nav-number">4.8.1.4.6.</span> <span class="nav-text">f、用于排序</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#g%E3%80%81%E7%94%A8%E4%BA%8E%E5%88%86%E7%BB%84"><span class="nav-number">4.8.1.4.7.</span> <span class="nav-text">g、用于分组</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%80%BB%E7%9A%84%E6%9D%A5%E8%AF%B4"><span class="nav-number">4.8.1.4.8.</span> <span class="nav-text">总的来说</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E4%BB%A3%E4%BB%B7"><span class="nav-number">4.8.1.5.</span> <span class="nav-text">索引的代价</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-number">4.8.1.6.</span> <span class="nav-text">查询优化器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95"><span class="nav-number">4.8.1.7.</span> <span class="nav-text">覆盖索引</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E6%8C%91%E9%80%89"><span class="nav-number">4.8.1.8.</span> <span class="nav-text">索引的挑选</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8F%AA%E4%B8%BA%E7%94%A8%E4%BA%8E%E6%90%9C%E7%B4%A2%E3%80%81%E6%8E%92%E5%BA%8F%E6%88%96%E5%88%86%E7%BB%84%E7%9A%84%E5%88%97%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95"><span class="nav-number">4.8.1.8.1.</span> <span class="nav-text">只为用于搜索、排序或分组的列创建索引</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%80%83%E8%99%91%E5%88%97%E7%9A%84%E5%9F%BA%E6%95%B0"><span class="nav-number">4.8.1.8.2.</span> <span class="nav-text">考虑列的基数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%88%97%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%B0%BD%E9%87%8F%E5%B0%8F"><span class="nav-number">4.8.1.8.3.</span> <span class="nav-text">索引列的类型尽量小</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%80%BC%E7%9A%84%E5%89%8D%E7%BC%80"><span class="nav-number">4.8.1.8.4.</span> <span class="nav-text">索引字符串值的前缀</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%A9%E7%B4%A2%E5%BC%95%E5%88%97%E5%9C%A8%E6%AF%94%E8%BE%83%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%AD%E5%8D%95%E7%8B%AC%E5%87%BA%E7%8E%B0"><span class="nav-number">4.8.1.8.5.</span> <span class="nav-text">让索引列在比较表达式中单独出现</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%BB%E9%94%AE%E6%8F%92%E5%85%A5%E9%A1%BA%E5%BA%8F"><span class="nav-number">4.8.1.8.6.</span> <span class="nav-text">主键插入顺序</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E5%86%97%E4%BD%99%E5%92%8C%E9%87%8D%E5%A4%8D%E7%B4%A2%E5%BC%95"><span class="nav-number">4.8.1.8.7.</span> <span class="nav-text">避免冗余和重复索引</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E6%96%87%E7%B4%A2%E5%BC%95"><span class="nav-number">4.8.2.</span> <span class="nav-text">全文索引</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E5%B8%B8%E4%BD%BF%E7%94%A8%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95-inverted-index"><span class="nav-number">4.8.2.1.</span> <span class="nav-text">通常使用倒排索引( inverted index )</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E7%B4%A2%E5%BC%95"><span class="nav-number">4.8.3.</span> <span class="nav-text">哈希索引</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">4.9.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ACID"><span class="nav-number">4.9.1.</span> <span class="nav-text">ACID</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E7%8A%B6%E6%80%81"><span class="nav-number">4.9.2.</span> <span class="nav-text">事务的状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4"><span class="nav-number">4.9.3.</span> <span class="nav-text">提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E7%82%B9"><span class="nav-number">4.9.4.</span> <span class="nav-text">保存点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redo"><span class="nav-number">4.9.5.</span> <span class="nav-text">redo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undo"><span class="nav-number">4.9.6.</span> <span class="nav-text">undo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB"><span class="nav-number">4.9.7.</span> <span class="nav-text">事务隔离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC"><span class="nav-number">4.9.8.</span> <span class="nav-text">MVCC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#purge"><span class="nav-number">4.9.9.</span> <span class="nav-text">purge</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81"><span class="nav-number">4.10.</span> <span class="nav-text">锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="nav-number">4.11.</span> <span class="nav-text">备份与恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E4%BC%98"><span class="nav-number">4.12.</span> <span class="nav-text">调优</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Explain"><span class="nav-number">4.12.1.</span> <span class="nav-text">Explain</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">高可用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="nav-number">5.1.</span> <span class="nav-text">主从复制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E8%A1%A8"><span class="nav-number">6.</span> <span class="nav-text">分表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%BA%93"><span class="nav-number">7.</span> <span class="nav-text">分库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F"><span class="nav-number">8.</span> <span class="nav-text">乱七八糟</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="KebabShell"
+      src="/images/hexo.jpg">
+  <p class="site-author-name" itemprop="name">KebabShell</p>
+  <div class="site-description" itemprop="description">纯个人记录</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KebabShellGitHub" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KebabShellGitHub" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kebabshell@163.com" title="E-Mail → mailto:kebabshell@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2837329130" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2837329130" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kebabshellgithub.github.io/2020/05/20/MySQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/hexo.jpg">
+      <meta itemprop="name" content="KebabShell">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋早亦朝">
+      <meta itemprop="description" content="纯个人记录">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="MySQL | 秋早亦朝">
+      <meta itemprop="description" content="MySQL">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-20 16:42:16" itemprop="dateCreated datePublished" datetime="2020-05-20T16:42:16+00:00">2020-05-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">MySQL</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>还有 <a href="/2021/06/11/MySQL45%E8%AE%B2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="MySQL45讲学习笔记">MySQL45讲学习笔记</a> （新的）</p>
+</blockquote>
+<h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><p><code>SHOW ENGINES</code> 查看支持的所有存储引擎</p>
+<h3 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h3><ul>
+<li>MVCC 多版本并发控制</li>
+<li>四个隔离级别</li>
+<li>next-key locking 避免幻读( phantom )</li>
+<li>插入缓存 insert buffer</li>
+<li>二次写 double write </li>
+<li>自适应哈希索引 adaptive hash index</li>
+<li>预读 read ahead</li>
+<li>重做日志 redo log</li>
+<li>聚集 clustered</li>
+</ul>
+<h3 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h3><p>[my-z[ei]m]</p>
+<ul>
+<li>不支持 事务、表锁设计</li>
+<li>支持 全文索引</li>
+<li>缓冲池只缓存索引文件，不缓存数据文件</li>
+<li>用 MyISAM 的表由 MYD 和 MYI 组成<ul>
+<li>MYD 用来存数据文件</li>
+<li>MYI 用来存索引文件</li>
+</ul>
+</li>
+<li>可用 myisampack 工具来解压缩数据文件，myisampack 使用赫夫曼编码来压缩数据<ul>
+<li>压缩后的表是只读的</li>
+</ul>
+</li>
+<li>5.0 开始，MyISAM 单表默认支持256TB的数据</li>
+<li>对于 MyISAM 存储引擎表，MySQL 数据库只缓存其索引文件，数据文件由操作系统来完成</li>
+<li>64 位支持大于 4 GB 的索引缓冲区</li>
+</ul>
+<h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><ul>
+<li>user 表 看信息</li>
+</ul>
+<p><img src="https://i.loli.net/2020/12/11/FTig3WpVDBNjdOv.png" alt="user表"></p>
+<h2 id="MySQL系统数据库"><a href="#MySQL系统数据库" class="headerlink" title="MySQL系统数据库"></a>MySQL系统数据库</h2><h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><p>核心，它存储了 MySQL 的用户账户和权限信息，一些存储过程、事件的定义信息，一些运行过程中产生的日志信息，一些帮助信息以及时区信息等</p>
+<h3 id="information-schema"><a href="#information-schema" class="headerlink" title="information_schema"></a>information_schema</h3><p>这个数据库保存着 MySQL 服务器维护的所有其他数据库的信息，比如有哪些表、哪些视图、哪些触发器、哪些列、哪些索引。这些信息并不是真实的用户数据，而是一些描述性信息，有时候也称之为元数据</p>
+<h3 id="performance-schema"><a href="#performance-schema" class="headerlink" title="performance_schema"></a>performance_schema</h3><p>这个数据库里主要保存 MySQL 服务器运行过程中的一些状态信息，算是对 MySQL 服务器的一个性能监控。包括统计最近执行了哪些语句，在执行过程的每个阶段都花费了多长时间，内存的使用情况等等信息</p>
+<h3 id="sys"><a href="#sys" class="headerlink" title="sys"></a>sys</h3><p>这个数据库主要是通过视图的形式把 information_schema 和 performance_schema 结合起来，让程序员可以更方便的了解 MySQL 服务器的一些性能信息</p>
+<h2 id="InnoDB-详"><a href="#InnoDB-详" class="headerlink" title="InnoDB(详)"></a>InnoDB(详)</h2><ul>
+<li>InnoDB是多线程的</li>
+</ul>
+<h3 id="基本名词"><a href="#基本名词" class="headerlink" title="基本名词"></a>基本名词</h3><ul>
+<li>dirty page 脏页：LRU 列表被修改的页( 因为和磁盘数据不一样了 )</li>
+</ul>
+<h3 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h3><p>存储结构 &#x3D; 表空间Tablespace( 段Segment( 区Extent( 页Page( 行Row ) ) ) )</p>
+<img src="https://img.kebabshell.space/1062001-20180806105300673-894487905.png" alt="存储结构" style="zoom: 67%;" />
+
+<h4 id="表空间"><a href="#表空间" class="headerlink" title="表空间"></a>表空间</h4><p>最高层</p>
+<ul>
+<li>启用 innodb_file_per_table 就能将每张表单独放到一个表空间<ul>
+<li>如果启用，每张表的表空间只存放 数据、索引、插入缓冲 BITmap 页，其他的如回滚( undo )信息、插入缓冲索引页、系统事务信息、二次写缓冲( Double write buffer )等还是在原来的共享表空间( ibdata1 )里</li>
+</ul>
+</li>
+</ul>
+<h4 id="段"><a href="#段" class="headerlink" title="段"></a>段</h4><p>表空间是由各个段组成的</p>
+<p>有 数据段、索引段、回滚段 等</p>
+<p>数据段 为 B+ 树的叶子节点</p>
+<p>索引段为 B+ 树的非叶子节点( 非索引节点 )</p>
+<h4 id="区"><a href="#区" class="headerlink" title="区"></a>区</h4><p>由连续页组成</p>
+<p>每个区大小都为 1 MB</p>
+<p>每次从磁盘申请 4 ~ 5 个区</p>
+<p>因为默认页 16 KB，所以一个区共 64 个连续页</p>
+<p>对压缩页就另说了</p>
+<h4 id="页-x2F-块"><a href="#页-x2F-块" class="headerlink" title="页&#x2F;块"></a>页&#x2F;块</h4><p>页是 InnoDB 中磁盘和内存交互的基本单位，也是是管理存储空间的基本单位，一般是 16 KB</p>
+<h5 id="数据页-B-tree-Node"><a href="#数据页-B-tree-Node" class="headerlink" title="数据页 B-tree Node"></a>数据页 B-tree Node</h5><p>数据页是存放记录的页</p>
+<ul>
+<li>记录按照主键值的大小串联成一个单向链表</li>
+<li>页之间组成双向链表</li>
+<li>页不是连续的，即不是页 1 页 2…</li>
+<li>一个页最少存储 2 条记录</li>
+</ul>
+<p><img src="https://img.kebabshell.space/image-20210105200559313.png" alt="image-20210105200559313"></p>
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">中文名</th>
+<th align="center">占用空间大小</th>
+<th align="center">简单描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">File Header</td>
+<td align="center">文件头部</td>
+<td align="center">38 字节</td>
+<td align="center">页的一些通用信息</td>
+</tr>
+<tr>
+<td align="center">Page Header</td>
+<td align="center">页面头部</td>
+<td align="center">56 字节</td>
+<td align="center">数据页专有的一些信息</td>
+</tr>
+<tr>
+<td align="center">Infimum + Supremum</td>
+<td align="center">最小记录和最大记录</td>
+<td align="center">26 字节</td>
+<td align="center">两个虚拟的行记录</td>
+</tr>
+<tr>
+<td align="center">User Records</td>
+<td align="center">用户记录</td>
+<td align="center">不确定</td>
+<td align="center">实际存储的行记录内容</td>
+</tr>
+<tr>
+<td align="center">Free Space</td>
+<td align="center">空闲空间</td>
+<td align="center">不确定</td>
+<td align="center">页中尚未使用的空间</td>
+</tr>
+<tr>
+<td align="center">Page Directory</td>
+<td align="center">页面目录</td>
+<td align="center">不确定</td>
+<td align="center">页中的某些记录的相对位置</td>
+</tr>
+<tr>
+<td align="center">File Trailer</td>
+<td align="center">文件尾部</td>
+<td align="center">8 字节</td>
+<td align="center">校验页是否完整</td>
+</tr>
+</tbody></table>
+<p>存储的记录会按照我们指定的行格式存储到 User Records 部分</p>
+<p>但是在一开始生成页的时候，其实并没有 User Records 这个部分，而是 Free Space</p>
+<p>每当我们插入一条记录，都会从 Free Space 的那部分，申请一个记录大小的空间，然后划分到 User Records 部分</p>
+<p>当 Free Space 部分的空间全部被 User Records 部分替代掉之后，也就意味着这个页使用完了</p>
+<p>如果还有新的记录插入的话，就需要去 <strong>申请新的页</strong></p>
+<p><img src="https://img.kebabshell.space/16a95c0fe86555ed"></p>
+<p>有两个伪记录 Infimum 和 Supremum，一个代表最小记录，一个代表最大记录</p>
+<ul>
+<li>它们并不存放在页的 User Records 部分，他们被单独放在一个称为 Infimum + Supremum 的部分</li>
+<li>Infimum记录( 也就是最小记录 )的下一条记录就是本页中主键值最小的用户记录，而本页中主键值最大的用户记录的下一条记录就是 Supremum记录( 也就是最大记录 )</li>
+</ul>
+<p><img src="https://img.kebabshell.space/16a95c1084c440b4"></p>
+<p>当删除第2条记录后：</p>
+<ul>
+<li>第 2 条记录并没有从存储空间中移除，而是把该条记录的 delete_mask 值设置为 1</li>
+<li>第 2 条记录的 next_record 值变为了 0，意味着该记录没有下一条记录了</li>
+<li>第 1 条记录的 next_record 指向了第 3 条记录</li>
+<li>最大记录 的 n_owned 值从 5 变成了 4<ul>
+<li>n_owned 是目录页</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://img.kebabshell.space/16a95c108ee1da43"></p>
+<blockquote>
+<p>当数据页中存在多条被删除掉的记录时，这些记录的 next_record 属性将会把这些被删除掉的记录组成一个垃圾链表，以备之后直接重用这部分存储空间</p>
+</blockquote>
+<p>初始情况下一个数据页里只有最小记录和最大记录两条记录，它们分属于两个分组</p>
+<p>之后每插入一条记录，都会从页目录中找到主键值比本记录的主键值大并且差值最小的槽，然后把该槽对应的记录的 n_owned 值加 1，表示本组内又添加了一条记录，直到该组中的记录数等于 8 个</p>
+<p>在一个组中的记录数等于 8 个后再插入一条记录时，会将组中的记录拆分成两个组，一个组中 4 条记录，另一个 5 条记录</p>
+<p>这个过程会在页目录中新增一个槽来记录这个新增分组中最大的那条记录的偏移量</p>
+<p><img src="https://img.kebabshell.space/16a95c10f2e61ad5"></p>
+<p><img src="https://img.kebabshell.space/16a95c10e3449897"></p>
+<p>File Trailer</p>
+<p><code>InnoDB</code>存储引擎会把数据存储到磁盘上，但是磁盘速度太慢，需要以<code>页</code>为单位把数据加载到内存中处理，如果该页中的数据在内存中被修改了，那么在修改后的某个时间需要把数据<span style="color:red">同步</span>到磁盘中。但是在同步了一半的时候中断电了咋办，这不是莫名尴尬么？为了检测一个页是否完整（也就是在同步的时候有没有发生只同步一半的尴尬情况），每个页的尾部都加了一个<code>File Trailer</code>部分，这个部分由<code>8</code>个字节组成，可以分成2个小部分：</p>
+<ul>
+<li><p>前4个字节代表页的校验和</p>
+<p>这个部分是和<code>File Header</code>中的校验和相对应的。每当一个页面在内存中修改了，在同步之前就要把它的校验和算出来，因为<code>File Header</code>在页面的前边，所以校验和会被首先同步到磁盘，当完全写完时，校验和也会被写到页的尾部，如果完全同步成功，则页的首部和尾部的校验和应该是一致的。如果写了一半儿断电了，那么在<code>File Header</code>中的校验和就代表着已经修改过的页，而在<code>File Trialer</code>中的校验和代表着原先的页，二者不同则意味着同步中间出了错。</p>
+</li>
+<li><p>后4个字节代表页面被最后修改时对应的日志序列位置（LSN）</p>
+<p>这个部分也是为了校验页的完整性的，只不过我们目前还没说<code>LSN</code>是个什么意思，所以大家可以先不用管这个属性。</p>
+</li>
+</ul>
+<p>这个<code>File Trailer</code>与<code>File Header</code>类似，都是所有类型的页通用的。</p>
+<img src="https://img.kebabshell.space/image-20201220161710220.png" alt="image-20201220161710220" style="zoom: 80%;" />
+
+<h6 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h6><ol>
+<li><p>InnoDB为了不同的目的而设计了不同类型的页，我们把用于存放记录的页叫做<code>数据页</code></p>
+</li>
+<li><p>一个数据页可以被大致划分为7个部分，分别是</p>
+<ul>
+<li><code>File Header</code>，表示页的一些通用信息，占固定的38字节</li>
+<li><code>Page Header</code>，表示数据页专有的一些信息，占固定的56个字节</li>
+<li><code>Infimum + Supremum</code>，两个虚拟的伪记录，分别表示页中的最小和最大记录，占固定的<code>26</code>个字节</li>
+<li><code>User Records</code>：真实存储我们插入的记录的部分，大小不固定</li>
+<li><code>Free Space</code>：页中尚未使用的部分，大小不确定</li>
+<li><code>Page Directory</code>：页中的某些记录相对位置，也就是各个槽在页面中的地址偏移量，大小不固定，插入的记录越多，这个部分占用的空间越多</li>
+<li><code>File Trailer</code>：用于检验页是否完整的部分，占用固定的8个字节</li>
+</ul>
+</li>
+<li><p>每个记录的头信息中都有一个<code>next_record</code>属性，从而使页中的所有记录串联成一个<code>单链表</code></p>
+</li>
+<li><p><code>InnoDB</code>会为把页中的记录划分为若干个组，每个组的最后一个记录的地址偏移量作为一个<code>槽</code>，存放在<code>Page Directory</code>中，所以在一个页中根据主键查找记录是非常快的，分为两步：</p>
+<ul>
+<li><p>通过二分法确定该记录所在的槽</p>
+</li>
+<li><p>通过记录的 next_record 属性遍历该槽所在的组中的各个记录</p>
+</li>
+</ul>
+</li>
+<li><p>每个数据页的<code>File Header</code>部分都有上一个和下一个页的编号，所以所有的数据页会组成一个<code>双链表</code></p>
+</li>
+<li><p>为保证从内存中同步到磁盘的页的完整性，在页的首部和尾部都会存储页中数据的校验和和页面最后修改时对应的<code>LSN</code>值，如果首部和尾部的校验和和<code>LSN</code>值校验不成功的话，就说明同步过程出现了问题</p>
+</li>
+</ol>
+<p>undo 页 undo Log Page</p>
+<p>系统页 System Page</p>
+<p>Transaction system Page</p>
+<p>Insert Buffer Bitmap</p>
+<p>Insert Buffer Free List</p>
+<p>Uncompressed BLOB Page</p>
+<p>compressed BLOB Page</p>
+<h4 id="行"><a href="#行" class="headerlink" title="行"></a>行</h4><p>每个页最多允许存放 16 KB &#x2F; 2 - 200 行的记录，即 7992 行</p>
+<h5 id="行格式"><a href="#行格式" class="headerlink" title="行格式"></a>行格式</h5><p>有 4 种不同类型的行格式，分别是 Compact、Redundant、Dynamic 和 Compressed</p>
+<p>指定行格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE 表名 (列的信息) ROW_FORMAT=行格式名称</span><br><span class="line">    </span><br><span class="line">ALTER TABLE 表名 ROW_FORMAT=行格式名称</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="Compact"><a href="#Compact" class="headerlink" title="Compact"></a>Compact</h6><p><img src="https://img.kebabshell.space/image-20210105181541756.png" alt="image-20210105181541756"></p>
+<p>记录被分为 额外信息 和 真实数据</p>
+<ul>
+<li>额外信息是为了描述这条记录而不得不额外添加的一些信息，分为 3 类，分别是 变长字段长度列表、NULL 值列表 和 记录头信息<ul>
+<li>变长字段长度列表<ul>
+<li>所有变长字段( 如 VARCHAR(M)、VARBINARY(M)、各种 TEXT、BLOB 类型 )的真实数据占用的字节长度，形成一个变长字段长度列表，各变长字段数据占用的字节数按照 列的顺序 <code>逆序</code> 存放<ul>
+<li>变长字段中存储多少字节的数据是不固定的，要把这些数据占用的字节数也存起来( 十六进制 )，才不至于把 MySQL 服务器搞懵</li>
+<li>变长字段长度列表中只存储值为 非 NULL 的列内容占用的长度，值为 NULL 的列的长度是不储存的</li>
+</ul>
+</li>
+<li>对于 CHAR(M) 类型的列来说，当列采用的是定长字符集时，该列占用的字节数不会被加到变长字段长度列表，而如果采用变长字符集时，该列占用的字节数也会被加到变长字段长度列表</li>
+<li><strong>逆序存放！！！</strong></li>
+</ul>
+</li>
+<li>NULL 值列表<ul>
+<li>把这些值为 NULL 的列统一管理起来，存储到 NULL 值列表中，不然存储会很占地方</li>
+<li>如果表中没有允许存储 NULL 的列，那就不会有 NULL 值列表<ul>
+<li>将每个允许存储 NULL 的列对应一个 <strong>二进制位</strong>，二进制位按照列的顺序 <strong>逆序</strong> 排列<ul>
+<li>二进制位的值为 1 时，代表该列的值为 NULL</li>
+<li>二进制位的值为 0 时，代表该列的值不为 NULL</li>
+<li><strong>逆序！！！</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>记录头信息<ul>
+<li>由固定的 5 个字节( 也就是 40 个二进制位 )组成</li>
+<li><img src="https://img.kebabshell.space/image-20210105183755207.png" alt="image-20210105183755207"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>真实数据<ul>
+<li>除了自己定义的列，还有隐藏列，如 DB_ROW_ID、DB_TRX_ID、DB_ROLL_PTR，分别表示<ul>
+<li>行 ID，唯一标识一条记录、事务 ID、回滚指针</li>
+</ul>
+</li>
+<li>InnoDB 表主键的生成策略：优先使用用户自定义主键作为主键，如果用户没有定义主键，则选取一个 Unique 键作为主键，如果表中连 Unique 键都没有定义的话，则 InnoDB 会为表默认添加一个名为 DB_ROW_ID 的隐藏列作为主键</li>
+</ul>
+</li>
+</ul>
+<h6 id="Redundant"><a href="#Redundant" class="headerlink" title="Redundant"></a>Redundant</h6><p>老，略</p>
+<p><img src="https://img.kebabshell.space/image-20210105191613506.png" alt="image-20210105191613506"></p>
+<h6 id="溢出"><a href="#溢出" class="headerlink" title="溢出"></a>溢出</h6><p>在 Compact 和 Reduntant 行格式中，对于占用存储空间非常大的列，在记录的真实数据处只会存储该列的一部分数据，把剩余的数据分散存储在几个其他的页中，然后记录的真实数据处用 20 个字节存储指向这些页的地址( 这 20 个字节中还包括这些分散在其他页面中的数据的占用的字节数 )，从而可以找到剩余数据所在的页</p>
+<p><img src="https://img.kebabshell.space/image-20210105195626851.png" alt="image-20210105195626851"></p>
+<h6 id="Dynamic-与-Compressed"><a href="#Dynamic-与-Compressed" class="headerlink" title="Dynamic 与 Compressed"></a>Dynamic 与 Compressed</h6><p>它们不会在记录的真实数据处存储字段真实数据的前 768 个字节，而是把 <strong>所有的字节</strong> 都存储到其他页面中，只在记录的真实数据处存储其他页面的地址</p>
+<p><img src="https://img.kebabshell.space/image-20210105195944180.png" alt="image-20210105195944180"></p>
+<p>与 Dynamic 不同的是，Compressed 行格式会采用压缩算法对页面进行压缩，以节省空间</p>
+<h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><p><img src="https://i.loli.net/2020/12/11/3Ecsb8S1W6KYV9k.png" alt="innodb架构图"></p>
+<p>InnoDB有多个内存块，可以认为这些内存块组成了一个大的内存池，作用：</p>
+<ul>
+<li>维护线程</li>
+<li>缓存</li>
+</ul>
+<h3 id="后台线程"><a href="#后台线程" class="headerlink" title="后台线程"></a>后台线程</h3><ul>
+<li>Master Thread</li>
+<li>IO Thread</li>
+<li>Purge Thread</li>
+<li>Page Cleaner Thread</li>
+</ul>
+<h3 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h3><p>内存组成：</p>
+<ul>
+<li>innodb_buffer_pool 缓冲池</li>
+<li>redo log_buffer 重做日志缓冲</li>
+<li>innodb_additional_men_pool_size 额外内存池</li>
+</ul>
+<h4 id="缓冲池"><a href="#缓冲池" class="headerlink" title="缓冲池"></a>缓冲池</h4><p>作用是提高性能：</p>
+<ul>
+<li>读取：硬盘读到的数据 → 缓冲池，下次读相同的页，看缓冲池有没有，没有再去硬盘找</li>
+<li>修改：改缓冲池 → 以一定频率刷新到硬盘<ul>
+<li>Checkpoint 机制</li>
+</ul>
+</li>
+</ul>
+<p>缓存的数据页类型有：</p>
+<ul>
+<li>data page 数据页</li>
+<li>index page 索引页</li>
+<li>[insert buffer 插入缓存](#Insert Buffer)</li>
+<li>[adaptive hash index 自适应哈希索引](#Adaptive Hash Index)</li>
+<li>lock info 锁信息</li>
+<li>data dictionary 数据字典</li>
+</ul>
+<p>缓冲池的组成：</p>
+<p><img src="https://img.kebabshell.space/image-20201214180025474.png" alt="组成"></p>
+<p>( 碎片：分配空间后，剩余的不够一个页( 16 KB ( 未压缩 ) )，就成了碎片 )</p>
+<p>允许多个缓冲池实例，每个页根据 hash 值平均分配到不同缓冲池实例</p>
+<h5 id="管理缓冲池"><a href="#管理缓冲池" class="headerlink" title="管理缓冲池"></a>管理缓冲池</h5><p>主要使用的 List：</p>
+<ul>
+<li>LRU List：左边是热区( new )，右边是 old，当缓冲区满了，就释放末尾的页( new 和 old 是相对 midpoint 来说的 )<ul>
+<li>防止全表扫描污染缓冲池，有：<ul>
+<li>midpoint<ul>
+<li>新读取到的页不是加入 LRU 首部，而是放入 midpoint 位置( 默认在 LRU 5&#x2F;8 处 )</li>
+<li>可以通过 innodb_old_blocks_pct 改</li>
+</ul>
+</li>
+<li>innodb_old_blocks_time<ul>
+<li>表示页读取到 mid 位置后还需要多长时间才加入 LRU 热端</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Free List：记录空闲的页<ul>
+<li>有维护一个控制信息，记录了头&#x2F;尾地址，以及数量</li>
+<li>Buffer Pool 初始化的时候已经分配好了控制块和缓存页，只是没有数据。此时 LRU List 为空，所有页都在 Free List</li>
+<li>每当需要从磁盘中加载一个页到 Buffer Pool 中时，就从 Free List 中取一个空闲的缓存页，并且把该缓存页对应的控制块的信息填上，然后把该缓存页对应的 Free List 节点从链表中移除，放入 LRU List，表示该页已经被使用了</li>
+<li>如果 Free List 没空闲的，就要移除 LRU List 末尾的页</li>
+</ul>
+</li>
+<li>Flush List<ul>
+<li>结构与 Free List 相似</li>
+<li>Flush List 存储的是 dirty page 脏页( 是指针，指向 LRU List 的脏页 )</li>
+<li>脏页既存在于 LRU List，也在 Flush List</li>
+<li>这里的脏页修改指的此页被加载进 Buffer Pool 后第一次被修改，只有第一次被修改时才需要加入 Flush List ( 代码中是根据 Page 头部的 oldest_modification &#x3D;&#x3D; 0 来判断是否是第一次修改 )，如果这个页被再次修改就不会再放到 Flush List 了，因为已经存在</li>
+<li>并且在 Flush List 中的脏页是根据 oldest_lsn ( 这个值表示这个页第一次被更改时的 lsn 号，对应值 oldest_modification，每个页头部记录 )进行排序刷新到磁盘的，值越小表示要最先被刷新，避免数据不一致</li>
+<li><a href="#Checkpoint">Checkpoint 机制</a></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://img.kebabshell.space/image-20201214171050793.png" alt="image-20201214171050793"></p>
+<h4 id="重做日志缓冲"><a href="#重做日志缓冲" class="headerlink" title="重做日志缓冲"></a>重做日志缓冲</h4><ul>
+<li><p>InnoDB 首先将重做日志信息放入 redo log buffer，然后按一定频率将其刷新到 重做日志文件</p>
+</li>
+<li><p>一般情况，每一秒会将重做日志缓冲刷新到日志文件</p>
+</li>
+</ul>
+<p>缓冲大小由 innodb_log_buffer_size 控制，默认的 8 MB 已经基本满足每一秒发生的事务量</p>
+<p>刷入磁盘的时机：</p>
+<ul>
+<li>Master Thread 每秒都会刷新</li>
+<li>每个事务提交时会刷新</li>
+<li>当 重做日志缓冲 空间小于 1&#x2F;2 时，会刷新</li>
+</ul>
+<h4 id="Change-Buffer"><a href="#Change-Buffer" class="headerlink" title="Change Buffer"></a>Change Buffer</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/a-phper/p/10313884.html">参考</a></p>
+</blockquote>
+<p>注意：唯一索引普通索引选择难题</p>
+<p>对于一个字段，比如身份证，是选择唯一索引，还是普通索引？</p>
+<ul>
+<li><p>对于查询来说，差距微乎其微，即使是普通索引，相同的值也在页的同一个位置（再不济也在隔壁吧~），而唯一索引查到了就停止了</p>
+</li>
+<li><p>对于更新来说，就会影响了</p>
+<ul>
+<li><p>change buffer：当需要更新一个数据页时，如果数据页在内存中就直接更新，而如果这个数据页还没有在内存中的话，在不影响数据一致性的前提下，InooDB会将这些更新操作缓存在change buffer中，这样就不需要从磁盘中读入这个数据页了。在下次查询需要访问这个数据页的时候，将数据页读入内存，然后执行change buffer中与这个页有关的操作。通过这种方式就能保证这个数据逻辑的正确性。</p>
+<p>需要说明的是，虽然名字叫作change buffer，实际上它是可以持久化的数据。也就是说，change buffer在内存中有拷贝，也会被写入到磁盘上</p>
+<p>将change buffer中的操作应用到原数据页，得到最新结果的过程称为merge。除了访问这个数据页会触发merge外，系统有后台线程会定期merge。在数据库正常关闭（shutdown）的过程中，也会执行merge操作。</p>
+</li>
+<li><p>对于唯一索引来说，更新时必须验证整个表都没有这个值，必须要将数据页读入内存才能判断。如果都已经读入到内存了，那直接更新内存会更快，就没必要使用change buffer了</p>
+</li>
+<li><p>change buffer 实际上也只有普通索引可以使用</p>
+</li>
+<li><p>将更新操作先记录在change buffer，减少读磁盘，语句的执行速度会得到明显的提升</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Checkpoint"><a href="#Checkpoint" class="headerlink" title="Checkpoint"></a>Checkpoint</h4><p>主要解决：</p>
+<ul>
+<li>缩短数据库恢复时间<ul>
+<li>重做日志中记录了 Checkpoint 的位置，这个点之前的页已经刷新回磁盘，只需要对 Checkpoint之后的重做日志进行恢复。这样就大大缩短了恢复时间</li>
+</ul>
+</li>
+<li>缓冲池不够用时，将脏页刷新到磁盘<ul>
+<li>缓冲池不够用时，根据 LRU 算法，溢出最近最少使用的页，如果页为脏页，强制执行 Checkpoint，将脏页刷新回磁盘</li>
+</ul>
+</li>
+<li>重做日志不可用时，刷新脏页<ul>
+<li>重做日志写满了，但脏页还在 Flush List 里面，没有刷到磁盘。要强制产生 Checkpoint，将缓冲池中的页至少刷新到当前位置</li>
+</ul>
+</li>
+</ul>
+<p>引入 LSN ( Log Sequence Number )</p>
+<ul>
+<li>就是字面意思</li>
+<li>每个页都有 LSN，重做日志也有，Checkpoint 也有</li>
+</ul>
+<p>实现：</p>
+<p>有三种 Checkpoint：</p>
+<ul>
+<li><p>Sharp Checkpoint：在数据库关闭时使用，将所有的脏页都刷新回磁盘</p>
+</li>
+<li><p>Fuzzy Checkpoint：在数据库运行时使用，只刷新一部分脏页</p>
+<ul>
+<li><p>MasterThread Checkpoint</p>
+<ul>
+<li>每秒&#x2F;十秒从 Flush List 刷新一定比例脏页到磁盘</li>
+</ul>
+</li>
+<li><p>FLUSH_LRU_LIST Checkpoint</p>
+<ul>
+<li>解决上面的 “缓冲池不够用时，将脏页刷新到磁盘“</li>
+</ul>
+</li>
+<li><p>Async&#x2F;Sync Flush Checkpoint ( 在 Page Cleaner Threader 中操作 )</p>
+<ul>
+<li><p>解决上面的 “重做日志不可用”</p>
+</li>
+<li><p>强制把一些页刷回磁盘( 从 Flush List 获取 )</p>
+</li>
+<li><p>把已经写入重做日志的 LSN 称为 redo_lsn，已经刷回磁盘的最新的 LSN 称为 checkpoint_lsn，则有：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">checkpoint_age = redo_lsn - checkpoint_lsn</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">async_water_mark = 75% * total_redo_log_file_size</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sync_water_mark = 90% * total_redo_log_file_size</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果 checkpoint_age &lt; async_water_mark：不需要刷新</p>
+</li>
+<li><p>如果 sync_water_mark &gt; checkpoint_age &gt; async_water_mark：从 Flush List 刷新足够脏页到磁盘。使得 checkpoint_age &lt; async_water_mark</p>
+</li>
+<li><p>如果 checkpoint_age &gt; sync_water_mark，很少发生。和上面一样</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Dirty Page too much</p>
+<ul>
+<li>脏页太多，强制 Checkpoint</li>
+</ul>
+</li>
+</ul>
+<p>总的来说还是为了保证缓冲池有足够的页</p>
+<h3 id="关键特性5个"><a href="#关键特性5个" class="headerlink" title="关键特性5个"></a>关键特性5个</h3><h4 id="Insert-Buffer"><a href="#Insert-Buffer" class="headerlink" title="Insert Buffer"></a>Insert Buffer</h4><p>插入缓存</p>
+<p>增强插入性能</p>
+<p>使用的条件</p>
+<ul>
+<li>索引是辅助索引( secondary index )</li>
+<li>索引不是唯一的( unique )</li>
+</ul>
+<p>对于非聚集索引的插入和更新操作，不是每一次直接插入到索引页中，而是先判断插入非聚集索引页是否在缓冲池中，若存在，则直接插入，不存在，则先放入一个 Insert Buffer 对象中。数据库这个非聚集的索引已经插到叶子节点，而实际并没有，只是存放在另一个位置。然后再以一定的频率和情况进行 Insert Buffer 和辅助索引页子节点的 merge( 合并 )操作，这时通常能将多个插入合并到一个操作中( 因为在一个索引页中 )，这就大大提高了对于非聚集索引插入的性能</p>
+<h4 id="Double-Write"><a href="#Double-Write" class="headerlink" title="Double Write"></a>Double Write</h4><p>两次写</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/geaozhang/p/7241744.html#gongzuoliucheng">https://www.cnblogs.com/geaozhang/p/7241744.html#gongzuoliucheng</a></p>
+<p>《内幕》P53</p>
+</blockquote>
+<p>增强可靠性</p>
+<p>重做日志记录的是对页的物理修改，如果页本身已经损坏，重做日志也无能为力</p>
+<p>在应用重做日志前，需要一个页的副本，当写入失败时，先用副本来还原这个页，在进行重做</p>
+<p>关键词：内存、共享表空间、各个表空间、副本在共享表空间、顺序写（写进共享表空间）、随机写（内存到各个表空间）、2M、1M</p>
+<h4 id="Adaptive-Hash-Index"><a href="#Adaptive-Hash-Index" class="headerlink" title="Adaptive Hash Index"></a>Adaptive Hash Index</h4><p>AHI 自适应哈希索引</p>
+<p>AHI 是通过缓冲池的 B+ 树页构造出来的，不需要对整张表构建</p>
+<h4 id="Async-IO"><a href="#Async-IO" class="headerlink" title="Async IO"></a>Async IO</h4><p>AIO、异步 IO</p>
+<h4 id="Flush-Neighbor-Page"><a href="#Flush-Neighbor-Page" class="headerlink" title="Flush Neighbor Page"></a>Flush Neighbor Page</h4><p>刷新邻接页</p>
+<p>当刷新一个脏页时，会检测该页所在区( extent )的所有页，如果是脏页，也一并刷新</p>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>虚表</p>
+<p>某个查询语句的一个别名</p>
+<p>在存储<code>视图</code>的时候是不需要存储真实的数据的，只需要把它的结构存储起来就行了</p>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><h4 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+ 树索引"></a>B+ 树索引</h4><p>一个 B+ 树索引的根节点自诞生之日起，便不会再移动</p>
+<p>最下边一层是叶子节点，其余的是内节点</p>
+<blockquote>
+<p>B+ 树找到的是 <strong>被查找数据行</strong> 所在的 <strong>页</strong>，然后把页读到内存，在内存找</p>
+<p>一个页最少存储 2 条记录</p>
+<p>一般情况下，我们用到的 B+ 树都不会超过 4 层，通过主键值去查找某条记录最多只需要做 4 个页面内的查找( 查找 3 个目录项页和一个用户记录页 )</p>
+<p>在 InnoDB 中，索引即数据，数据即索引</p>
+<ul>
+<li>MyISAM 将索引和数据分开存储，对数据&#x2F;用户记录没有按主键大小排序，而是有个行号，索引叶子节点不存数据，而是存主键 + 行号，即<strong>先通过索引找行号</strong>，<strong>再根据行号找完整的数据</strong>( 对其他列建立的索引也是这样 )</li>
+<li>也就是说，<code>MyISAM</code> 中建立的索引相当于全部都是 <code>二级索引</code></li>
+</ul>
+<p>使用二分法查找</p>
+<p>大目录嵌套小目录，小目录表示的才是数据</p>
+<p>即数据都在树的叶子节点上( 完整的用户记录 )</p>
+</blockquote>
+<p>对于一条记录( record )，有分为 用户记录( 0 )、目录项记录( 1 )、最小记录( 2 )、最大记录( 3 )，由 记录头信息 里的 <code>record_type</code> 决定</p>
+<ul>
+<li>目录项中的两个列是 主键 和 页号<ul>
+<li>主键 key：页的用户记录中 <strong>最小</strong> 的主键值</li>
+<li>页号 page_no</li>
+</ul>
+</li>
+<li>用户记录包含完整的数据，存储了所有列的值</li>
+</ul>
+<h5 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h5><p>而 B+ 树索引叫做 <strong>聚簇( chu4 )索引</strong></p>
+<p>聚簇索引的两个特性：</p>
+<ol>
+<li><p>使用 <strong>记录主键值的大小</strong> 进行记录和页的排序，包括</p>
+<ul>
+<li><p>页内的 <strong>记录</strong> 是按照主键的大小顺序排成一个 <strong>单向链表</strong></p>
+</li>
+<li><p>各个存放用户记录的 <strong>页</strong> 也是根据页中用户记录的主键大小顺序排成一个 <strong>双向链表</strong></p>
+</li>
+<li><p>存放目录项记录的页分为不同的层次，在同一层次中的页也是根据页中目录项记录的主键大小顺序排成一个 <strong>双向链表</strong></p>
+</li>
+</ul>
+</li>
+<li><p><code>B+</code>树的叶子节点存储的是 <strong>完整的用户记录</strong></p>
+<ul>
+<li>所谓完整的用户记录，就是指这个记录中存储了所有列的值（包括隐藏列）</li>
+</ul>
+</li>
+</ol>
+<p>InnoDB 会<strong>自动</strong>的为我们<strong>创建聚簇索引</strong></p>
+<p>聚簇索引<strong>只能</strong>在搜索条件是<strong>主键值</strong>时<strong>才能发挥作用</strong></p>
+<h5 id="二级索引与联合索引-注意回表"><a href="#二级索引与联合索引-注意回表" class="headerlink" title="二级索引与联合索引( 注意回表 )"></a>二级索引与联合索引( 注意回表 )</h5><p>也叫非聚簇索引</p>
+<p>针对<strong>某一列</strong>叫二级索引，<strong>多个列</strong>叫联合索引，<strong>联合索引 本质上也是 二级索引</strong></p>
+<p>对二级索引来说</p>
+<ul>
+<li>用户记录里只有 b 列的数据( b 列数据 + 主键 )，不包含其他列</li>
+<li>目录项记录是 b 列<strong>最小值</strong> + 页号 + 对应主键<ul>
+<li>因为 b 列不唯一，主键值是为了在有 b 列值相同的时候，防止插入时懵逼，不知道插入哪个页，即先比 b 列，如果一样，再比主键</li>
+</ul>
+</li>
+<li>所以在二级索引中，要通过某一列的值查用户数据，需要查到二级索引的叶子节点的用户记录，<strong>拿到用户记录里的主键值</strong>，再去 <strong>聚簇索引</strong> 里找完整的用户记录<ul>
+<li>这个过程称为 <strong>回表</strong> ( 通过某列的值查找完整的用户记录需要使用到 <strong>2 棵 B+ 树</strong> )，所以叫做二级索引<ul>
+<li>找第一次的时候，因为记录都是连在一起的，叫 <strong>顺序 IO</strong>，而找第二次时，主键可能是不连续的，这就导致了 <strong>随机 IO</strong></li>
+<li><strong>需要回表的记录越多，使用二级索引的性能就越低</strong><ul>
+<li>如果第一次返回的记录占比很大，那么第二次回表随机 IO 花费的也就越多，还不如直接聚簇索引( 全表扫描 )</li>
+<li>而决定什么时候用全表扫描，什么时候是 二级索引 + 回表，就是 <a href="#%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8">查询优化器</a> 的工作了</li>
+<li>为避免回表，应该尽量 <a href="#%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95">索引覆盖</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>对联合索引来说</p>
+<ul>
+<li>假如针对 b、c 列建立联合索引，就先按 b 列进行排序，再按 c 列进行排序</li>
+<li>目录项记录是 b最小值 + c最小值 + 页号 + 对应主键</li>
+<li>用户记录是 b + c + 对应主键</li>
+</ul>
+<h5 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h5><p><code>InnoDB</code> 和 <code>MyISAM</code> <strong>都会自动</strong>为主键或者声明为 <code>UNIQUE</code> 的列去建立 <code>B+</code> 树索引</p>
+<p>在创建表的时候指定需要建立索引的单个列或者建立联合索引的多个列：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TALBE 表名 (</span><br><span class="line">    各种列的信息 ··· , </span><br><span class="line">    [KEY|INDEX] 索引名 (需要被索引的单个列或多个列)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>其中的 <code>KEY</code> 和 <code>INDEX</code> 是同义词，任意选用一个就可以。我们也可以在修改表结构的时候添加索引：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 ADD [INDEX|KEY] 索引名 (需要被索引的单个列或多个列);</span><br></pre></td></tr></table></figure>
+
+<p>也可以在修改表结构的时候删除索引：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 DROP [INDEX|KEY] 索引名;</span><br></pre></td></tr></table></figure>
+
+<p>比方说我们想在创建 <code>index_demo</code> 表的时候就为 <code>c2</code> 和 <code>c3</code> 列添加一个 <code>联合索引</code>，可以这么写建表语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE index_demo(</span><br><span class="line">    c1 INT,</span><br><span class="line">    c2 INT,</span><br><span class="line">    c3 CHAR(1),</span><br><span class="line">    PRIMARY KEY(c1),</span><br><span class="line">    INDEX idx_c2_c3 (c2, c3)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>在这个建表语句中我们创建的索引名是 <code>idx_c2_c3</code>，这个名称可以随便起，不过我们还是建议以 <code>idx_</code> 为前缀，后边跟着需要建立索引的列名，多个列名之间用下划线 <code>_</code> 分隔开。</p>
+<p>如果我们想删除这个索引，可以这么写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE index_demo DROP INDEX idx_c2_c3;</span><br></pre></td></tr></table></figure>
+
+<p><code>WHERE </code>子句中的几个搜索条件的顺序对查询结果没有影响，有 <a href="#%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8">查询优化器</a>，会分析这些搜索条件并且按照可以使用的索引中列的顺序来决定先使用哪个搜索条件，后使用哪个搜索条件</p>
+<h5 id="适用条件"><a href="#适用条件" class="headerlink" title="适用条件"></a>适用条件</h5><p>全值匹配、匹配左边连续列、匹配列前缀、匹配范围值、精确匹配某一列并范围匹配另外一列、用于排序、用于分组</p>
+<h6 id="a、全值匹配"><a href="#a、全值匹配" class="headerlink" title="a、全值匹配"></a>a、全值匹配</h6><p>…就是全值匹配…</p>
+<h6 id="b、匹配左边连续列"><a href="#b、匹配左边连续列" class="headerlink" title="b、匹配左边连续列"></a>b、匹配左边连续列</h6><p>搜索条件中的各个列必须是联合索引中从最左边连续的列</p>
+<h6 id="c、匹配列前缀"><a href="#c、匹配列前缀" class="headerlink" title="c、匹配列前缀"></a>c、匹配列前缀</h6><p>&#39;As%&#39; 可以，&#39;%As%&#39; 不行</p>
+<h6 id="d、匹配范围值"><a href="#d、匹配范围值" class="headerlink" title="d、匹配范围值"></a>d、匹配范围值</h6><p>如果对多个列同时进行范围查找的话，只有对索引最左边的那个列进行范围查找的时候才能用到 B+ 树索引</p>
+<h6 id="e、精确匹配某一列并范围匹配另外一列"><a href="#e、精确匹配某一列并范围匹配另外一列" class="headerlink" title="e、精确匹配某一列并范围匹配另外一列"></a>e、精确匹配某一列并范围匹配另外一列</h6><p>…就是精确匹配某一列并范围匹配另外一列</p>
+<h6 id="f、用于排序"><a href="#f、用于排序" class="headerlink" title="f、用于排序"></a>f、用于排序</h6><p>一般情况下，把记录都加载到内存中，再用一些排序算法，在内存中对这些记录进行排序，有的时候结果集太大以至于不能在内存中进行排序，就得暂时借助磁盘的空间来存放中间结果，排序操作完成后再把排好序的结果集返回到客户端</p>
+<p>在 <code>MySQL</code> 中，把在内存中或者磁盘上进行排序的方式统称为文件排序( <code>filesort</code> )</p>
+<p>如果 <code>ORDER BY</code> 子句里使用到了我们的索引列，就有可能省去在内存或文件中排序的步骤</p>
+<p><code>ORDER BY</code> 的子句后边的列的 <strong>顺序</strong> 也必须按照索引列的顺序给出</p>
+<ul>
+<li>不能使用索引进行排序的情况<ul>
+<li>ASC、DESC 混用</li>
+<li><code>WHERE</code> 子句出现非排序使用到的索引列</li>
+<li>排序列包含非同一个索引的列<ul>
+<li>有时候用来排序的多个列不是一个索引里的，这种情况也不能使用索引进行排序</li>
+</ul>
+</li>
+<li>排序列使用了复杂的表达式<ul>
+<li>要想使用索引进行排序操作，必须保证索引列是以单独列的形式出现，而不是修饰过的形式，如使用一些 函数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="g、用于分组"><a href="#g、用于分组" class="headerlink" title="g、用于分组"></a>g、用于分组</h6><p>如果按索引来分组 <code>GROUP BY</code>，就能用到索引</p>
+<h6 id="总的来说"><a href="#总的来说" class="headerlink" title="总的来说"></a>总的来说</h6><p>一切按照 B+ 树节点的存放方式来决定</p>
+<h5 id="索引的代价"><a href="#索引的代价" class="headerlink" title="索引的代价"></a>索引的代价</h5><ul>
+<li><strong>空间</strong><ul>
+<li>每建立一个索引都要为它建立一棵 <code>B+</code> 树，每一棵 <code>B+</code> 树的每一个节点都是一个数据页，一个页默认会占用 <code>16KB</code> 的存储空间，一棵很大的 <code>B+</code> 树由许多数据页组成</li>
+</ul>
+</li>
+<li><strong>时间</strong><ul>
+<li>每次对表中的数据进行增、删、改操作时，都需要去修改各个 <code>B+</code> 树索引</li>
+</ul>
+</li>
+</ul>
+<h5 id="查询优化器"><a href="#查询优化器" class="headerlink" title="查询优化器"></a>查询优化器</h5><p>查询优化器会事先对表中的记录计算一些统计数据，然后再利用这些统计数据根据查询的条件来计算一下需要回表的记录数，<strong>需要回表的记录数越多，就越倾向于使用全表扫描</strong>，反之倾向于使用 <strong>二级索引 + 回表</strong> 的方式</p>
+<p>一般情况下，限制查询获取较少的记录数会让优化器更倾向于选择使用 二级索引 + 回表 的方式进行查询，因为回表的记录越少，性能提升就越高</p>
+<h5 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h5><p>为了避免 <strong>回表</strong> 操作带来的性能损耗，最好在 <strong>查询列表里只包含索引列</strong></p>
+<p>对这种查询&#x2F;排序条件只用到索引的方式称为 <strong>索引覆盖</strong></p>
+<h5 id="索引的挑选"><a href="#索引的挑选" class="headerlink" title="索引的挑选"></a>索引的挑选</h5><h6 id="只为用于搜索、排序或分组的列创建索引"><a href="#只为用于搜索、排序或分组的列创建索引" class="headerlink" title="只为用于搜索、排序或分组的列创建索引"></a>只为用于搜索、排序或分组的列创建索引</h6><h6 id="考虑列的基数"><a href="#考虑列的基数" class="headerlink" title="考虑列的基数"></a>考虑列的基数</h6><ul>
+<li>列的基数 指的是某一列中 <strong>不重复数据</strong> 的个数</li>
+<li>在记录行数一定的情况下，列的基数越大，该列中的值越分散，列的基数越小，该列中的值越集中</li>
+<li>最好为那些列的基数大的列建立索引，为基数太小列的建立索引效果可能不好</li>
+</ul>
+<h6 id="索引列的类型尽量小"><a href="#索引列的类型尽量小" class="headerlink" title="索引列的类型尽量小"></a>索引列的类型尽量小</h6><ul>
+<li>数据类型越小，在查询时进行的比较操作越快( CPU 的层次 )</li>
+<li>数据类型越小，索引占用的存储空间就越少，在一个数据页内就可以放下更多的记录，从而减少磁盘<code>I/O</code>带来的性能损耗，也就意味着可以把更多的数据页缓存在内存中，从而加快读写效率</li>
+</ul>
+<h6 id="索引字符串值的前缀"><a href="#索引字符串值的前缀" class="headerlink" title="索引字符串值的前缀"></a>索引字符串值的前缀</h6><p>只对字符串的前几个字符进行索引</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE person_info(</span><br><span class="line">    name VARCHAR(100) NOT NULL,</span><br><span class="line">    birthday DATE NOT NULL,</span><br><span class="line">    phone_number CHAR(11) NOT NULL,</span><br><span class="line">    country varchar(100) NOT NULL,</span><br><span class="line">    KEY idx_name_birthday_phone_number (name(10), birthday, phone_number)</span><br><span class="line">);  </span><br></pre></td></tr></table></figure>
+
+<p><code>name(10)</code> 就表示在建立的 <code>B+</code> 树索引中只保留记录的前 <code>10</code> 个字符的编码，这种只索引字符串值的前缀的策略是非常鼓励的，尤其是在字符串类型能存储的字符比较多的时候</p>
+<ul>
+<li>但是这种就用不了索引排序了，因为只对前几个字符进行索引，后面的字符都是无序的</li>
+</ul>
+<h6 id="让索引列在比较表达式中单独出现"><a href="#让索引列在比较表达式中单独出现" class="headerlink" title="让索引列在比较表达式中单独出现"></a>让索引列在比较表达式中单独出现</h6><p>有一个整数列 <code>my_col</code>，我们为其建立了索引。有下边的两个<code>WHERE</code>子句</p>
+<ol>
+<li><p><code>WHERE my_col * 2 &lt; 4</code></p>
+</li>
+<li><p><code>WHERE my_col &lt; 4/2</code></p>
+</li>
+</ol>
+<p>第1个 <code>my_col</code> 并不是以单独列的形式出现的，存储引擎会依次遍历所有的记录，计算这个表达式的值是不是小于 <code>4</code>，这种情况下是使用不到 <code>B+</code> 树索引的</p>
+<p>第2个 <code>my_col</code> 是以单独列的形式出现的，这样的情况可以直接使用 <code>B+</code>树索引</p>
+<h6 id="主键插入顺序"><a href="#主键插入顺序" class="headerlink" title="主键插入顺序"></a>主键插入顺序</h6><p>让主键具有 <code>AUTO_INCREMENT</code>，让存储引擎自己为表生成主键</p>
+<ul>
+<li>因为如果一个主键 1 ~ 20 的数据页满了，这时候插进去一个主键是 5 的，就得分成两个页，造成性能损耗</li>
+</ul>
+<h6 id="避免冗余和重复索引"><a href="#避免冗余和重复索引" class="headerlink" title="避免冗余和重复索引"></a>避免冗余和重复索引</h6><h4 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h4><h5 id="通常使用倒排索引-inverted-index"><a href="#通常使用倒排索引-inverted-index" class="headerlink" title="通常使用倒排索引( inverted index )"></a>通常使用倒排索引( inverted index )</h5><p>innodb 使用 full inverted index</p>
+<h4 id="哈希索引"><a href="#哈希索引" class="headerlink" title="哈希索引"></a>哈希索引</h4><p>就是上面的 [自适应哈希索引](#Adaptive Hash Index)</p>
+<p>Innodb 会监控对表上二级索引的查找，如果发现某二级索引被频繁访问，二级索引成为热数据，建立哈希索引可以带来速度的提升</p>
+<p>要求：对这个页的连续访问模式都是一样的，访问模式即查询条件</p>
+<p>特点</p>
+<p>　　1、无序，没有树高</p>
+<p>　　2、降低对二级索引树的频繁访问资源</p>
+<p>　　3、自适应</p>
+<p>缺陷</p>
+<p>　　1、hash 自适应索引会占用 innodb buffer pool</p>
+<p>　　2、自适应 hash 索引只适合搜索等值的查询，如 select * from table where index_col&#x3D;’xxx’，而对于其他查找类型，如范围查找，是不能使用的</p>
+<p>　　3、极端情况下，自适应 hash 索引才有比较大的意义，可以降低逻辑读</p>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><h4 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h4><ul>
+<li>原子性（Atomicity）[ˌætəˈmisiti:]<ul>
+<li>转账不能转一半</li>
+</ul>
+</li>
+<li>一致性（Consistency）</li>
+<li>隔离性（Isolation）[ˌaisəˈleiʃən]<ul>
+<li>执行顺序有一定规律</li>
+</ul>
+</li>
+<li>持久性（Durability）[ˌdjʊərəˈbɪlɪtɪ&#x2F;]</li>
+</ul>
+<h4 id="事务的状态"><a href="#事务的状态" class="headerlink" title="事务的状态"></a>事务的状态</h4><p><img src="https://img.kebabshell.space/image-20210324135118187.png" alt="image-20210324135118187"></p>
+<h4 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h4><p>autocommit：默认ON，每一条语句都算是一个独立的事务</p>
+<p>隐式提交：即使 autocommit off，也会隐式提交（结构变化）</p>
+<h4 id="保存点"><a href="#保存点" class="headerlink" title="保存点"></a>保存点</h4><p>SAVEPOINT 保存点名称;</p>
+<p>ROLLBACK [WORK] TO [SAVEPOINT] 保存点名称;</p>
+<p>RELEASE SAVEPOINT 保存点名称;</p>
+<h4 id="redo"><a href="#redo" class="headerlink" title="redo"></a>redo</h4><p>事务提交后还在内存，但是如果故障，内存数据都没了</p>
+<p>我们只是想让已经提交了的事务对数据库中数据所做的修改永久生效，即使后来系统崩溃，在重启后也能把这种修改恢复出来</p>
+<p><strong>只需要把修改了哪些东西记录一下就好</strong></p>
+<p>是顺序写的</p>
+<p>redo 有 redo log buffer（重做日志缓冲，易丢失） 和 redo log file（重做日志文件，持久的）</p>
+<p>事务提交时，必须先把日志写到重做日志文件（这里指 redo log 和 undo log）进行持久化</p>
+<p>把一条记录插入到一个页面时需要更改的地方非常多，所以有很多类型的 redo log</p>
+<ul>
+<li>MLOG_REC_INSERT（对应的十进制数字为 9）：表示插入一条使用非紧凑行格式的记录时的redo日志类型</li>
+<li>MLOG_COMP_REC_INSERT（对应的十进制数字为 38）：表示插入一条使用紧凑行格式的记录时的redo日志类型</li>
+<li>MLOG_COMP_PAGE_CREATE（type 字段对应的十进制数字为 58）：表示创建一个存储紧凑行格式记录的页面的redo日志类型</li>
+<li>MLOG_COMP_REC_DELETE（type 字段对应的十进制数字为 42）：表示删除一条使用紧凑行格式记录的redo日志类型</li>
+<li>…</li>
+</ul>
+<p>这些类型的 redo log 既包含物理层面的意思，也包含逻辑层面的意思，具体指：</p>
+<ul>
+<li><p>物理层面看，这些日志都指明了对哪个表空间的哪个页进行了修改</p>
+</li>
+<li><p>逻辑层面看，在系统奔溃重启时，并不能直接根据这些日志里的记载，将页面内的某个偏移量处恢复成某个数据，而是需要调用一些事先准备好的函数，执行完这些函数后才可以将页面恢复成系统奔溃前的样子</p>
+</li>
+</ul>
+<p>对 redo 日志中的某些数据还可能进行压缩处理</p>
+<p><strong>底层页面中的一次原子访问的过程称之为一个 Mini-Transaction，简称 mtr</strong></p>
+<p>对于 <strong>redo log 组</strong>，因为一条 redo 可能导致很多操作，如页分裂啥的，需要保证原子性，所以要在该组中的最后一条 redo 日志后边加上一条特殊类型的 redo 日志，该类型名称为MLOG_MULTI_REC_END（他只有一个type字段）</p>
+<p><img src="https://img.kebabshell.space/image-20210324143558673.png" alt="image-20210324143558673"></p>
+<p>对于 <strong>Mini-Transaction</strong></p>
+<p><img src="https://img.kebabshell.space/image-20210324143757095.png" alt="image-20210324143757095"></p>
+<p>通过mtr生成的redo日志都放在了大小为512字节的页中，叫 <strong>redo log block</strong></p>
+<p><img src="https://img.kebabshell.space/image-20210324144128844.png" alt="image-20210324144128844"></p>
+<p>真正的 redo 日志都是存储到占用 496 字节大小的 log block body 中</p>
+<p><strong>redo log buffer（redo日志缓冲区）</strong></p>
+<p><img src="https://img.kebabshell.space/image-20210324144412280.png" alt="image-20210324144412280"></p>
+<p>每个 mtr 运行过程中产生的日志先暂时存到一个地方，当该 mtr 结束的时候，将过程中产生的一组 redo 日志再全部复制到 log buffer 中，不同事务的 mtr 可能是交替写入 log buffer 的</p>
+<p>redo 日志刷盘时机是</p>
+<ul>
+<li>log buffer 空间不足时（超过一半）</li>
+<li>事务提交时</li>
+<li>后台线程（每秒）</li>
+<li>正常关闭服务器时</li>
+<li>checkpoint</li>
+<li>…</li>
+<li>需要调用一下操作系统提供的fsync函数才可以</li>
+</ul>
+<p><strong>恢复</strong></p>
+<p>checkpoint_lsn</p>
+<h4 id="undo"><a href="#undo" class="headerlink" title="undo"></a>undo</h4><p>undo log 撤销日志，用来帮助事务回滚和 MVCC</p>
+<p>隐藏列：roll_pointer</p>
+<ul>
+<li>改动时，都会把旧的版本写入到 undo 日志中，这个隐藏列就相当于一个指针，可以通过它来找到该记录修改前的信息</li>
+</ul>
+<p>是随机读写的</p>
+<p>事务 id</p>
+<ul>
+<li>只有在事务对表中的记录做改动时才会为这个事务分配一个唯一的事务 id</li>
+</ul>
+<h4 id="事务隔离"><a href="#事务隔离" class="headerlink" title="事务隔离"></a>事务隔离</h4><p>事务并发会遇到的<strong>问题</strong></p>
+<ul>
+<li>脏写：一个事务修改了另一个未提交事务修改过的数据</li>
+<li>脏读：一个事务读到了另一个未提交事务修改过的数据</li>
+<li>不可重复读：一个事务读到另一个事务修改过的数据，并且其他事务每对该数据进行一次修改后，<strong>该事务查询到的是不一样的值</strong></li>
+<li>幻读：一个事务先根据某些条件查询出一些记录，之后另一个事务又向表中插入了符合这些条件的记录，原先的事务再次按照该条件查询时，能<strong>把另一个事务插入的记录也读出来</strong><ul>
+<li>幻读强调的是一个事务按照某个相同条件多次读取记录时，后读取时<strong>读到了之前没有读到的记录</strong>，如果后读取时<strong>没有读到</strong>，那就是<strong>不可重复读</strong></li>
+</ul>
+</li>
+</ul>
+<p>不论是哪种隔离级别，都不允许<strong>脏写</strong>的情况发生</p>
+<p>严重性：脏写 &gt; 脏读 &gt; 不可重复读 &gt; 幻读</p>
+<p>不可重复读和幻读有什么区别？</p>
+<p>(1) 不可重复读是读取了其他事务更改的数据，<strong>针对 update 操作</strong></p>
+<p>(2) 幻读是读取了其他事务新增的数据，<strong>针对 insert 和 delete 操作</strong></p>
+<p>既想保持事务的隔离性（按顺序来），又想让服务器在处理访问同一数据的多个事务时性能尽量高些，所以有<strong>隔离级别</strong>这东西</p>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>READ UNCOMMITTED 读未提交</td>
+<td>Possible</td>
+<td>Possible</td>
+<td>Possible</td>
+</tr>
+<tr>
+<td>READ COMMITTED 读已提交</td>
+<td>Not Possible</td>
+<td>Possible</td>
+<td>Possible</td>
+</tr>
+<tr>
+<td>REPEATABLE READ 可重复读</td>
+<td>Not Possible</td>
+<td>Not Possible</td>
+<td>Possible</td>
+</tr>
+<tr>
+<td>SERIALIZABLE 可串行化</td>
+<td>Not Possible</td>
+<td>Not Possible</td>
+<td>Not Possible</td>
+</tr>
+</tbody></table>
+<p>Oracle 只支持 READ COMMITTED 和 SERIALIZABLE 隔离级别</p>
+<p><strong>MySQL</strong> 在 REPEATABLE READ 隔离级别下，是<strong>可以防止幻读问题的发生</strong></p>
+<p>MySQL的默认隔离级别为 REPEATABLE READ</p>
+<p><strong>设置隔离级别</strong>：SET [GLOBAL|SESSION] TRANSACTION ISOLATION LEVEL level;</p>
+<ul>
+<li>level<ul>
+<li>REPEATABLE READ</li>
+<li>READ COMMITTED</li>
+<li>READ UNCOMMITTED</li>
+<li>SERIALIZABLE</li>
+</ul>
+</li>
+<li>GLOBAL、SESSION或者什么都不放</li>
+</ul>
+<h4 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h4><ul>
+<li>版本链<ul>
+<li>每次对记录进行改动，都会记录一条undo日志，每条undo日志也都有一个roll_pointer属性（INSERT操作对应的undo日志没有该属性，因为该记录并没有更早的版本），可以将这些undo日志都连起来，串成一个链表。版本链的头节点就是当前记录最新的值</li>
+</ul>
+</li>
+<li>ReadView<ul>
+<li>需要判断一下版本链中的哪个版本是当前事务隔离级别可见的</li>
+<li>m_ids、min_trx_id、max_trx_id、creator_trx_id</li>
+<li>在访问某条记录时<ul>
+<li>如果被访问版本的trx_id属性值与ReadView中的creator_trx_id值相同，意味着当前事务在访问它自己修改过的记录，所以该版本可以被当前事务访问</li>
+<li>如果被访问版本的trx_id属性值小于ReadView中的min_trx_id值，表明生成该版本的事务在当前事务生成ReadView前已经提交，所以该版本可以被当前事务访问</li>
+<li>如果被访问版本的trx_id属性值大于ReadView中的max_trx_id值，表明生成该版本的事务在当前事务生成ReadView后才开启，所以该版本不可以被当前事务访问</li>
+<li>如果被访问版本的trx_id属性值在ReadView的min_trx_id和max_trx_id之间，那就需要判断一下trx_id属性值是不是在m_ids列表中，如果在，说明创建ReadView时生成该版本的事务还是活跃的，该版本不可以被访问；如果不在，说明创建ReadView时生成该版本的事务已经被提交，该版本可以被访问</li>
+</ul>
+</li>
+<li>READ COMMITTD <strong>在每一次</strong>进行普通 SELECT 操作前都会生成一个 ReadView，而 REPEATABLE READ <strong>只在第一次</strong>进行普通 SELECT 操作前生成一个 ReadView，之后的查询操作都重复使用这个 ReadView 就好了</li>
+</ul>
+</li>
+</ul>
+<h4 id="purge"><a href="#purge" class="headerlink" title="purge"></a>purge</h4><p>在确定系统中包含最早产生的那个 ReadView 的事务不会再访问某些 update undo 日志以及被打了删除标记的记录后，有一个后台运行的 purge 线程会把它们真正的删除掉</p>
+<h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><p>锁结构主要属性</p>
+<ul>
+<li><p>trx信息：代表这个锁结构是哪个事务生成的</p>
+</li>
+<li><p>is_waiting：代表当前事务是否在等待</p>
+</li>
+</ul>
+<p>当某事务改动了这条记录后，就生成了一个锁结构与该记录关联，因为之前没有别的事务为这条记录加锁，<strong>所以 is_waiting 属性就是false</strong>，我们把这个场景就称之为<strong>获取锁成功，或者加锁成功</strong>，然后就可以继续执行操作了</p>
+<p>另一个事务也想对该记录做改动，那么先去看看有没有锁结构与这条记录关联，发现有一个锁结构与之关联后，然后也生成了一个锁结构与这条记录关联，不过锁结构的 <strong>is_waiting 为 true</strong>，表示当前事务需要等待，我们把这个场景就称之为<strong>获取锁失败，或者加锁失败，或者没有成功的获取到锁</strong></p>
+<p>在持有锁事务提交之后，就会把该事务生成的锁结构释放掉，然后看看还有没有别的事务在等待获取锁，发现了另一个事务还在等待获取锁，<strong>所以把那个事务对应的锁结构的 is_waiting 属性设置为 false</strong>，然后把该事务<strong>对应的线程唤醒</strong>，让它继续执行，此时那个事务就算获取到锁了</p>
+<p>锁类别</p>
+<ul>
+<li>共享锁（S锁）</li>
+<li>独占锁（X锁）</li>
+<li>意向锁（是表级锁）<ul>
+<li>意向共享锁（IS锁）：当事务准备在某条记录上加S锁时，需要先在表级别加一个IS锁</li>
+<li>意向独占锁（IX锁）：当事务准备在某条记录上加X锁时，需要先在表级别加一个IX锁</li>
+</ul>
+</li>
+</ul>
+<p>InnoDB的表级锁</p>
+<p>InnoDB的行级锁（记录锁）</p>
+<ul>
+<li>Record Locks</li>
+<li>Gap Locks（gap锁）<ul>
+<li>gap锁的提出仅仅是为了防止插入幻影记录而提出的</li>
+</ul>
+</li>
+<li>Next-Key Locks（next-key锁<ul>
+<li>既想锁住某条记录，又想阻止其他事务在该记录前边的间隙插入新记录</li>
+</ul>
+</li>
+<li>Insert Intention Locks（插入意向锁</li>
+<li>隐式锁</li>
+</ul>
+<h3 id="备份与恢复"><a href="#备份与恢复" class="headerlink" title="备份与恢复"></a>备份与恢复</h3><h3 id="调优"><a href="#调优" class="headerlink" title="调优"></a>调优</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/1846.html">https://coolshell.cn/articles/1846.html</a></p>
+</blockquote>
+<h4 id="Explain"><a href="#Explain" class="headerlink" title="Explain"></a>Explain</h4><ul>
+<li><p>id    在一个大的查询语句中每个SELECT关键字都对应一个唯一的id</p>
+<ul>
+<li>在<strong>连接查询</strong>的执行计划中，每个表都会对应一条记录，这些记录的<strong>id列的值是相同</strong>的，出现在前边的表表示驱动表，出现在后边的表表示被驱动表</li>
+<li>在包含子查询的查询语句的执行计划中，每个SELECT关键字都会对应一个唯一的id值<ul>
+<li>查询优化器可能对涉及子查询的查询语句进行重写，从而转换为连接查询</li>
+<li>两个表的 UNION 是有三个 id，因为还有一个临时表，id 为 NULL 表明这个临时表是为了合并两个查询的结果集去重而创建的</li>
+<li>UNION ALL 就只有两个，不需要去重</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>select_type    SELECT关键字对应的那个查询的类型</p>
+<ul>
+<li>PRIMARY：对于包含UNION、UNION ALL或者子查询的大查询来说，它是由几个小查询组成的，其中最左边的那个查询的select_type值就是PRIMARY</li>
+<li>UNION：对于包含UNION或者UNION ALL的大查询来说，它是由几个小查询组成的，其中除了最左边的那个小查询以外，其余的小查询的select_type值就是UNION</li>
+<li>UNION RESULT：UNION 临时表</li>
+<li>SUBQUERY：如果包含子查询的查询语句不能够转为对应的semi-join的形式，并且该子查询是<strong>不相关子查询</strong>，并且查询优化器决定采用将该子查询<strong>物化</strong>的方案来执行该子查询时，该子查询的第一个SELECT关键字代表的那个查询的select_type就是SUBQUERY，由于select_type为SUBQUERY的子查询由于会被物化，所以只需要执行一遍<ul>
+<li><a target="_blank" rel="noopener" href="https://www.modb.pro/db/29203">https://www.modb.pro/db/29203</a></li>
+</ul>
+</li>
+<li>DEPENDENT SUBQUERY：子查询是相关子查询，DEPENDENT SUBQUERY的查询可能会被执行多次</li>
+<li>DEPENDENT UNION</li>
+<li>DERIVED</li>
+<li>MATERIALIZED</li>
+</ul>
+</li>
+<li><p>table    表名</p>
+</li>
+<li><p>partitions    匹配的分区信息</p>
+</li>
+<li><p>type    针对单表的访问方法</p>
+<ul>
+<li>system：当表中只有一条记录并且该表使用的存储引擎的统计数据是精确的，比如MyISAM、Memory</li>
+<li>const：根据主键或者唯一二级索引列与常数进行等值匹配</li>
+<li>eq_ref：在连接查询时，如果被驱动表是通过主键或者唯一二级索引列等值匹配的方式进行访问的</li>
+<li>ref：通过普通的二级索引列与常量进行等值匹配时来查询某个表，可能是ref</li>
+<li>ref_or_null：当对普通二级索引进行等值匹配查询，该索引列的值也可以是NULL值，可能</li>
+<li>index_merge：索引合并</li>
+<li>range：范围区间</li>
+<li>index：覆盖索引，但是没有匹配所有索引列</li>
+<li>ALL：全表</li>
+</ul>
+</li>
+<li><p>possible_keys    可能用到的索引</p>
+</li>
+<li><p>key    实际上使用的索引</p>
+</li>
+<li><p>key_len    实际使用到的索引长度</p>
+</li>
+<li><p>ref    当使用索引列等值查询时，与索引列进行等值匹配的对象信息</p>
+</li>
+<li><p>rows    预估的需要读取的记录条数</p>
+</li>
+<li><p>filtered    某个表经过搜索条件过滤后剩余记录条数的百分比</p>
+</li>
+<li><p>Extra    一些额外的信息</p>
+<ul>
+<li><p>Using index：可以使用索引覆盖</p>
+</li>
+<li><p>Using index condition：搜索条件中虽然出现了索引列，但却不能使用到索引</p>
+<ul>
+<li><p>SELECT * FROM s1 WHERE key1 &gt; ‘z’ AND key1 LIKE ‘%a’;<br>其中的key1 &gt; ‘z’可以使用到索引，但是key1 LIKE ‘%a’却无法使用到索引，在以前版本的MySQL中，是按照下边步骤来执行这个查询的：</p>
+<p>  先根据key1 &gt; ‘z’这个条件，从二级索引idx_key1中获取到对应的二级索引记录。</p>
+<p>  根据上一步骤得到的二级索引记录中的主键值进行回表，找到完整的用户记录再检测该记录是否符合key1 LIKE ‘%a’这个条件，将符合条件的记录加入到最后的结果集。</p>
+<p>但是虽然key1 LIKE ‘%a’不能组成范围区间参与range访问方法的执行，但这个条件毕竟只涉及到了key1列，所以新版本MySQL把上边的步骤改进了一下：</p>
+<p>先根据key1 &gt; ‘z’这个条件，定位到二级索引idx_key1中对应的二级索引记录。</p>
+<p>对于指定的二级索引记录，先不着急回表，而是先检测一下该记录是否满足key1 LIKE ‘%a’这个条件，如果这个条件不满足，则该二级索引记录压根儿就没必要回表。</p>
+<p>对于满足key1 LIKE ‘%a’这个条件的二级索引记录执行回表操作。</p>
+<p>我们说回表操作其实是一个随机IO，比较耗时，所以上述修改虽然只改进了一点点，但是可以省去好多回表操作的成本。设计MySQL的大叔们把他们的这个改进称之为索引条件下推（英文名：Index Condition Pushdown）。</p>
+</li>
+</ul>
+</li>
+<li><p>Using where：使用全表扫描来执行对某个表的查询，并且该语句的WHERE子句中有针对该表的搜索条件</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>EXPLAIN FORMAT&#x3D;JSON + 语句</p>
+<ul>
+<li>json格式的执行计划</li>
+</ul>
+<p>SHOW WARNINGS</p>
+<ul>
+<li>使用EXPLAIN语句查看了某个查询的执行计划后，紧接着还可以使用SHOW WARNINGS语句查看与这个查询的执行计划有关的一些扩展信息</li>
+</ul>
+<h2 id="高可用"><a href="#高可用" class="headerlink" title="高可用"></a>高可用</h2><h3 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&mid=2453141544&idx=2&sn=da0ea11633faed02e1a1c1e03944b529&scene=21#wechat_redirect">参考</a></p>
+</blockquote>
+<h2 id="分表"><a href="#分表" class="headerlink" title="分表"></a>分表</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&mid=2453148283&idx=1&sn=eb0fd9d1b89cff317437acc09e03eeaf&scene=21#wechat_redirect">参考</a></p>
+</blockquote>
+<p>中间件：sharding-sphere、sharding-jdbc</p>
+<p>1、垂直拆分（分字段）在实际业务中用的不多，麻烦</p>
+<p>2、水平拆分</p>
+<p>3、MySQL 分区表</p>
+<ul>
+<li>HASH 分区</li>
+</ul>
+<h2 id="分库"><a href="#分库" class="headerlink" title="分库"></a>分库</h2><p>按业务拆库和按表分库</p>
+<p>按表分库：垂直分库和水平分库</p>
+<h2 id="乱七八糟"><a href="#乱七八糟" class="headerlink" title="乱七八糟"></a>乱七八糟</h2><p>数据库三大范式</p>
+<ul>
+<li>第一范式：每个列都不可以再拆分</li>
+<li>第二范式：在第一范式的基础上，非主键列完全依赖于主键，而不能是依赖于主键的一部分</li>
+<li>第三范式：在第二范式的基础上，非主键列只依赖于主键，不依赖于其他非主键</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/05/12/Java%E5%9F%BA%E7%A1%80/" rel="prev" title="Java基础">
+                  <i class="fa fa-chevron-left"></i> Java基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/07/17/Nginx/" rel="next" title="Nginx">
+                  Nginx <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KebabShell</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

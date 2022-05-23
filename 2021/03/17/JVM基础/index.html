@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="mask-icon" href="/images/rocket_1222543_easyicon.net.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kebabshellgithub.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":80,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"slideLeftIn","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="JVM 基础，太™难背了。更新中...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM 基础">
+<meta property="og:url" content="https://kebabshellgithub.github.io/2021/03/17/JVM%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="秋早亦朝">
+<meta property="og:description" content="JVM 基础，太™难背了。更新中...">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210322162215909.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210322165736973.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210322181921887.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210322235848892.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210323000453318.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210327132820305.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210327132800980.png">
+<meta property="og:image" content="https://img.kebabshell.space/aaa.jpg">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210322155411280.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210322154744416.png">
+<meta property="og:image" content="https://img.kebabshell.space/242025553_1553171107811_2A8BFCA92E7F024DFD2F7B0EA602002E.png">
+<meta property="article:published_time" content="2021-03-17T10:21:25.000Z">
+<meta property="article:modified_time" content="2022-05-23T16:10:17.270Z">
+<meta property="article:author" content="KebabShell">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.kebabshell.space/image-20210322162215909.png">
+
+
+<link rel="canonical" href="https://kebabshellgithub.github.io/2021/03/17/JVM%E5%9F%BA%E7%A1%80/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kebabshellgithub.github.io/2021/03/17/JVM%E5%9F%BA%E7%A1%80/","path":"2021/03/17/JVM基础/","title":"JVM 基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JVM 基础 | 秋早亦朝</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?5e2684a539c5d87042f60cb2b8d78c36"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="秋早亦朝" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">秋早亦朝</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">KebabShell</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM-%E5%9F%BA%E7%A1%80%E4%B8%AD%E7%9A%84%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">JVM 基础中的基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9F"><span class="nav-number">1.1.</span> <span class="nav-text">运行时数据区域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8-Program-Counter-Register%EF%BC%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">程序计数器（PC寄存器 - Program Counter Register）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88"><span class="nav-number">1.1.2.</span> <span class="nav-text">虚拟机栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%88%E7%9A%84%E5%AD%98%E5%82%A8%E5%8D%95%E4%BD%8D-%E6%A0%88%E5%B8%A7%EF%BC%88P294%EF%BC%89"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">栈的存储单位 - 栈帧（P294）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%A1%A8%EF%BC%88%E6%9C%AC%E5%9C%B0%E5%8F%98%E9%87%8F%E8%A1%A8%EF%BC%89"><span class="nav-number">1.1.2.1.1.</span> <span class="nav-text">局部变量表（本地变量表）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%EF%BC%88%E6%93%8D%E4%BD%9C%E6%A0%88%EF%BC%89"><span class="nav-number">1.1.2.1.2.</span> <span class="nav-text">操作数栈（操作栈）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5"><span class="nav-number">1.1.2.1.3.</span> <span class="nav-text">动态链接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E5%80%BC-x2F-%E8%BF%94%E5%9B%9E%E5%9C%B0%E5%9D%80%EF%BC%88P300%EF%BC%89"><span class="nav-number">1.1.2.1.4.</span> <span class="nav-text">方法返回值&#x2F;返回地址（P300）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%99%84%E5%8A%A0%E6%B6%88%E6%81%AF"><span class="nav-number">1.1.2.1.5.</span> <span class="nav-text">附加消息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88"><span class="nav-number">1.1.3.</span> <span class="nav-text">本地方法栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86"><span class="nav-number">1.1.4.</span> <span class="nav-text">堆</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B4%E8%BD%BB%E4%BB%A3-amp-%E8%80%81%E5%B9%B4%E4%BB%A3"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">年轻代 &amp; 老年代</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">内存结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">内存分配策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%86%E9%85%8D%E8%BF%87%E7%A8%8B"><span class="nav-number">1.1.4.4.</span> <span class="nav-text">对象分配过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90-amp-%E6%A0%88%E4%B8%8A%E5%88%86%E9%85%8D"><span class="nav-number">1.1.4.5.</span> <span class="nav-text">逃逸分析 &amp; 栈上分配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Minor-GC-amp-Major-GC-amp-Full-GC"><span class="nav-number">1.1.4.6.</span> <span class="nav-text">Minor GC &amp; Major GC &amp; Full GC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="nav-number">1.1.5.</span> <span class="nav-text">方法区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98"><span class="nav-number">1.1.6.</span> <span class="nav-text">直接内存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E"><span class="nav-number">1.2.</span> <span class="nav-text">执行引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HotSpot-%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA-%E7%AE%80%E5%8D%95%E7%89%88"><span class="nav-number">1.3.</span> <span class="nav-text">HotSpot 对象创建 简单版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HotSpot-%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80"><span class="nav-number">1.4.</span> <span class="nav-text">HotSpot 对象内存布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.5.</span> <span class="nav-text">对象的定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E5%92%8C%E6%BA%A2%E5%87%BA"><span class="nav-number">1.6.</span> <span class="nav-text">对于内存泄漏和溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-number">1.7.</span> <span class="nav-text">字符串常量池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86"><span class="nav-number">1.8.</span> <span class="nav-text">垃圾收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86"><span class="nav-number">1.8.1.</span> <span class="nav-text">分代收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HotSpost-%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.8.2.</span> <span class="nav-text">HotSpost 算法实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.9.</span> <span class="nav-text">类加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE"><span class="nav-number">1.9.1.</span> <span class="nav-text">双亲委派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-number">1.9.2.</span> <span class="nav-text">类加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%99%E7%AE%B1%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6"><span class="nav-number">1.9.3.</span> <span class="nav-text">沙箱安全机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="nav-number">1.9.4.</span> <span class="nav-text">类加载机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.9.4.1.</span> <span class="nav-text">加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.9.4.2.</span> <span class="nav-text">连接</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-number">1.9.4.2.1.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-number">1.9.4.2.2.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">1.9.4.2.3.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.9.4.3.</span> <span class="nav-text">初始化</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="KebabShell"
+      src="/images/hexo.jpg">
+  <p class="site-author-name" itemprop="name">KebabShell</p>
+  <div class="site-description" itemprop="description">纯个人记录</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KebabShellGitHub" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KebabShellGitHub" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kebabshell@163.com" title="E-Mail → mailto:kebabshell@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2837329130" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2837329130" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kebabshellgithub.github.io/2021/03/17/JVM%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/hexo.jpg">
+      <meta itemprop="name" content="KebabShell">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋早亦朝">
+      <meta itemprop="description" content="纯个人记录">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JVM 基础 | 秋早亦朝">
+      <meta itemprop="description" content="JVM 基础，太™难背了。更新中...">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JVM 基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-17 10:21:25" itemprop="dateCreated datePublished" datetime="2021-03-17T10:21:25+00:00">2021-03-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%91%86%E7%83%82%E4%BA%86/" itemprop="url" rel="index"><span itemprop="name">摆烂了</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">JVM 基础，太™难背了。更新中...</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="JVM-基础中的基础"><a href="#JVM-基础中的基础" class="headerlink" title="JVM 基础中的基础"></a>JVM 基础中的基础</h1><p>一个进程对应一个JVM实例，对应一个堆栈+方法区</p>
+<h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h2><blockquote>
+<p>P43</p>
+</blockquote>
+<p><img src="https://img.kebabshell.space/image-20210322162215909.png" alt="image-20210322162215909"></p>
+<p><img src="https://img.kebabshell.space/image-20210322165736973.png" alt="image-20210322165736973"></p>
+<h3 id="程序计数器（PC寄存器-Program-Counter-Register）"><a href="#程序计数器（PC寄存器-Program-Counter-Register）" class="headerlink" title="程序计数器（PC寄存器 - Program Counter Register）"></a>程序计数器（PC寄存器 - Program Counter Register）</h3><ul>
+<li>行号指示器、“线程私有”、本地方法计数器为空（undefined）、用来存储指向下一条指令的地址…</li>
+<li>切换线程需要知道下一次执行之前线程的地址</li>
+</ul>
+<h3 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h3><p><img src="https://img.kebabshell.space/image-20210322181921887.png" alt="image-20210322181921887"></p>
+<ul>
+<li>每个<strong>线程</strong>创建时都会创建一个虚拟机栈，内部有一个个的栈帧，线程私有</li>
+<li>每个<strong>方法</strong> - 栈帧（局部变量表（主要）、操作数栈、动态链接、方法出口…）（入栈到出栈）</li>
+<li>保存方法的局部变量、部分结果，参与方法的调用与返回</li>
+<li>栈溢出（如递归，会StackOverflowError，而栈如果动态扩容超过内存物理大小，则会 OOM）</li>
+<li>这里不存在gc</li>
+<li></li>
+</ul>
+<h4 id="栈的存储单位-栈帧（P294）"><a href="#栈的存储单位-栈帧（P294）" class="headerlink" title="栈的存储单位 - 栈帧（P294）"></a>栈的存储单位 - 栈帧（P294）</h4><h5 id="局部变量表（本地变量表）"><a href="#局部变量表（本地变量表）" class="headerlink" title="局部变量表（本地变量表）"></a>局部变量表（本地变量表）</h5><ul>
+<li>方法参数和方法的局部变量</li>
+<li>最小单位是变量槽（Variable Slot），就是个数组</li>
+<li>对于64位数据类型，JVM会高位对齐，为其分配两个槽（long、double）</li>
+<li><code>this</code> 有在里面，也是个变量<ul>
+<li>静态方法中，不能使用 this，因为 this 不会在这个方法的局部变量表，因为 this 代表对象实例，而静态是随类加载而加载，先于实例就有了，所以 this 放进去没卵用</li>
+</ul>
+</li>
+<li><img src="https://img.kebabshell.space/image-20210322235848892.png" alt="image-20210322235848892"></li>
+<li>变量表大小是<strong>编译时就确定了</strong>，运行时不能更改</li>
+<li>JVM通过索引定位使用变量表</li>
+<li><strong>槽是可以重用的</strong>，即有些变量是很小的作用域，超过的话这个槽就会被重用</li>
+<li>因为是线程独占私有的，所以<strong>不存在并发问题</strong></li>
+<li><strong>局部变量</strong>不会有默认值&#x2F;初始值，<strong>在使用前必须要显式赋值</strong><ul>
+<li><img src="https://img.kebabshell.space/image-20210323000453318.png" alt="image-20210323000453318"></li>
+</ul>
+</li>
+<li><strong>局部变量表存的对象引用和 GC 密切相关</strong></li>
+</ul>
+<h5 id="操作数栈（操作栈）"><a href="#操作数栈（操作栈）" class="headerlink" title="操作数栈（操作栈）"></a>操作数栈（操作栈）</h5><ul>
+<li>用数组实现，LIFO</li>
+<li>push、store。。。（方法中）</li>
+<li><strong>保存计算过程的中间结果</strong>，同时作为计算过程中变量的临时存储空间</li>
+<li>栈中的任何一个元素都可以是任意的Java类型</li>
+<li>32位占用一个栈深度</li>
+<li>64两个</li>
+<li>栈的最大深度在编译期就定义好了</li>
+<li><strong>byte、short、char、boolean都以int来保存</strong></li>
+<li>++i 和 i++ 的区别</li>
+<li><strong>栈顶缓存（HotSpot）</strong>：栈顶元素全部缓存在物理CPU的寄存器，提高执行引擎效率</li>
+</ul>
+<h5 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h5><ul>
+<li>即指向运行时常量池中该栈帧所属方法的引用（如#6等），动态链接的作用是将这些方法引用转换为直接引用</li>
+<li>（Class 常量池的内容会存放到运行时常量池（如：子类调用父类方法，调用其他类的方法））</li>
+<li>下面只是说明 Class 常量池</li>
+<li><img src="https://img.kebabshell.space/image-20210327132820305.png" alt="image-20210327132820305"></li>
+<li><img src="https://img.kebabshell.space/image-20210327132800980.png" alt="image-20210327132800980"></li>
+<li>每个栈帧都包含一个指向运行时常量池中该栈帧所属方法的引用，持有这个引用是为了支持方法调用过程中的动态连接(Dynamic Linking)。Class文件的常量池中存有大量的符号引用，字节码中的方法调用指令就以常量池中指向方法的符号引用作为参数。这些符号引用一部分会在类加载阶段或者第一次使用的时候就转化为直接引用，这种转化称为静态解析。另外一部分将在每一次运行期间转化为直接引用，这部分称为动态连接<ul>
+<li>math.compute()调用时compute()叫符号，需要通过compute()这个符号去到常量池中去找到对应方法的符号引用，运行时将通过符号引用找到方法的字节码指令的内存地址。</li>
+</ul>
+</li>
+</ul>
+<h5 id="方法返回值-x2F-返回地址（P300）"><a href="#方法返回值-x2F-返回地址（P300）" class="headerlink" title="方法返回值&#x2F;返回地址（P300）"></a>方法返回值&#x2F;返回地址（P300）</h5><p>栈顶方法<strong>返回</strong>该方法<strong>被调用的位置</strong></p>
+<ul>
+<li>正常调用返回<ul>
+<li>主调方法的PC计数器的值作为返回地址，保存在栈帧</li>
+</ul>
+</li>
+<li>异常返回<ul>
+<li>返回地址通过异常处理器表来确定，栈帧不会保存信息</li>
+</ul>
+</li>
+</ul>
+<h5 id="附加消息"><a href="#附加消息" class="headerlink" title="附加消息"></a>附加消息</h5><ul>
+<li>其他信息</li>
+</ul>
+<p><strong>动态链接+方法返回地址+附加消息 &#x3D; 帧数据区（或栈帧信息（深入了解JVM））</strong></p>
+<blockquote>
+<p>代码跟踪</p>
+<p>静态链接和动态链接</p>
+<ul>
+<li>静态，编译期就确定的</li>
+<li>动态：编译期无法确定，如多态的方法调用</li>
+</ul>
+<p>方法的调用：解析+分派（P301）</p>
+<ul>
+<li>方法调用<ul>
+<li>invokestatic：调静态方法</li>
+<li>invokespecial：调构造器（&lt;init&gt;()）方法</li>
+<li>invokevirtual：调虚方法<ul>
+<li>注意：final方法是非虚方法，但是是用invokevirtual调用（历史设计）</li>
+</ul>
+</li>
+<li>invokeinterface：调接口方法，会在运行时再确定实现该接口的对象</li>
+<li>invokedynamic：运行时动态解析出所引用的方法，再执行</li>
+</ul>
+</li>
+<li>invokestatic和invokespecial+final（invokevirtual）是都是静态的，编译期就把符号引用转为直接引用，即非虚，其他为虚方法</li>
+<li>分派有静态也有动态<ul>
+<li>动态：如多态的重写</li>
+</ul>
+</li>
+</ul>
+<p>OutOfMemoryError</p>
+<p>StackOverflowError</p>
+<ul>
+<li>设置 <code>-Xsssize</code>：-Xss1m、-Xss1024k、-Xss1048576</li>
+</ul>
+</blockquote>
+<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><ul>
+<li>与虚拟机栈作用相似</li>
+<li>HotSpot直接把虚拟机栈和本地方法栈合二为一</li>
+<li>OutOfMemoryError</li>
+<li>StackOverflowError</li>
+</ul>
+<h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><blockquote>
+<ul>
+<li>内存最大的一块</li>
+<li>物理内存不连续，逻辑是连续的（虚拟内存（见操作系统））</li>
+<li>被所有线程共享<ul>
+<li>但是：堆里可以划分<strong>线程私有</strong>的缓冲区 thread local allocation buffer</li>
+</ul>
+</li>
+<li>虚拟机启动时创建</li>
+<li>这个区域的唯一目的就是存放对象实例</li>
+<li>也称为 GC 堆</li>
+<li>分代设计：新生代、老年代、永久代（JDK 8 没了，改用本地内存中实现的元空间）、Eden 空间、From&#x2F;To Survivor 空间…</li>
+<li>细分的目的只是为了更好的回收内存，更好的分配内存</li>
+<li>可扩展：-Xms、-Xmx、-XX</li>
+<li>OOM</li>
+</ul>
+</blockquote>
+<h4 id="年轻代-amp-老年代"><a href="#年轻代-amp-老年代" class="headerlink" title="年轻代 &amp; 老年代"></a>年轻代 &amp; 老年代</h4><p>test</p>
+<h4 id="内存结构"><a href="#内存结构" class="headerlink" title="内存结构"></a>内存结构</h4><p>7及以前：新生代区域、老年代区域、永久代区域（PSPermGen）</p>
+<p>8及以后：新生代区域、老年代区域、元空间（Metaspace）</p>
+<ul>
+<li>Young Gen 新生代区域<ul>
+<li>Eden 区</li>
+<li>Survivor 0</li>
+<li>Survivor 1</li>
+</ul>
+</li>
+<li>Old Gen 老年代区域</li>
+<li>元空间 Metaspace（可通过 -XX:+PrintGCDetails 显示）</li>
+</ul>
+<h4 id="内存分配策略"><a href="#内存分配策略" class="headerlink" title="内存分配策略"></a>内存分配策略</h4><p>test</p>
+<h4 id="对象分配过程"><a href="#对象分配过程" class="headerlink" title="对象分配过程"></a>对象分配过程</h4><p>TLAB（堆里可以划分线程私有的缓冲区 thread local allocation buffer）</p>
+<p>test</p>
+<h4 id="逃逸分析-amp-栈上分配"><a href="#逃逸分析-amp-栈上分配" class="headerlink" title="逃逸分析 &amp; 栈上分配"></a>逃逸分析 &amp; 栈上分配</h4><p>test</p>
+<h4 id="Minor-GC-amp-Major-GC-amp-Full-GC"><a href="#Minor-GC-amp-Major-GC-amp-Full-GC" class="headerlink" title="Minor GC &amp; Major GC &amp; Full GC"></a>Minor GC &amp; Major GC &amp; Full GC</h4><p>test</p>
+<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p>（元数据区&#x2F;堆外内存。1.8）（堆外内存也包括JIT编译产物）</p>
+<ul>
+<li>Method Area</li>
+<li>（只有 HotSpot 有</li>
+<li>被所有线程共享</li>
+<li>存储已经被虚拟机加载的类型信息、常量、静态变量…</li>
+<li>是堆的一个逻辑部分，但叫做“非堆（Non-Heap）”</li>
+<li>OutOfMemoryError（如动态类，即 CGLib 那些，可能导致 OOM</li>
+<li><strong>运行时常量池</strong><ul>
+<li>方法区的一部分</li>
+<li>常量池表 Constant Pool Table，用于存放编译期生成的字面量和符号引用（字符串，能根据这个字符串定位到指定的数据，比如java&#x2F;lang&#x2F;StringBuilder），这部分内容将在类加载后存放到运行时常量池</li>
+<li>具备动态性：运行期间也可以将新的常量放入池中（String#intern）</li>
+<li>OutOfMemoryError</li>
+</ul>
+</li>
+</ul>
+<h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h3><ul>
+<li><strong>不是运行时数据区域的一部分</strong></li>
+<li>OutOfMemoryError</li>
+<li>JDK 1.4 有 NIO，基于通道与缓冲区，使用 Native 函数库直接分配堆外内存，然后通过一个存储在堆里的 DirectByteBuffer 对象作为这块内存的引用进行操作，避免了在堆与 Native 堆之间来回复制<ul>
+<li>本机直接内存的分配不会受到限制，但是会受到总内存的限制，也会OOM</li>
+</ul>
+</li>
+</ul>
+<h2 id="执行引擎"><a href="#执行引擎" class="headerlink" title="执行引擎"></a>执行引擎</h2><p>等</p>
+<h2 id="HotSpot-对象创建-简单版"><a href="#HotSpot-对象创建-简单版" class="headerlink" title="HotSpot 对象创建 简单版"></a>HotSpot 对象创建 简单版</h2><blockquote>
+<p>P48</p>
+</blockquote>
+<ul>
+<li>取决于 Java 堆是否规整<ul>
+<li>指针碰撞</li>
+<li>空闲列表</li>
+</ul>
+</li>
+<li>并发下分配内存方式<ul>
+<li>CAS</li>
+<li>每个线程在 Java 堆中预先分配一小块内存，称为本地线程分配缓冲（TLAB），哪个线程要分配内存，就在自己的本地缓冲区分配，只有缓冲区用完，分配新的缓冲区才需要同步锁定<ul>
+<li>是否使用 TLAB：-XX:+&#x2F;-UserTLAB</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>内存分配完成后，虚拟机把内存空间初始化为零值，保证实例字段能直接访问到</li>
+<li>设置对象头信息，如这个对象是哪个类的实例、元数据信息、哈希码、GC 分代年龄、偏向锁…</li>
+<li>这时候构造函数还没执行，都还是默认零值，如何初始化有程序员决定</li>
+</ul>
+<h2 id="HotSpot-对象内存布局"><a href="#HotSpot-对象内存布局" class="headerlink" title="HotSpot 对象内存布局"></a>HotSpot 对象内存布局</h2><blockquote>
+<p>P51</p>
+</blockquote>
+<ul>
+<li>对象头（Header）<ul>
+<li>存储对象自身运行时数据（32 位虚拟机为 32 个比特；64 为 64 个比特）<ul>
+<li>（Mark Word）</li>
+</ul>
+</li>
+<li>类型指针，指向类型元数据，确定该对象是哪个类的实例（找元数据不一定要经过对象本身）<ul>
+<li>如果是数组，还有一块数据是记录数组长度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实例数据（Instance Data）<ul>
+<li>无论是从父类来的，还是定义的，都在这里记录</li>
+</ul>
+</li>
+<li>对齐填充（Padding）<ul>
+<li>仅仅起到占位符的作用</li>
+<li>HotSpot 要求对象起始地址必须为 8 字节的整数倍，所以任何对象的大小都必须是 8 字节的整数倍</li>
+</ul>
+</li>
+</ul>
+<h2 id="对象的定位"><a href="#对象的定位" class="headerlink" title="对象的定位"></a>对象的定位</h2><p>通过栈上的 reference 引用来操作堆上的具体对象。</p>
+<p>引用的定位实现是由虚拟机决定的，没有一定。</p>
+<p>主流有两种</p>
+<ul>
+<li><p>句柄</p>
+<ul>
+<li>堆中可能要划分出一块内存来作为句柄池，reference 中存的就是对象的句柄地址</li>
+<li>句柄包含了对象实例数据与类型数据各自具体的地址信息</li>
+</ul>
+</li>
+<li><p>直接指针</p>
+</li>
+</ul>
+<p>句柄最大的好处就是，对象被移动的时候只会改变句柄中实例数据指针，而 reference 本身不改变</p>
+<p>直接指针最大的好处是快，开销少</p>
+<p>HotSpot 主要使用直接指针</p>
+<p><img src="https://img.kebabshell.space/aaa.jpg" alt="aaa"></p>
+<h2 id="对于内存泄漏和溢出"><a href="#对于内存泄漏和溢出" class="headerlink" title="对于内存泄漏和溢出"></a>对于内存泄漏和溢出</h2><p>分析工具：Eclipse Memory Analyzer</p>
+<blockquote>
+<p>作者：McAce<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/40560123/answer/512873873">https://www.zhihu.com/question/40560123/answer/512873873</a><br>来源：知乎</p>
+<p>内存泄露本意是申请的内存空间没有被正确释放，导致后续程序里这块内存被永远占用（不可达），而且指向这块内存空间的指针不再存在时，这块内存也就永远不可达了，内存空间就这么一点点被蚕食，借用别人的比喻就是：比如有10张纸，本来一人一张，画完自己擦了还回去，别人可以继续画，现在有个坏蛋要了纸不擦不还，然后还跑了找不到人了，如此就只剩下9张纸给别人用了，这样的人多起来后，最后大家一张纸都没有了。</p>
+<p>内存溢出是指存储的数据超出了指定空间的大小，这时数据就会越界，举例来说，常见的溢出，是指在栈空间里，分配了超过数组长度的数据，导致多出来的数据覆盖了栈空间其他位置的数据，这种情况发生时，可能会导致程序出现各种难排查的异常行为，或是被有心人利用，修改特定位置的变量数据达到溢出攻击的目的。而Java中的内存溢出，一般指【OOM：发生位置】这种Error，它更像是一种内存空间不足时发生的错误，并且也不会导致溢出攻击这种问题，举例来说，堆里能存10个数，分了11个数进去，堆就溢出了1个数，JVM会检测、避免、报告这种问题，所以虽然实际上JVM规避了内存溢出带来的问题，但在概念上来说，它确实是溢出才导致的，只是Java程序员在看到这个问题时，脑袋里的反应会是“内存不够了，咋回事，是不是又是哪个大对象没释放”之类，而不是像C程序员“我X被攻击了&#x2F;程序咋写的搞溢出了”（这段是我臆想的）。同时对于Java来说，传统意义的溢出攻击也无法奏效，因为Java的数组会检查下标，对超出数组下标的赋值会报ArrayOutOfIndex错误。</p>
+<p>而内存泄露的话，个人意见在Java里是不存在的，gc采用根搜索算法时，不可达的对象会被回收，gc是会搜索回收这些空间的，由于程序员个人问题，没用的对象不回收但可达，这种情况能不能界定为内存泄露，我觉得是个哲学问题（对象可达，但空间被占用了，对象也不再使用了），个人觉得是不能界定为内存泄露的。</p>
+</blockquote>
+<blockquote>
+<p>底下评论：</p>
+<p>java 中也会存在内存泄露的，比如在使用 ThreadLocal 这个类时，就易发生内存泄露。</p>
+<p>内存泄漏在早期 java 版本中比较多，主要是 hotspot 没对 method area 进行有效回收导致的</p>
+</blockquote>
+<h2 id="字符串常量池"><a href="#字符串常量池" class="headerlink" title="字符串常量池"></a>字符串常量池</h2><blockquote>
+<p>P63</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">str1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;计算机&quot;</span>).append(<span class="string">&quot;软件&quot;</span>).toString();</span><br><span class="line">System.out.println(str1.intern() == str1); <span class="comment">// JDK 6: false; JDK 7: true</span></span><br><span class="line"></span><br><span class="line"><span class="type">String</span> <span class="variable">str2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;ja&quot;</span>).append(<span class="string">&quot;va&quot;</span>).toString();</span><br><span class="line">System.out.println(str2.intern() == str2); <span class="comment">// JDK 6: false; JDK 7: false</span></span><br></pre></td></tr></table></figure>
+
+<p>JDK 6 中，intern 会把首次遇到的字符串实例<strong>复制到</strong>永久代的<strong>字符串常量池</strong>，返回的也是永久代里面这个字符串实例的引用，而 StringBuilder 创建的字符串对象实例是在 Java 堆上的，所以不可能是同一个引用</p>
+<p>JDK 7 中 intern 不再需要拷贝字符串实例到永久代，字符串常量池已经移到了 Java 堆中。只需要<strong>在常量池中</strong>记录首次出现的实例<strong>引用</strong>即可，所以 intern 返回的引用和 StringBuilder 创建的字符串实例就是同一个</p>
+<blockquote>
+<p>而“java”已经出现过，字符串常量池已经有他的引用，所以为 false（之前有进入常量池）</p>
+</blockquote>
+<h2 id="垃圾收集"><a href="#垃圾收集" class="headerlink" title="垃圾收集"></a>垃圾收集</h2><p>java的垃圾收集机制主要针对新生代和老年代的内存进行回收，不同的垃圾收集算法针对不同的区域。所以java的垃圾收集算法使用的是分代回收。一般java的对象首先进入新生代的Eden区域，当进行GC的时候会回收新生代的区域，新生代一般采用复制收集算法，将活着的对象复制到survivor区域中，如果survivor区域装在不下，就查看老年代是否有足够的空间装下新生代中的对象，如果能装下就装下，否则老年代就执行FULL GC回收自己，老年代还是装不下，就会抛出OUtOfMemory的异常</p>
+<p>判断对象是否存活</p>
+<ul>
+<li>引用计数<ul>
+<li>有一个地方引用对象，对象的计数器加一，引用失效，计数器减一，计数器为零就是不可能再被使用</li>
+<li>简单，效率高</li>
+<li>难以解决对象之间相互循环引用的问题</li>
+</ul>
+</li>
+<li>可达性分析<ul>
+<li>GC Roots。对象到 GC Roots 不可达时，就会被判定可回收</li>
+</ul>
+</li>
+</ul>
+<p>引用</p>
+<ul>
+<li>强引用、软引用、弱引用、虚引用</li>
+</ul>
+<p>对象死亡</p>
+<ul>
+<li>一个对象的死亡，至少要经历两次标记（标记指的是到 GC Roots 不可达时标记这个对象）</li>
+<li>第一次标记完，会有一次筛选，看看对象有没有必要执行 finalize 方法<ul>
+<li>对象没覆盖 finalize 方法&#x2F;finalize 方法已经被虚拟机调用，就没必要</li>
+<li>如果有必要，对象放入 F-Queue，虚拟机会去触发对象的 finalize 方法（不会等他）</li>
+<li>收集器会继续对 F-Queue 中的对象进行第二次标记，如果对象重新与引用链上的对象建立关联，就能活下来</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>不建议使用 finalize 方法，用 try-finally</p>
+</blockquote>
+<h3 id="分代收集"><a href="#分代收集" class="headerlink" title="分代收集"></a>分代收集</h3><blockquote>
+<p>收集器应该将 Java 堆分为不同区域，将回收对象依据年龄（对象逃过垃圾收集的次数）扔到不同的区域存储</p>
+</blockquote>
+<ul>
+<li>Minor GC、Major GC、Full GC</li>
+<li>新生代 Young Generation、老年代 Old Generation</li>
+</ul>
+<p>算法</p>
+<ul>
+<li>标记-清除</li>
+<li>标记-复制</li>
+<li>标记-整理</li>
+</ul>
+<h3 id="HotSpost-算法实现"><a href="#HotSpost-算法实现" class="headerlink" title="HotSpost 算法实现"></a>HotSpost 算法实现</h3><p>- </p>
+<h2 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h2><h3 id="双亲委派"><a href="#双亲委派" class="headerlink" title="双亲委派"></a>双亲委派</h3><blockquote>
+<p>P281、283</p>
+</blockquote>
+<img src="https://img.kebabshell.space/image-20210322155411280.png" alt="image-20210322155411280" style="zoom:50%;" />
+
+<p>父子关系非继承，而是组合的方式来复用父加载器的代码</p>
+<p>一个类加载器收到类加载的请求，首先不会自己尝试加载，而是把这个请求委派给父加载器去加载，因此所有的加载都会被委派到最顶层的启动类加载器。</p>
+<p>只有上层的无法加载，下面的小弟才会尝试加载</p>
+<blockquote>
+<p>不然的话，要是用户自己写了个 Object 类，放到 ClassPath，就会有不同的加载器加载了不同的 Object 类</p>
+</blockquote>
+<p>实现双亲委派的代码在 java.lang.ClassLoader 的 loadClass 方法中</p>
+<h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><p>启动（引导）类加载器、扩展类加载器、应用程序加载器（也叫系统类加载器）</p>
+<p>图同上 ↑</p>
+<blockquote>
+<p>P282</p>
+</blockquote>
+<p>启动类加载器是无法被引用的，null</p>
+<p>对于自定义加载器</p>
+<ul>
+<li>作用主要有<ul>
+<li>添加除磁盘外的 Class 来源</li>
+<li>隔离、重载（防止不同中间件的冲突）</li>
+<li>防止源码泄露</li>
+</ul>
+</li>
+<li>继承 ClassLoader，重写 findClass</li>
+</ul>
+<h3 id="沙箱安全机制"><a href="#沙箱安全机制" class="headerlink" title="沙箱安全机制"></a>沙箱安全机制</h3><p>保护源码的安全性</p>
+<ul>
+<li>自定义类如 String 类，加载时会率先使用引导类加载器，而不是自定义类的应用程序加载器</li>
+</ul>
+<blockquote>
+<p>JVM 中对象是否是同一个：</p>
+<ul>
+<li>完整类名</li>
+<li>类加载器</li>
+</ul>
+</blockquote>
+<h3 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h3><p>加载 - 连接（验证-准备-解析）- 初始化</p>
+<h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><p>（字节流</p>
+<p>拿到类的类型数据（包括使用的类加载器（启动类加载器无法引用，为 null）），放到方法区（8 就是元空间了），然后在堆实例化一个 Class 对象，作为程序访问方法区的类型数据的入口</p>
+<h4 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h4><h5 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h5><p>要保证字节码文件的正确性、安全性等</p>
+<p>验证包括 文件格式、元数据、字节码、符号引用</p>
+<h5 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h5><p>为类中定义的<strong>静态变量</strong>分配内存还有设置初始值</p>
+<p>7及以前，是方法区，而在8，类变量会随类对象一起到堆中</p>
+<p>（这里不包括实例值，还只是初始值）</p>
+<p>但要是静态变量还加了个 final，那就有赋值</p>
+<h5 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h5><p>Class 文件的常量池的符号引用转化为直接引用</p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>执行 类构造器方法 &lt;clinit&gt;()</p>
+<p>要是没有静态语句块，也就没有这个 </p>
+<p>并且在静态中，是按顺序赋值的</p>
+<p><img src="https://img.kebabshell.space/image-20210322154744416.png" alt="image-20210322154744416"></p>
+<p><img src="https://img.kebabshell.space/242025553_1553171107811_2A8BFCA92E7F024DFD2F7B0EA602002E.png" alt="242025553_1553171107811_2A8BFCA92E7F024DFD2F7B0EA602002E"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="prev" title="操作系统">
+                  <i class="fa fa-chevron-left"></i> 操作系统
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/06/02/Regex/" rel="next" title="正则表达式">
+                  正则表达式 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KebabShell</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

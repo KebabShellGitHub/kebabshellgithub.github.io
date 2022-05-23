@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="mask-icon" href="/images/rocket_1222543_easyicon.net.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kebabshellgithub.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":80,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"slideLeftIn","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="只是使用，基本不涉及原理...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis">
+<meta property="og:url" content="https://kebabshellgithub.github.io/2020/07/17/Redis/index.html">
+<meta property="og:site_name" content="秋早亦朝">
+<meta property="og:description" content="只是使用，基本不涉及原理...">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.kebabshell.space/%E4%B8%BB%E8%8A%82%E7%82%B9%E6%95%85%E9%9A%9C.png">
+<meta property="og:image" content="https://img.kebabshell.space/%E6%8B%93%E6%89%91.png">
+<meta property="og:image" content="https://img.kebabshell.space/%E8%99%9A%E6%8B%9F%E6%A7%BD.png">
+<meta property="og:image" content="https://img.kebabshell.space/%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D.png">
+<meta property="article:published_time" content="2020-07-17T20:19:55.000Z">
+<meta property="article:modified_time" content="2022-05-23T16:10:17.274Z">
+<meta property="article:author" content="KebabShell">
+<meta property="article:tag" content="消息队列">
+<meta property="article:tag" content="中间件">
+<meta property="article:tag" content="缓存">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.kebabshell.space/%E4%B8%BB%E8%8A%82%E7%82%B9%E6%95%85%E9%9A%9C.png">
+
+
+<link rel="canonical" href="https://kebabshellgithub.github.io/2020/07/17/Redis/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kebabshellgithub.github.io/2020/07/17/Redis/","path":"2020/07/17/Redis/","title":"Redis"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Redis | 秋早亦朝</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?5e2684a539c5d87042f60cb2b8d78c36"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="秋早亦朝" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">秋早亦朝</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">KebabShell</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">配置详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AC%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">公用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#EXPIRE-key-second-%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.1.</span> <span class="nav-text">EXPIRE key second 的使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key-%E7%9A%84%E5%91%BD%E5%90%8D%E5%BB%BA%E8%AE%AE"><span class="nav-number">2.2.</span> <span class="nav-text">key 的命名建议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">3.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String-%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.</span> <span class="nav-text">String 的实际应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hash"><span class="nav-number">4.</span> <span class="nav-text">Hash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List"><span class="nav-number">5.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-number">5.1.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set"><span class="nav-number">6.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sorted-Set%EF%BC%88zset%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">Sorted Set（zset）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zset%E5%BB%B6%E6%97%B6%E9%98%9F%E5%88%97"><span class="nav-number">8.</span> <span class="nav-text">zset延时队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">9.</span> <span class="nav-text">持久化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5%E5%92%8C%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5"><span class="nav-number">10.</span> <span class="nav-text">过期策略和内存淘汰策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">11.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="nav-number">12.</span> <span class="nav-text">主从复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-Sentinel%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="nav-number">13.</span> <span class="nav-text">Redis Sentinel的高可用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-Sentinel%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84"><span class="nav-number">13.1.</span> <span class="nav-text">Redis Sentinel拓扑结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-Sentinel%E8%8A%82%E7%82%B9%E5%8F%91%E7%8E%B0%E5%92%8C%E7%9B%91%E6%8E%A7%E6%9C%BA%E5%88%B6"><span class="nav-number">13.2.</span> <span class="nav-text">Redis Sentinel节点发现和监控机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-Sentinel%E9%83%A8%E7%BD%B2%E6%8A%80%E5%B7%A7"><span class="nav-number">13.3.</span> <span class="nav-text">Redis Sentinel部署技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E8%99%9A%E6%8B%9F%E6%A7%BD%E5%88%86%E5%8C%BA%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">14.</span> <span class="nav-text">Redis虚拟槽分区的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-Cluster"><span class="nav-number">15.</span> <span class="nav-text">Redis Cluster</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E9%99%90%E5%88%B6"><span class="nav-number">15.1.</span> <span class="nav-text">功能限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E4%BC%B8%E7%BC%A9"><span class="nav-number">15.2.</span> <span class="nav-text">集群伸缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E5%8F%91%E7%8E%B0"><span class="nav-number">15.3.</span> <span class="nav-text">故障发现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D"><span class="nav-number">15.4.</span> <span class="nav-text">故障恢复</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="KebabShell"
+      src="/images/hexo.jpg">
+  <p class="site-author-name" itemprop="name">KebabShell</p>
+  <div class="site-description" itemprop="description">纯个人记录</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KebabShellGitHub" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KebabShellGitHub" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kebabshell@163.com" title="E-Mail → mailto:kebabshell@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2837329130" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2837329130" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kebabshellgithub.github.io/2020/07/17/Redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/hexo.jpg">
+      <meta itemprop="name" content="KebabShell">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋早亦朝">
+      <meta itemprop="description" content="纯个人记录">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Redis | 秋早亦朝">
+      <meta itemprop="description" content="只是使用，基本不涉及原理...">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-07-17 20:19:55" itemprop="dateCreated datePublished" datetime="2020-07-17T20:19:55+00:00">2020-07-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">只是使用，基本不涉及原理...</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127055527950#heading-2">Redis 大全</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/news/329055">部分原理</a></p>
+</blockquote>
+<p><code>Redis</code> 五种数据类型：<code>string</code>、<code>hash</code>、<code>list</code>、<code>set</code>、<code>zset</code></p>
+<h2 id="配置详解"><a href="#配置详解" class="headerlink" title="配置详解"></a>配置详解</h2><ul>
+<li><p>daemonize：守护线程。默认为 no</p>
+</li>
+<li><p>port：默认 6379</p>
+</li>
+<li><p>bind：绑定 IP 地址</p>
+</li>
+<li><p>databases：数据库数量，默认 16</p>
+</li>
+<li><p>save <code>&lt;second&gt; &lt;changes&gt;</code>：指定多少时间、有多少次更新操作，就将数据同步到 <strong>数据文件</strong></p>
+</li>
+<li><p>redis 默认配置有三个条件，满足一个即进行 <strong>持久化</strong></p>
+<ul>
+<li>save 900 1<ul>
+<li>900 s 有 1 个更改</li>
+</ul>
+</li>
+<li>save 300 10<ul>
+<li>300 s 有 10 个更改</li>
+</ul>
+</li>
+<li>save 60 10000<ul>
+<li>60 s 有 10000 更改</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>dbfilename：指定本地数据库的文件名，默认 dump.rdb</p>
+</li>
+<li><p>dir：指定本地数据库的存放目录，默认为 .&#x2F; 当前文件夹</p>
+</li>
+<li><p>requirepass：设置密码，默认关闭</p>
+</li>
+<li><p>远程：<code>redis-cli -h &lt;host&gt; -p &lt;port&gt; -a &lt;password&gt;</code></p>
+</li>
+<li><p>Redis 关闭</p>
+<ul>
+<li>使用 kill 命令( 非正常关闭，数据易丢失 )<br><code>ps -ef|grep -i redis</code><br><code>kill -9 PID</code></li>
+<li>正常关闭<br><code>redis-cli shutdown</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="公用命令"><a href="#公用命令" class="headerlink" title="公用命令"></a>公用命令</h2><ul>
+<li><code>DEL key</code></li>
+<li><code>DUMP key</code>：序列化给定 key，返回被序列化的值</li>
+<li><code>EXISTS key</code>：检查 key 是否存在</li>
+<li><code>EXPIRE key second</code>：为 key 设定 过期时间</li>
+<li><code>TTL key</code>：返回 key 剩余时间</li>
+<li><code>PERSIST key</code>：移除 key 的过期时间，key 将持久保存</li>
+<li><code>KEY pattern</code>：查询所有符号给定模式的 key</li>
+<li><code>RANDOM key</code>：随机返回一个 key</li>
+<li><code>RANAME key newkey</code>：修改 key 的名称</li>
+<li><code>MOVE key db</code>：移动 key 至指定数据库中</li>
+<li><code>TYPE key</code>：返回 key 所储存的值的类型</li>
+</ul>
+<h3 id="EXPIRE-key-second-的使用场景"><a href="#EXPIRE-key-second-的使用场景" class="headerlink" title="EXPIRE key second 的使用场景"></a>EXPIRE key second 的使用场景</h3><ul>
+<li>限时的优惠活动</li>
+<li>网站数据缓存</li>
+<li>手机验证码</li>
+<li>限制网站访客频率</li>
+</ul>
+<h3 id="key-的命名建议"><a href="#key-的命名建议" class="headerlink" title="key 的命名建议"></a>key 的命名建议</h3><ul>
+<li><code>key</code> 不要太长，尽量不要超过 1024 字节( 不仅消耗内存，也会降低查找的效率 )</li>
+<li><code>key</code> 不要太短，太短可读性会降低</li>
+<li>在一个项目中，<code>key</code> 最好使用统一的命名模式，如 <code>user:123:password</code></li>
+<li><code>key</code> 区分大小写</li>
+</ul>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><p>（简单动态字符串 simple dynamic string SDS）</p>
+<ul>
+<li><code>set key_name value</code>：命令不区分大小写，但是 key_name 区分大小写</li>
+<li><code>SETNX key value</code>：当 key 不存在时设置 key 的值( SET if Not eXists )</li>
+<li><code>get key_name</code></li>
+<li><code>GETRANGE key start end</code>：获取 key 中字符串的子字符串，从 start 开始，end 结束</li>
+<li><code>MGET key1 [key2 …]</code>：获取多个 key</li>
+<li><code>GETSET KEY_NAME VALUE</code>：设定 key 的值，并返回 key 的旧值。当 key 不存在，返回 nil</li>
+<li><code>STRLEN key</code>：返回 key 所存储的字符串的长度</li>
+<li><code>INCR KEY_NAME</code> ：INCR 命令 key 中存储的值 + 1，如果不存在 key，则 key 中的值话先被初始化为 0 再加 1</li>
+<li><code>INCRBY KEY_NAME a</code>：增加 a</li>
+<li><code>DECR KEY_NAME</code>：key 中的值自减一</li>
+<li><code>DECRBY KEY_NAME a</code>：减 a</li>
+<li><code>append key_name value</code>：字符串拼接，追加至末尾，如果不存在，为其赋值</li>
+</ul>
+<h3 id="String-的实际应用场景"><a href="#String-的实际应用场景" class="headerlink" title="String 的实际应用场景"></a>String 的实际应用场景</h3><ul>
+<li><p>缓存功能：String 字符串是最常用的数据类型，不仅仅是 Redis，各个语言都是最基本类型，因此，利用 Redis 作为缓存，配合其它数据库作为存储层，利用 Redis 支持高并发的特点，可以大大加快系统的读写速度、以及降低后端数据库的压力。</p>
+</li>
+<li><p>计数器：许多系统都会使用 Redis 作为系统的实时计数器，可以快速实现计数和查询的功能。而且最终的数据结果可以按照特定的时间落地到数据库或者其它存储介质当中进行永久保存。</p>
+</li>
+<li><p>共享用户 Session：用户重新刷新一次界面，可能需要访问一下数据进行重新登录，或者访问页面缓存 Cookie，但是可以利用 Redis 将用户的 Session 集中管理，在这种模式只需要保证 Redis 的高可用，每次用户 Session 的更新和获取都可以快速完成。大大提高效率。</p>
+</li>
+</ul>
+<h2 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h2><ul>
+<li>这个是类似 Map 的一种结构，这个一般就是可以将结构化的数据，比如一个对象( 前提是这个对象没嵌套其他的对象 )给缓存在 Redis  里，然后每次读写缓存的时候，可以就操作 Hash 里的某个字段。</li>
+<li>但是这个的场景其实还是多少单一了一些，因为现在很多对象都是比较复杂的，比如你的商品对象可能里面就包含了很多属性，其中也有对象</li>
+<li><code>HSET key_name field value</code>：为指定的 key 设定 field 和 value</li>
+<li><code>hmset key field value[field1,value1]</code></li>
+<li><code>hget key field</code></li>
+<li><code>hmget key field[field1]</code></li>
+<li><code>hgetall key</code>：返回 hash 表中所有字段和值</li>
+<li><code>hkeys key</code>：获取 hash 表所有字段</li>
+<li><code>hlen key</code>：获取 hash 表中的字段数量</li>
+<li><code>hdel key field [field1]</code>：删除一个或多个 hash 表的字段</li>
+<li>如果 hash 的属性值被删除完，那么 hash 的 key 也会被 redis 删除</li>
+</ul>
+<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p>有序、双向链表</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">listNode</span>&#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">listNode</span> *prev;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">listNode</span> *next;</span><br><span class="line">    <span class="type">void</span> *value;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>lpush key value1 [value2]</code></li>
+<li><code>rpush key value1 [value2]</code></li>
+<li><code>lpushx key value</code>：从左侧插入值，如果list不存在，则不操作</li>
+<li><code>rpushx key value</code>：从右侧插入值，如果list不存在，则不操作</li>
+<li><code>llen key</code>：获取列表长度</li>
+<li><code>lindex key index</code>：获取指定索引的元素</li>
+<li><code>lrange key start stop</code>：获取列表指定范围的元素</li>
+<li><code>lpop key</code> ：从左侧移除第一个元素</li>
+<li><code>prop key</code>：移除列表最后一个元素</li>
+<li><code>blpop key [key1] timeout</code>：移除并获取列表第一个元素，如果列表没有元素会阻塞列表到等待超时或发现可弹出元素为止</li>
+<li><code>brpop key [key1] timeout</code>：移除并获取列表最后一个元素，如果列表没有元素会阻塞列表到等待超时或发现可弹出元素为止</li>
+<li><code>ltrim key start stop</code> ：对列表进行修改，让列表只保留指定区间的元素，不在指定区间的元素就会被删除</li>
+<li><code>lset key index value</code> ：指定索引的值</li>
+<li><code>linsert key before|after world value</code>：在列表元素前或则后插入元素</li>
+<li><code>rpop lpush list1 list2</code>：移除 list1 最后一个元素，并将该元素添加到 list2 并返回此元素<ul>
+<li>用此命令可以实现订单下单流程、用户系统登录注册短信等。</li>
+</ul>
+</li>
+</ul>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><ul>
+<li>可以通过 List 存储一些列表型的数据结构，类似粉丝列表、文章的评论列表之类的东西。</li>
+<li>可以通过 lrange 命令，读取某个闭区间内的元素，可以基于 List 实现分页查询，基于 Redis 实现简单的高性能分页，可以做类似微博那种下拉不断分页的东西，性能高，就一页一页走。</li>
+<li>消息队列：Redis的链表结构，可以轻松实现阻塞队列，可以使用左进右出的命令组成来完成队列的设计。比如：数据的生产者可以通过 Lpush 命令从左边插入数据，多个数据消费者，可以使用 BRpop 命令阻塞的“抢”列表尾部的数据。</li>
+<li>文章列表或者数据分页展示的应用。</li>
+<li>博客网站的文章列表，当用户量越来越多时，而且每一个用户都有自己的文章列表，而且当文章多时，都需要分页展示，这时可以考虑使用 Redis 的列表，列表不但有序同时还支持按照范围内获取元素，可以完美解决分页查询功能。大大提高查询效率。</li>
+<li><code>rpop lpush list1 list2</code> 用此命令可以实现订单下单流程、用户系统登录注册短信等。</li>
+</ul>
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><ul>
+<li>Set 是无序集合，会自动去重的那种。</li>
+<li>直接基于 Set 将系统里需要去重的数据扔进去，自动就给去重了，如果你需要对一些数据进行快速的全局去重，你当然也可以基于 JVM 内存里的 HashSet 进行去重，但是如果你的某个系统部署在多台机器上呢？得基于Redis进行全局的 Set 去重。</li>
+<li>可以基于 Set 玩儿交集、并集、差集的操作，比如交集吧，我们可以把两个人的好友列表整一个交集，看看俩人的共同好友是谁？对吧。</li>
+<li>反正这些场景比较多，因为对比很快，操作也简单，两个查询一个Set搞定。</li>
+<li><code>sadd key value1[value2]</code>：向集合添加成员</li>
+<li><code>scard key</code>：返回集合成员数</li>
+<li><code>smembers key</code>：返回集合中所有成员</li>
+<li><code>sismember key member</code>：判断memeber元素是否是集合key成员的成员</li>
+<li><code>srandmember key [count]</code>：返回集合中一个或多个随机数</li>
+<li><code>srem key member1 [member2]</code>：移除集合中一个或多个成员</li>
+<li><code>spop key</code>：移除并返回集合中的一个随机元素</li>
+<li><code>smove source destination member</code>：将member元素从source集合移动到destination集合</li>
+<li><code>sdiff key1 [key2]</code>：返回所有集合的差集</li>
+<li><code>sdiffstore destination key1[key2]</code>：返回给定所有集合的差集并存储在destination中</li>
+<li>对两个集合间的数据[计算]进行交集、并集、差集运算<ul>
+<li>以非常方便的实现如共同关注、共同喜好、二度好友等功能。对上面的所有集合操作，你还可以使用不同的命令选择将结果返回给客户端还是存储到一个新的集合中。</li>
+<li>利用唯一性，可以统计访问网站的所有独立 IP</li>
+</ul>
+</li>
+</ul>
+<h2 id="Sorted-Set（zset）"><a href="#Sorted-Set（zset）" class="headerlink" title="Sorted Set（zset）"></a>Sorted Set（zset）</h2><ul>
+<li><p>Sorted set 是排序的 Set，去重但可以排序，写进去的时候给一个分数，自动根据分数排序。</p>
+</li>
+<li><p>有序集合的使用场景与集合类似，但是set集合不是自动有序的，而Sorted set可以利用分数进行成员间的排序，而且是插入时就排序好。所以当你需要一个有序且不重复的集合列表时，就可以选择Sorted set数据结构作为选择方案。</p>
+</li>
+<li><p>排行榜：有序集合经典使用场景。例如视频网站需要对用户上传的视频做排行榜，榜单维护可能是多方面：按照时间、按照播放量、按照获得的赞数等。</p>
+</li>
+<li><p>用Sorted Sets来做带权重的队列，比如普通消息的score为1，重要消息的score为2，然后工作线程可以选择按score的倒序来获取工作任务。让重要的任务优先执行。</p>
+</li>
+<li><p>微博热搜榜，就是有个后面的热度值，前面就是名称</p>
+</li>
+<li><p><code>ZADD key score1 memeber1</code></p>
+</li>
+<li><p><code>ZCARD key</code> ：获取集合中的元素数量</p>
+</li>
+<li><p><code>ZCOUNT key min max</code> 计算在有序集合中指定区间分数的成员数</p>
+</li>
+<li><p><code>ZCOUNT key min max</code>计算在有序集合中指定区间分数的成员数</p>
+</li>
+<li><p><code>ZRANK key member</code>：返回有序集合指定成员的索引</p>
+</li>
+<li><p><code>ZREVRANGE key start stop</code> ：返回有序集中指定区间内的成员，通过索引，分数从高到底</p>
+</li>
+<li><p><code>ZREM key member [member …]</code> 移除有序集合中的一个或多个成员</p>
+</li>
+<li><p><code>ZREMRANGEBYRANK key start stop</code> 移除有序集合中给定的排名区间的所有成员(第一名是0)(低到高排序）</p>
+</li>
+<li><p><code>ZREMRANGEBYSCORE key min max</code> 移除有序集合中给定的分数区间的所有成员</p>
+</li>
+<li><p>常用于排行榜：</p>
+<ul>
+<li>如推特可以以发表时间作为score来存储</li>
+<li>存储成绩</li>
+<li>还可以用zset来做带权重的队列，让重要的任务先执行</li>
+</ul>
+</li>
+</ul>
+<h2 id="zset延时队列"><a href="#zset延时队列" class="headerlink" title="zset延时队列"></a>zset延时队列</h2><ul>
+<li>Zset本质就是Set结构上加了个排序的功能，除了添加数据value之外，还提供另一属性score，这一属性在添加修改元素时候可以指定，每次指定后，Zset会自动重新按新的值调整顺序。可以理解为有两列字段的数据表，一列存value,一列存顺序编号。操作中key理解为zset的名字，那么对延时队列又有何用呢？试想如果score代表的是想要执行时间的时间戳，在某个时间将它插入Zset集合中，它变会按照时间戳大小进行排序，也就是对执行时间前后进行排序，这样的话，起一个死循环线程不断地进行取第一个key值，如果当前时间戳大于等于该key值的socre就将它取出来进行消费删除，就可以达到延时执行的目的, 注意不需要遍历整个Zset集合，以免造成性能浪费。</li>
+<li><a target="_blank" rel="noopener" href="https://my.oschina.net/u/3266761/blog/1930360">https://my.oschina.net/u/3266761/blog/1930360</a></li>
+</ul>
+<h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><p><code>Redis</code> 提供了 <code>RDB</code> 和 <code>AOF</code> 两种持久化方式，<code>RDB</code> 是把内存中的数据集以快照形式写入磁盘，实际操作是通过 fork 子进程执行，采用二进制压缩存储；<code>AOF</code> 是以文本日志的形式记录 Redis 处理的每一个写入或删除操作。</p>
+<p><code>RDB</code> 把整个 <code>Redis</code> 的数据保存在<strong>单一文件</strong>中，比较适合用来做灾备，但缺点是快照保存完成之前如果宕机，这段时间的数据将会丢失，另外保存快照时可能导致服务短时间不可用。</p>
+<p><code>AOF</code> 对日志文件的写入操作使用的<strong>追加模式</strong>，有灵活的同步策略，支持每秒同步、每次修改同步和不同步，缺点就是相同规模的数据集，<code>AOF</code> 要大于 <code>RDB</code>，<code>AOF</code> 在运行效率上往往会慢于 <code>RDB</code>。</p>
+<h2 id="过期策略和内存淘汰策略"><a href="#过期策略和内存淘汰策略" class="headerlink" title="过期策略和内存淘汰策略"></a>过期策略和内存淘汰策略</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8aa619933ebb">参考</a></p>
+</blockquote>
+<p>过期策略</p>
+<ul>
+<li>定时过期、惰性过期、定期过期</li>
+<li>Redis中同时使用了惰性过期和定期过期两种过期策略</li>
+</ul>
+<p>内存淘汰策略（内存不足时淘汰的策略）</p>
+<ul>
+<li>noeviction：当内存不足以容纳新写入数据时，新写入操作会报错。</li>
+<li>allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的key。</li>
+<li>allkeys-random：当内存不足以容纳新写入数据时，在键空间中，随机移除某个key。</li>
+<li>volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的key。</li>
+<li>volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个key。</li>
+<li>volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的key优先移除。</li>
+</ul>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ThinkWon/article/details/103522351">参考</a></p>
+</blockquote>
+<p>MULTI、EXEC、WATCH</p>
+<p>事务执行过程中，如果服务端收到有EXEC、DISCARD、WATCH、MULTI之外的请求，将会把请求放入队列中排队</p>
+<p>redis 不支持回滚</p>
+<ul>
+<li>WATCH 命令是一个乐观锁，可以为 Redis 事务提供 check-and-set （CAS）行为。 可以监控一个或多个键，一旦其中有一个键被修改（或删除），之后的事务就不会执行，监控一直持续到EXEC命令。</li>
+<li>MULTI命令用于开启一个事务，它总是返回OK。 MULTI执行之后，客户端可以继续向服务器发送任意多条命令，这些命令不会立即被执行，而是被放到一个队列中，当EXEC命令被调用时，所有队列中的命令才会被执行。</li>
+<li>EXEC：执行所有事务块内的命令。返回事务块内所有命令的返回值，按命令执行的先后顺序排列。 当操作被打断时，返回空值 nil 。</li>
+<li>通过调用DISCARD，客户端可以清空事务队列，并放弃执行事务， 并且客户端会从事务状态中退出。<br>UNWATCH命令可以取消watch对所有key的监控。</li>
+</ul>
+<h2 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h2><ul>
+<li><code>Redis</code> 主从复制模式可以将主节点的数据同步给从节点，从而保障当主节点不可达的情况下，从节点可以作为后备顶上来，并且可以保障数据尽量不丢失（主从复制可以保障最终一致性）。第二，从节点可以扩展主节点的读能力，一旦主节点不能支持大规模并发量的读操作，从节点可以在一定程度上分担主节点的压力。</li>
+<li>主从复制面临的问题：<ul>
+<li>当主节点发生故障的时候，需要手动的将一个从节点晋升为主节点，同时通知应用方修改主节点地址并重启应用，同时需要命令其它从节点复制新的主节点，整个过程需要人工干预。</li>
+<li>主节点的写能力受到单机的限制。</li>
+<li>主节点的存储能力受到单机的限制。</li>
+</ul>
+</li>
+<li>原始的故障迁移<ul>
+<li>主节点发生故障后，客户端连接主节点失败，两个从节点与主节点连接失败造成复制中断。</li>
+<li>如果主节点无法正常启动，需要选出一个从节点(slave-1),对其执行slaveof  no one命令使其成为新的主节</li>
+<li>原来的从节点（slave-1）成为新的主节点后，更新应用方的主节点信息，重新启动应用方。</li>
+<li>客户端命令另一个从节点（slave-2）去复制新的主节点</li>
+<li>待原来的主节点恢复后，让它去复制新的主节点</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://img.kebabshell.space/%E4%B8%BB%E8%8A%82%E7%82%B9%E6%95%85%E9%9A%9C.png" alt="主节点故障"></p>
+<h2 id="Redis-Sentinel的高可用"><a href="#Redis-Sentinel的高可用" class="headerlink" title="Redis Sentinel的高可用"></a>Redis Sentinel的高可用</h2><ul>
+<li>当主节点出现故障时，Redis Sentinel 能自动完成故障发现和故障转移，并通知应用方，从而实现真正的高可用。</li>
+<li>Redis Sentinel 是一个分布式架构，其中包含若干个 Sentinel 节点和 Redis 数据节点，每个 Sentinel 节点会对数据节点和其余 Sentinel 节点进行监控，当它发现节点不可达时，会对节点做下线标识。如果被标识的是“主节点”，它还会和其他的Sentinel节点进行“协商”，当大多数 Sentinel 节点都认为主节点不可达时，它们会选举一个 Sentinel 节点来完成自动故障转移的工作，同时会将这个变化实时通知给Redis应用方。整个过程是自动的，不需要人工干预，解决了 Redis 的高可用问题。</li>
+<li>Redis Sentinel 包含了若干个 Sentinel 节点，这样做也带来了两个好处：<ul>
+<li>对节点的故障判断是由多个 Sentinel 节点共同完成，这样可以有效的防止误判。</li>
+<li>Sentinel 节点集合是由若干个 Sentinel 节点组成的，这样即使个别 Sentinel 节点不可用，整个 Sentinel 节点集合依然是健壮的。</li>
+</ul>
+</li>
+<li>Redis Sentinel 具有以下几个功能：<ul>
+<li>监控：Sentinel 会定期检测 Redis 数据节点、其余 Sentinel 节点是否可到达</li>
+<li>通知：Sentinel 会将故障转移的结果通知给应用方。</li>
+<li>主节点故障转移：实现从节点晋升为主节点并维护后续正确的主从关系。</li>
+<li>配置提供者：在RedisSentinel结构中，客户端在初始化的时候连接的是Sentinel节点集合，从中获取主节点信息。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Redis-Sentinel拓扑结构"><a href="#Redis-Sentinel拓扑结构" class="headerlink" title="Redis Sentinel拓扑结构"></a>Redis Sentinel拓扑结构</h3><p><img src="https://img.kebabshell.space/%E6%8B%93%E6%89%91.png" alt="拓扑"></p>
+<h3 id="Redis-Sentinel节点发现和监控机制"><a href="#Redis-Sentinel节点发现和监控机制" class="headerlink" title="Redis Sentinel节点发现和监控机制"></a>Redis Sentinel节点发现和监控机制</h3><ul>
+<li>Redis Sentinel 通过三个定时监控任务完成对各个节点的发现和监控</li>
+<li>每隔 10 秒，每个 Sentinel 会向主节点和从节点发送 info 命令获取最新的拓扑结构</li>
+<li>每隔 2 秒，每个 Sentinel 节点会向 Redis 数据节点的 Sentinel：hello 频道上发送该 Senitnel 节点对于主节点的判断。以及当前 Sentinel 节点的信息，同时每个 Sentinel 节点也会订阅该频道，来了解其他 Sentinel 节点以及他们对主节点的判断。这个定时任务可以完成以下两个工作：<ul>
+<li>发现新的 Sentinel 节点：通过订阅主节点的 Sentinel：hello 了解其他 Sentinel 节点信息。如果是新加入的 Sentinel 节点，将该 Sentinel 节点信息保存起来，并与该 Sentinel 节点创建连接</li>
+<li>Sentinel节点之间交换主节点状态，作为后面客观下线以及领导者选举的依据</li>
+</ul>
+</li>
+<li>每隔 1 秒，每个 Sentinel 节点会向主节点、从节点、其余 Sentinel 节点发送一条 ping 命令做一次心跳检测，来确认当前节点是否可达。与主节点，从节点，其余 Sentinel 都建立起连接，实现了对每个节点的监控。这个定时任务是节点失败判定的重要依据</li>
+</ul>
+<h3 id="Redis-Sentinel部署技巧"><a href="#Redis-Sentinel部署技巧" class="headerlink" title="Redis Sentinel部署技巧"></a>Redis Sentinel部署技巧</h3><ul>
+<li>Sentinel 节点不应该部署在一台物理机上</li>
+<li>部署至少三个且奇数个的 Sentinel 节点</li>
+<li>只有一套 Sentinel，还是每个主节点配置一套 Sentinel <ul>
+<li>如果 Sentinel 节点集合监控的是同一个业务的多个主节点集合，那么使用方案 1，否则使用方案 2</li>
+</ul>
+</li>
+<li>Redis Cluster|数据分区<ul>
+<li>Redis 数据分区：Redis Cluster 采用虚拟槽分区，所有的键根据哈希函数映射到 0-16383 整数槽内</li>
+<li>计算公式：slot&#x3D;CRC16(key) &amp;16383。每一个节点负责维护一部分槽以及槽所映射的键值数据</li>
+</ul>
+</li>
+</ul>
+<h2 id="Redis虚拟槽分区的特点"><a href="#Redis虚拟槽分区的特点" class="headerlink" title="Redis虚拟槽分区的特点"></a>Redis虚拟槽分区的特点</h2><ul>
+<li>解耦数据和节点之间的关系，简化了节点扩容和收缩的难度</li>
+<li>节点自身维护槽的映射关系，不需要客户端或者代理服务维护槽分区元数据</li>
+<li>支持节点、槽、键之间的映射查询，用于数据路由、在线伸缩等场景。</li>
+</ul>
+<p><img src="https://img.kebabshell.space/%E8%99%9A%E6%8B%9F%E6%A7%BD.png" alt="虚拟槽"></p>
+<h2 id="Redis-Cluster"><a href="#Redis-Cluster" class="headerlink" title="Redis Cluster"></a>Redis Cluster</h2><h3 id="功能限制"><a href="#功能限制" class="headerlink" title="功能限制"></a>功能限制</h3><ul>
+<li>Key 批量操作支持有限。目前只支持同 slot 内的 key 执行批量操作（如mget,mset）</li>
+<li>Key事务操作支持有限。只支持多key在同一个节点上的事务操作，多个key分布在不同节点上时无法使用事务功能。</li>
+<li>Key作为数据分区的最小粒度，因此不能将一个大的键值对象如hash，list等映射到不同节点。</li>
+<li>不支持多数据库空间，集群模式下只能使用db0空间。</li>
+<li>复制结构只支持一层，从节点只能复制主节点，不支持嵌套树状复制结构。</li>
+</ul>
+<h3 id="集群伸缩"><a href="#集群伸缩" class="headerlink" title="集群伸缩"></a>集群伸缩</h3><ul>
+<li><p>Redis集群提供了灵活的节点扩容和收缩方案，在不影响集群对外服务的情况下，可以为集群添加节点进行扩容也可以下线部分节点进行缩容。</p>
+</li>
+<li><p>扩容集群的步骤：</p>
+<ul>
+<li>准备新节点</li>
+<li>加入集群</li>
+<li>迁移槽和数据</li>
+</ul>
+</li>
+<li><p>缩容集群的步骤：</p>
+<ul>
+<li>首先要确定下线节点是否有负责的槽，如果是，需要把槽迁移到其他节点，保证节点下线后真个集群槽节点映射的完整性</li>
+<li>当下线节点不再负责槽或者本身是从节点时，就可以通知集群内其他节点忘记下线节点，就可以通知集群内其他节点忘记下线节点当所有的节点忘记该节点后可以正常关闭。</li>
+</ul>
+</li>
+</ul>
+<h3 id="故障发现"><a href="#故障发现" class="headerlink" title="故障发现"></a>故障发现</h3><ul>
+<li>Redis 集群自身实现了高可用。高可用首先需要解决集群部分失败的场景：当少数节点出现故障时，可以通过自动故障转移保证集群可以正常对外提供服务。<br>故障发现的类型：<ul>
+<li>主观下线：指某个节点认为另一个节点不可用，即下线状态，这个状态并不是最终的故障判定，只能代表一个节点的意见，可能存在误判情况。</li>
+<li>客观下线：指标记一个节点真正的下线，集群内多个节点都认为该节点不可用，从而达成共识的结果。如果持有槽的主节点故障，需要为该节点进行故障转移。</li>
+</ul>
+</li>
+</ul>
+<h3 id="故障恢复"><a href="#故障恢复" class="headerlink" title="故障恢复"></a>故障恢复</h3><ul>
+<li>故障节点变为客观下线后，如果下线节点是持有槽的主节点，则需要在它的从节点中选出一个替换它。从而保证集群高可用。下线主节点的所有从节点承担故障恢复的义务，当从节点通过内部定时任务发现自身复制的主节点进入客观下线时，将会触发故障恢复流程。</li>
+</ul>
+<p><img src="https://img.kebabshell.space/%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D.png" alt="故障恢复"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" rel="tag"># 消息队列</a>
+              <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag"># 中间件</a>
+              <a href="/tags/%E7%BC%93%E5%AD%98/" rel="tag"># 缓存</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/07/17/Nginx/" rel="prev" title="Nginx">
+                  <i class="fa fa-chevron-left"></i> Nginx
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/07/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="next" title="计算机网络">
+                  计算机网络 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KebabShell</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

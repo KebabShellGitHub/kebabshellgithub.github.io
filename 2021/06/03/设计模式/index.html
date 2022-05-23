@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="mask-icon" href="/images/rocket_1222543_easyicon.net.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kebabshellgithub.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":80,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"slideLeftIn","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="大部分来自aobing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式">
+<meta property="og:url" content="https://kebabshellgithub.github.io/2021/06/03/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="秋早亦朝">
+<meta property="og:description" content="大部分来自aobing">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-03T21:31:35.000Z">
+<meta property="article:modified_time" content="2022-05-23T16:10:17.290Z">
+<meta property="article:author" content="KebabShell">
+<meta property="article:tag" content="设计模式">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://kebabshellgithub.github.io/2021/06/03/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kebabshellgithub.github.io/2021/06/03/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/","path":"2021/06/03/设计模式/","title":"设计模式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>设计模式 | 秋早亦朝</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?5e2684a539c5d87042f60cb2b8d78c36"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="秋早亦朝" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">秋早亦朝</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">KebabShell</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%84%E5%A4%A7%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">各大设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">单例模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a%E3%80%81%E9%A5%BF%E6%B1%89%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">a、饿汉式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b%E3%80%81%E6%87%92%E6%B1%89%E5%BC%8F"><span class="nav-number">1.1.2.</span> <span class="nav-text">b、懒汉式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a%E3%80%81%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">a、简单工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b%E3%80%81%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">b、工厂方法模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c%E3%80%81%E6%8A%BD%E8%B1%A1%E5%B7%A5%E7%A8%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.3.</span> <span class="nav-text">c、抽象工程模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">建造者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.4.</span> <span class="nav-text">原型模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.5.</span> <span class="nav-text">责任链模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.6.</span> <span class="nav-text">观察者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.7.</span> <span class="nav-text">策略模式</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="KebabShell"
+      src="/images/hexo.jpg">
+  <p class="site-author-name" itemprop="name">KebabShell</p>
+  <div class="site-description" itemprop="description">纯个人记录</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KebabShellGitHub" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KebabShellGitHub" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kebabshell@163.com" title="E-Mail → mailto:kebabshell@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2837329130" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2837329130" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kebabshellgithub.github.io/2021/06/03/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/hexo.jpg">
+      <meta itemprop="name" content="KebabShell">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋早亦朝">
+      <meta itemprop="description" content="纯个人记录">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="设计模式 | 秋早亦朝">
+      <meta itemprop="description" content="大部分来自aobing">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          设计模式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-03 21:31:35" itemprop="dateCreated datePublished" datetime="2021-06-03T21:31:35+00:00">2021-06-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">大部分来自aobing</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="各大设计模式"><a href="#各大设计模式" class="headerlink" title="各大设计模式"></a>各大设计模式</h1><h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&mid=2453150113&idx=1&sn=848b13f729996e6c94478653818df528&chksm=8cfd3b22bb8ab2343c6292660b85bdf62496e50ed31106e7a3b0fa88dfe3b76d6630e72892a1&scene=178&cur_album_id=1761987817540206592#rd">参考</a></p>
+</blockquote>
+<ul>
+<li>只有一个实例</li>
+<li>构造器私有，外部类无法通过调用构造器方法创建该实例</li>
+<li>没有公开的 set 方法</li>
+<li>提供一个公开的 get 方法获取唯一的这个实例</li>
+</ul>
+<h3 id="a、饿汉式"><a href="#a、饿汉式" class="headerlink" title="a、饿汉式"></a>a、饿汉式</h3><p>提前把对象 new 出来了，即第一次获取之前就已经存在这个实例了（static）</p>
+<p>即提前加载</p>
+<h3 id="b、懒汉式"><a href="#b、懒汉式" class="headerlink" title="b、懒汉式"></a>b、懒汉式</h3><p>第一次获取的时候发现空，就创建实例，再赋值（static）</p>
+<p>（线程不安全）</p>
+<p>写法：（加锁、双检锁、volatile、静态内部类、<strong>枚举</strong>）</p>
+<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&mid=2453151278&idx=1&sn=e2a702fea5a93b6300b90d9958ff9ec1&chksm=8cfd3cadbb8ab5bba091b70ff0b3ce759eab18b5e9e48464bd1c031eb1c56ed305c7e0de7f8b&scene=178&cur_album_id=1761987817540206592#rd">参考</a></p>
+</blockquote>
+<ul>
+<li>简单工厂模式</li>
+<li>工厂方法模式</li>
+<li>抽象工程模式</li>
+</ul>
+<h3 id="a、简单工厂模式"><a href="#a、简单工厂模式" class="headerlink" title="a、简单工厂模式"></a>a、简单工厂模式</h3><p>使用静态工厂，但使用反射会影响性能，为了避免反射，可以用 Map 存每种类的实例</p>
+<h3 id="b、工厂方法模式"><a href="#b、工厂方法模式" class="headerlink" title="b、工厂方法模式"></a>b、工厂方法模式</h3><p>工厂类直接被抽象化，需要具体特定化的逻辑代码转移到实现抽象方法的子类中</p>
+<h3 id="c、抽象工程模式"><a href="#c、抽象工程模式" class="headerlink" title="c、抽象工程模式"></a>c、抽象工程模式</h3><p>工厂方法类中只有一个抽象方法，要想实现多种不同的类对象，只能去创建不同的具体工厂方法的子类来实列化，<strong>而抽象工厂</strong>则是让一个工厂负责创建多个不同类型的对象</p>
+<h2 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&mid=2453151637&idx=1&sn=d5dae0624e20acbf4dcbbc7e9db2d2ec&chksm=8cfd3d16bb8ab4006a1f2cae679b039bacb1e0854cd9b3561a15d40d7b7e392338155232413c&scene=178&cur_album_id=1761987817540206592#rd">参考</a></p>
+</blockquote>
+<p>抽象建造者类、具体建造者类继承抽象类、director 指导类</p>
+<h2 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&mid=2453151731&idx=1&sn=0891865bb7114641ada2bd63b42cb027&chksm=8cfd3d70bb8ab46638289af5759c633b0d2d0e3a21da178f823e0a15709f21a2e08ee9da5bea&scene=178&cur_album_id=1761987817540206592#rd">参考</a></p>
+</blockquote>
+<p>克隆对象（Cloneable）</p>
+<p>比起new的好处是保留对象的信息</p>
+<blockquote>
+<p>注意：浅拷贝和深拷贝</p>
+<p>浅拷贝就是基本的数据类型直接复制，而成员变量里引用的其他对象，还是那个</p>
+<p>深拷贝就是所有都会复制一遍（可以通过递归实现，或者通过序列化把对象写入流中再从流中取出来）</p>
+<p>或者使用工具类：</p>
+<ul>
+<li>深拷贝（deep copy）：SerializationUtils</li>
+<li>浅拷贝（shallow copy）：BeanUtils</li>
+</ul>
+</blockquote>
+<h2 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&mid=2453151864&idx=1&sn=b4cdda3df741c00ec08ffea5a0e4a84f&chksm=8cfd02fbbb8a8bed30499cec4d08a3248db9eee62ef1528986f62c89f9acd83f279dc54e7459&scene=178&cur_album_id=1761987817540206592#rd">参考</a></p>
+</blockquote>
+<blockquote>
+<p>将请求的发送和接收解耦，让多个接收对象都有机会处理这个请求。将这些接收对象串成一条链，并沿着这条链传递这个请求，直到链上的某个接收对象能够处理它为止。</p>
+</blockquote>
+<p>关键词：handler 抽象类、handler 实现类、handleRequest 方法</p>
+<p>就是 handler 里面有 handler 成员变量，存着下一个 handler（实现也可以不是传递的方式，看参考文章）</p>
+<p>应用：</p>
+<ul>
+<li>SpringMVC 中的 ServletFilter</li>
+<li>Spring 中的 SpringInterceptor</li>
+<li>dubbo</li>
+</ul>
+<h2 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&mid=2453152034&idx=1&sn=1e1db22c4a7cb2bfcc4a7ce141a9ef00&chksm=8cfd03a1bb8a8ab75c824b6866b1960485276f1dae410567d917bd0be71e4d071ab146e147cd&scene=178&cur_album_id=1761987817540206592#rd">参考</a></p>
+</blockquote>
+<p>如 RocketMQ 的发布&#x2F;订阅模式</p>
+<blockquote>
+<p>当一个对象的状态发生改变时，已经登记的其他对象能够观察到这一改变从而作出自己相对应的改变。通过这种方式来达到减少依赖关系，解耦合的作用。</p>
+</blockquote>
+<p>关键词：主题（Subject）、主题实现类、观察者</p>
+<p>应用：</p>
+<ul>
+<li>Observable 类</li>
+<li>Spring 的 ApplicationListener<ul>
+<li>ApplicationEventMulticaster 作为主题，里面有添加，删除，通知等</li>
+</ul>
+</li>
+</ul>
+<h2 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&mid=2453152103&idx=1&sn=8dba1b8d01c05b986c641c55ae198e7e&chksm=8cfd03e4bb8a8af28ae60f80fc54a19cd5ccc5a3e4a39c57b95776a96082c9df5a082fcc57aa&scene=178&cur_album_id=1761987817540206592#rd">参考</a></p>
+</blockquote>
+<p>关键词：Strategy（抽象策略）、ConcreteStrategy 策略实现、Context</p>
+<p>可以搞一个抽象类（游泳）和实现类，然后 Context 里面维护一个 Map，Context get 了一个游泳（自由泳，其他也可以），get 里面发现 Map 没有，就 new 存入 Map，有就直接返回</p>
+<p>也可以直接 new 一个返回</p>
+<p>应用：</p>
+<ul>
+<li>ThreadPoolExecutor（HashSet）</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/06/02/%E6%97%A5%E5%BF%97/" rel="prev" title="Java 日志">
+                  <i class="fa fa-chevron-left"></i> Java 日志
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/06/11/MySQL45%E8%AE%B2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="MySQL45讲学习笔记">
+                  MySQL45讲学习笔记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KebabShell</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

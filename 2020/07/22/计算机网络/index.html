@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="mask-icon" href="/images/rocket_1222543_easyicon.net.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kebabshellgithub.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":80,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"slideLeftIn","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="计网，TCP 那块很乱，且有错，有另外的 TCP&#x2F;IP 的博文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络">
+<meta property="og:url" content="https://kebabshellgithub.github.io/2020/07/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="秋早亦朝">
+<meta property="og:description" content="计网，TCP 那块很乱，且有错，有另外的 TCP&#x2F;IP 的博文">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/zxBl7XGiWJHbunp.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/ijk3OM2L4W6KD8x.jpg">
+<meta property="og:image" content="https://img.kebabshell.space/image-20201226211852324.png">
+<meta property="og:image" content="http://img.kebabshell.space/image-20201226212830332.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/CbnIjzwd7sgLH1r.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/TsPwJb6LomIu5Zj.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/KasDi9gTex2fuGA.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/zgFDsGf2TJq9Nb8.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/xMLQfG9p8hYeNBJ.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/5L6ek9WpziZfMoA.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/AD7Po9LTmzWHh5i.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/qjrPBJm6o7gE1z2.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/sLKt5c4oZFrG3jH.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/2FVPQwTSOKeNuWM.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/KGsTcju7SQZm4tN.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/LRzsGwQlKUJxW9j.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/KXpJ4qhEbgNonV7.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/HaSkFoRZNA6dgM1.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/ZEIUagXfL7GYzkr.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/tPs7dFInqr42Al5.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/aNjJPiGovfXw1nH.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/9hfSNAclGkTvsKw.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/mK3Zs8HdpGkOt2W.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/tsglnV1qC6Uamvj.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/MEpwkIHSBaQ1dxi.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/sJ6rQBZVpaWnekD.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/ZL34TeSpavAkH5C.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/nwIM1VrzYvDQXdp.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/MSxY1coerWlON58.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/O13PhUtbfryomJT.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/LBlcK3DgjbqU6Fn.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/WMnQXfiTFHc9CN6.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/HMp4kwcXS5C6jaE.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/MB2v9dHrOs63Ypg.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/L2HpQYtNTbR4yjg.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/P1ZzKTsehtAQvyf.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/epiA3MqnrSFPztB.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/btewlyNB5iqDa8W.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/aPUXzWY7G1CEo5F.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/YKfNHIR4y5mxwPT.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/9kWT1deBJuf6loj.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/y326jplbv5XmwZT.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/uoGEXwQK8rnhCzk.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/LPeHmvldaFx23rq.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/vpYNaMd9GBSiz7w.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/OtPniWKlGcQwMp1.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/25AtqV8GFTBZsJe.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/917S4JEBUXZrn2C.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/9OtXumn4PzFhEVk.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/05/cpAS58U7loKN3se.png">
+<meta property="article:published_time" content="2020-07-22T14:00:32.000Z">
+<meta property="article:modified_time" content="2022-05-23T16:10:17.290Z">
+<meta property="article:author" content="KebabShell">
+<meta property="article:tag" content="网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/12/05/zxBl7XGiWJHbunp.jpg">
+
+
+<link rel="canonical" href="https://kebabshellgithub.github.io/2020/07/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kebabshellgithub.github.io/2020/07/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/","path":"2020/07/22/计算机网络/","title":"计算机网络"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>计算机网络 | 秋早亦朝</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?5e2684a539c5d87042f60cb2b8d78c36"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="秋早亦朝" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">秋早亦朝</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">KebabShell</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%88%86%E5%B1%82"><span class="nav-number">2.</span> <span class="nav-text">基本分层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS"><span class="nav-number">2.1.</span> <span class="nav-text">DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS-%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4"><span class="nav-number">2.1.1.</span> <span class="nav-text">DNS 名称空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS-%E7%BC%93%E5%AD%98"><span class="nav-number">2.1.2.</span> <span class="nav-text">DNS 缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E5%90%91-DNS-%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.1.3.</span> <span class="nav-text">反向 DNS 查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">消息格式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FTP"><span class="nav-number">2.2.</span> <span class="nav-text">FTP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E6%9D%A1%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.2.1.</span> <span class="nav-text">两条连接</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%BF%87%E7%A8%8B"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">建立过程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F-PASV-PORT"><span class="nav-number">2.2.2.</span> <span class="nav-text">两种工作模式( PASV + PORT )</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FTP%E6%8C%87%E4%BB%A4%E5%92%8C%E5%93%8D%E5%BA%94%E7%A0%81"><span class="nav-number">2.2.3.</span> <span class="nav-text">FTP指令和响应码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FTP-%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.2.4.</span> <span class="nav-text">FTP 传输模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FTP%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0"><span class="nav-number">2.2.5.</span> <span class="nav-text">FTP断点续传</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%BF%E5%90%8DFTP"><span class="nav-number">2.2.6.</span> <span class="nav-text">匿名FTP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP"><span class="nav-number">2.3.</span> <span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.3.1.</span> <span class="nav-text">报文格式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E9%A6%96%E9%83%A8%E5%AD%97%E6%AE%B5"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">通用首部字段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E7%BC%93%E5%AD%98%E9%A6%96%E9%83%A8%E5%AD%97%E6%AE%B5"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">通用缓存首部字段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">请求报文</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95"><span class="nav-number">2.3.1.3.1.</span> <span class="nav-text">请求方法</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="nav-number">2.3.1.4.</span> <span class="nav-text">响应报文</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93%E9%A6%96%E9%83%A8%E5%AD%97%E6%AE%B5"><span class="nav-number">2.3.1.5.</span> <span class="nav-text">实体首部字段</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">2.3.2.</span> <span class="nav-text">HTTP 状态码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">常见</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS"><span class="nav-number">2.4.</span> <span class="nav-text">HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.4.1.</span> <span class="nav-text">基本介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">实现的具体步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CA-%E8%AF%81%E4%B9%A6"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">CA 证书</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B"><span class="nav-number">2.4.2.</span> <span class="nav-text">详细握手过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Client-Hello"><span class="nav-number">2.4.2.1.</span> <span class="nav-text">Client Hello</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Server-Hello"><span class="nav-number">2.4.2.2.</span> <span class="nav-text">Server Hello</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Server-Certificate"><span class="nav-number">2.4.2.3.</span> <span class="nav-text">Server Certificate</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Server-Key-Exchange"><span class="nav-number">2.4.2.4.</span> <span class="nav-text">Server Key Exchange</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Server-Hello-Done"><span class="nav-number">2.4.2.5.</span> <span class="nav-text">Server Hello Done</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Client-Key-Exchange"><span class="nav-number">2.4.2.6.</span> <span class="nav-text">Client Key Exchange</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Change-Cipher-Spec"><span class="nav-number">2.4.2.7.</span> <span class="nav-text">Change Cipher Spec</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Encrypted-Handshake-Message"><span class="nav-number">2.4.2.8.</span> <span class="nav-text">Encrypted Handshake Message</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%BE%93%E5%B1%82%E7%9A%84%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%92%8C%E5%A4%9A%E8%B7%AF%E5%88%86%E8%A7%A3"><span class="nav-number">2.5.</span> <span class="nav-text">运输层的多路复用和多路分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP"><span class="nav-number">2.6.</span> <span class="nav-text">UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#UDP%E9%A6%96%E9%83%A8"><span class="nav-number">2.6.1.</span> <span class="nav-text">UDP首部</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UDP%E6%A0%A1%E9%AA%8C%E5%92%8C"><span class="nav-number">2.6.2.</span> <span class="nav-text">UDP校验和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">2.6.3.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP"><span class="nav-number">2.7.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E7%9A%84"><span class="nav-number">2.7.1.</span> <span class="nav-text">TCP是如何实现可靠传输的</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C%E5%92%8C"><span class="nav-number">2.7.1.1.</span> <span class="nav-text">校验和</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8F%B7"><span class="nav-number">2.7.1.2.</span> <span class="nav-text">序列号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A1%AE%E8%AE%A4%E5%BA%94%E7%AD%94"><span class="nav-number">2.7.1.3.</span> <span class="nav-text">确认应答</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0"><span class="nav-number">2.7.1.4.</span> <span class="nav-text">超时重传</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86"><span class="nav-number">2.7.1.5.</span> <span class="nav-text">连接管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="nav-number">2.7.1.6.</span> <span class="nav-text">流量控制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">2.7.1.7.</span> <span class="nav-text">拥塞控制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E7%AD%89%E5%BE%85%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.7.1.8.</span> <span class="nav-text">停止等待协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A1%AE%E8%AE%A4%E4%B8%A2%E5%A4%B1%E5%92%8C%E7%A1%AE%E8%AE%A4%E8%BF%9F%E5%88%B0"><span class="nav-number">2.7.1.9.</span> <span class="nav-text">确认丢失和确认迟到</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ARQ"><span class="nav-number">2.7.1.10.</span> <span class="nav-text">ARQ</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GBN-%E5%9B%9E%E9%80%80N%E6%AD%A5-%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.7.1.11.</span> <span class="nav-text">GBN (回退N步)协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SACK"><span class="nav-number">2.7.1.12.</span> <span class="nav-text">SACK</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E6%8A%A5%E6%96%87%E6%AE%B5%E9%A6%96%E9%83%A8"><span class="nav-number">2.7.2.</span> <span class="nav-text">TCP报文段首部</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E8%BF%9E%E6%8E%A5%E6%8E%A7%E5%88%B6"><span class="nav-number">2.7.3.</span> <span class="nav-text">TCP连接控制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E3%80%81%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="nav-number">2.7.3.1.</span> <span class="nav-text">三次握手、四次挥手</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E6%89%93%E5%BC%80%E3%80%81%E5%90%8C%E6%97%B6%E5%85%B3%E9%97%AD%E3%80%81%E5%8D%8A%E5%85%B3%E9%97%AD"><span class="nav-number">2.7.3.2.</span> <span class="nav-text">同时打开、同时关闭、半关闭</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93"><span class="nav-number">2.7.4.</span> <span class="nav-text">TCP实现可靠传输</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A5%E5%AD%97%E8%8A%82%E5%8D%95%E4%BD%8D%E7%9A%84%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="nav-number">2.7.4.1.</span> <span class="nav-text">以字节单位的滑动窗口</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%88%B6"><span class="nav-number">2.7.5.</span> <span class="nav-text">TCP流量控制机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0%E6%9C%BA%E5%88%B6"><span class="nav-number">2.7.6.</span> <span class="nav-text">TCP超时重传机制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E8%AE%A1%E6%97%B6%E5%99%A8%E7%9A%84%E9%87%8D%E4%BC%A0-RTO"><span class="nav-number">2.7.6.1.</span> <span class="nav-text">基于计时器的重传(RTO)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%97%B6%E9%97%B4"><span class="nav-number">2.7.6.1.1.</span> <span class="nav-text">设置时间</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E9%87%8D%E4%BC%A0"><span class="nav-number">2.7.6.2.</span> <span class="nav-text">快速重传</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%A6%E9%80%89%E6%8B%A9%E7%A1%AE%E8%AE%A4%E7%9A%84%E9%87%8D%E4%BC%A0-SACK"><span class="nav-number">2.7.6.3.</span> <span class="nav-text">带选择确认的重传(SACK)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6-1"><span class="nav-number">2.7.7.</span> <span class="nav-text">拥塞控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-number">2.8.</span> <span class="nav-text">网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IP"><span class="nav-number">2.8.1.</span> <span class="nav-text">IP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IP-%E5%88%86%E7%89%87"><span class="nav-number">2.8.2.</span> <span class="nav-text">IP 分片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IP-%E9%80%89%E8%B7%AF"><span class="nav-number">2.8.3.</span> <span class="nav-text">IP 选路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ICMP-%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.8.4.</span> <span class="nav-text">ICMP 协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E5%B8%A7"><span class="nav-number">2.9.</span> <span class="nav-text">以太网帧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PPP-%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.10.</span> <span class="nav-text">PPP 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MTU"><span class="nav-number">2.11.</span> <span class="nav-text">MTU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.12.</span> <span class="nav-text">ARP协议</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="KebabShell"
+      src="/images/hexo.jpg">
+  <p class="site-author-name" itemprop="name">KebabShell</p>
+  <div class="site-description" itemprop="description">纯个人记录</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KebabShellGitHub" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KebabShellGitHub" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kebabshell@163.com" title="E-Mail → mailto:kebabshell@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2837329130" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2837329130" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kebabshellgithub.github.io/2020/07/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/hexo.jpg">
+      <meta itemprop="name" content="KebabShell">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋早亦朝">
+      <meta itemprop="description" content="纯个人记录">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="计算机网络 | 秋早亦朝">
+      <meta itemprop="description" content="计网，TCP 那块很乱，且有错，有另外的 TCP/IP 的博文">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算机网络
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-07-22 14:00:32" itemprop="dateCreated datePublished" datetime="2020-07-22T14:00:32+00:00">2020-07-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">计网，TCP 那块很乱，且有错，有另外的 TCP/IP 的博文</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>以下多数来自《TCP&#x2F;IP 详解 卷1：协议》及《计算机网络 自顶向下方法》</p>
+<p>TCP 那块很乱，<a href="/2020/12/07/TCP/" title="看这篇">看这篇</a></p>
+<p>HTTPS 那块不知道说对了没有。。。</p>
+</blockquote>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>HTTP 或者 DNS 协议封包的时候，在其上层已经封装了 TCP 协议，TCP 协议封装中包含了对应的目的端口和源端口，TCP 之前又封装了 IP 协议，IP 协议中包含了源 IP 地址和目的 IP 地址，以此类推…</p>
+<h2 id="基本分层"><a href="#基本分层" class="headerlink" title="基本分层"></a>基本分层</h2><p>重点主要是 TCP&#x2F;IP 协议栈</p>
+<ul>
+<li>TCP&#x2F;IP 协议体系的认知</li>
+<li>物理层( 比特 bit )</li>
+<li>数据链路层( 帧 frame )<ul>
+<li>以太网帧的格式</li>
+<li>MTU 的概念</li>
+<li>ARP 协议、RARP 协议( ARP 查询原理、ARP 缓存 )</li>
+</ul>
+</li>
+<li>网络层( 数据报 datagram )<ul>
+<li>IP 分片：IP 首部格式，如 16 位分片标识、DF 不分片标志、MF 更多分片标志、13 位片偏移、8 位生存时间TTL、16 位首部校验和等等</li>
+<li>IP 选路 大概是路由表</li>
+<li>ICMP 协议，报文格式、报文的两大分类：查询和差错、2 种查询报文 + 5 种差错报文</li>
+</ul>
+</li>
+<li>传输层( 报文段 segment )<ul>
+<li>UDP 协议：特点 + 首部各个字段</li>
+<li>TCP 协议：特点 + 首部字段 + 可靠机制</li>
+<li>TCP 连接控制：三次握手、四次挥手、同时打开、同时关闭、半关闭</li>
+<li>TCP 流量控制机制：滑动窗口、慢启动、拥塞避免、快速重传、快速恢复</li>
+<li>TCP 超时重传机制：各种定时器( 4 个 )</li>
+<li>以上大部分隐藏封装于内核中</li>
+</ul>
+</li>
+<li>应用层( 报文 message )<ul>
+<li>DNS 协议：名字空间、DNS 指针查询( 反向查找或逆向解析 )基本原理、DNS 缓存</li>
+<li>FTP 协议：两条连接(控制连接+数据连接)、两种工作模式( PASV + PORT )、各种 FTP 指令和响应码、FTP 断点续传、匿名 FTP</li>
+<li>HTTP 协议：报文格式(请求报文、响应报文、请求头各种字段、响应头各种字段)、HTTP 状态码</li>
+<li>HTTPS 协议：https 的详细握手过程、摘要算法、数字签名、数字证书的原理和过程</li>
+</ul>
+</li>
+</ul>
+<h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h3><h4 id="DNS-名称空间"><a href="#DNS-名称空间" class="headerlink" title="DNS 名称空间"></a>DNS 名称空间</h4><p>DNS 中使用的所有的名称集合构成了 DNS 名称空间( name space )</p>
+<p>这个名称空间和计算机系统的文件夹和文件类似，都是划分为层次且 <strong>大小写不敏感</strong> 的。整个 DNS 域结构称为 DNS 命名空间</p>
+<p>域名结构是树状结构，树的最顶端代表根服务器，根的下一层就是由我们所熟知的 .com、.net、.cn 等通用域和 .cn、.uk 等国家域组成，称为顶级域。网上注册的域名基本都是二级域名，比如 <a target="_blank" rel="noopener" href="http://baidu.com/">http://baidu.com</a>、<a target="_blank" rel="noopener" href="http://taobao.com/">http://taobao.com</a> 等等二级域名，它们基本上是归企业和运维人员管理。接下来是三级或者四级域名</p>
+<h4 id="DNS-缓存"><a href="#DNS-缓存" class="headerlink" title="DNS 缓存"></a>DNS 缓存</h4><p>一条域名的 DNS 记录会在本地有两种缓存：浏览器缓存 和 操作系统( OS )缓存</p>
+<p>在浏览器中访问的时候，会优先访问浏览器缓存，如果未命中则访问 OS 缓存，最后再访问 DNS 服务器</p>
+<p>DNS 记录会有一个 TTL</p>
+<ul>
+<li>OS 缓存会参考 TTL 值，但是不完全等于 TTL 值</li>
+<li>而浏览器 DNS 缓存的时间跟 TTL 值无关，每种浏览器都使用一个固定值</li>
+</ul>
+<p>缓存同时适用于成功的解析和不成功的解析( 称为否定缓存( negative caching ))</p>
+<ul>
+<li>如果一个特定域名的请求无法返回一个记录，该事实也会被缓存</li>
+<li>当一再请求不存在的域名时，就能帮助降低互联网流量</li>
+</ul>
+<h4 id="反向-DNS-查询"><a href="#反向-DNS-查询" class="headerlink" title="反向 DNS 查询"></a>反向 DNS 查询</h4><blockquote>
+<p> 建议“每个可访问 Internet 的主机都应该有一个名称”，并且“对于每个 IP 地址，应该有一个匹配的 PTR 记录”，但这不是 Internet 标准的要求，并非所有 IP 地址都有反向条目</p>
+</blockquote>
+<p>DNS 服务器里有 <strong>两个区域</strong>，即“正向查找区域”和“反向查找区域”</p>
+<p>反向查找区域 即是这里所说的 IP 反向解析，它的作用就是通过查询 IP 地址的 <strong>PTR 记录</strong> 来得到该 IP 地址 <strong>指向的域名</strong>( 要成功得到域名就 <strong>必需要有该 IP 地址的 PTR 记录</strong> )</p>
+<h5 id="消息格式"><a href="#消息格式" class="headerlink" title="消息格式"></a>消息格式</h5><img src="https://i.loli.net/2020/12/05/zxBl7XGiWJHbunp.jpg" alt="消息格式" style="zoom:25%;" />
+
+<p>DNS 消息格式有一个固定的 12 字节头部。通常在 UDP&#x2F;IPv4 传输，且限制于 512 字节( 特殊的可扩展 )</p>
+<p>DNS 消息以固定的 12 字节头部开始，随后跟着 4 个 <strong>可变长度</strong> 的区段( section )：</p>
+<ul>
+<li>查询( 或区域 )、回答、授权记录和额外记录</li>
+<li>除了第一个区段，其他都包含一个或多个 <strong>资源记录(Resource Record, RR)</strong></li>
+</ul>
+<p>查询区段 包含一个数据项，结构和 RR 相近，而 RR 可以被缓存，问题不可以</p>
+<p>反向 DNS 查询需要的 PTR 就在 RR 中</p>
+<p><img src="https://i.loli.net/2020/12/05/ijk3OM2L4W6KD8x.jpg" alt="DNS-PTR.jpg"></p>
+<p>PTR RR 类型以一种特殊的方式使用了 <strong>特殊的域</strong>： <strong>in-addr.arpa( IPv6 中为 ip6.arpa )域</strong>。考虑一个 IPv4 地址，128.32.112.208，这个地址来自 128.32 的B类地址空间</p>
+<p>为了确定对应到这个地址的名称，首先将该地址 <strong>反转</strong>，然后添加 <strong>特殊的域</strong>：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">208.112.32.128.in-addr.arpa.</span><br></pre></td></tr></table></figure>
+
+<p>进行 PTR 记录的查询，实际上是在查询 <strong>域 208.112.32.128.in-addr.arpa.</strong> 中的 “主机” 208</p>
+<blockquote>
+<p>例子参考 《TCP&#x2F;IP 详解 卷1：协议》P381</p>
+<p><a target="_blank" rel="noopener" href="http://www.winwebmail.com/errmail/ptr.htm">参考文章</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/PTR%E8%AE%B0%E5%BD%95">百度百科</a>、<a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/64638.html">阿里</a>、<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yooplmqj/archive/2008/04/21/1163798.html">cnblogs</a></p>
+</blockquote>
+<blockquote>
+<p>“那么IP反向解析是怎么被应用到邮件服务器中来阻拦垃圾邮件的呢？我们来看看下面一个例子：</p>
+<p>某天，阿Q到A公司拜访，他递上一张名片，名片上写着他来自“黑道杀人俱乐部”以及电话号码等信息，A公司觉得应该对阿Q的来历做个简单调查，于是打电话到阿Q名片上的电话号码所属电信局进行查实，如果电信局告诉A公司其电话号码不属于“黑道杀人俱乐部”，则A公司将拒绝阿Q的拜访，如果其电话号码的确属于“黑道杀人俱乐部”，A公司可能接受阿Q的拜访也可能进一步查实，于是就打电话到“黑道杀人俱乐部”所属注册机构查询，如果得到的答复确认该俱乐部确有此电话号码，则A公司将接受阿Q的拜访，否则仍将拒绝阿Q的拜访。</p>
+<p>这个例子中，阿Q好比是我们的邮件服务器，A公司是对方邮件服务器，“黑道杀人俱乐部”就是我们邮件服务器与对方邮件服务器通信时所使用的HELO域名（不是邮件地址@后的域名），名片上的电话号码就是我们邮件服务器出口的公网IP地址。A公司对阿Q进行调查的过程就相当于一个反向解析验证过程。由此看出，反向解析验证其实是对方服务器在进行的，如果我们没有做反向解析，那么对方服务器的反向解析验证就会失败，这样对方服务器就会以我们是不明发送方而拒收我们发往的邮件，这也就是我们排除其它原因后（如被对方列入黑名单、没有MX记录、使用的是动态IP地址等等）在没做反向解析时无法向sina.com、homail.com发信的原因。”</p>
+</blockquote>
+<hr>
+<h3 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h3><blockquote>
+<p>FTP：文件传输协议</p>
+<p>用户首先提供远程主机的主机名，使本地主机的 FTP 客户端进程建立一个到远程主机 FTP 服务器进程的 <strong>TCP 连接</strong></p>
+<p>该用户接着提供用户标识和口令，作为 FTP 命令的一部分在该 TCP 连接上传送</p>
+<p><strong>一旦该服务器向该用户授权</strong>，用户就可以将存放在本地文件系统中的一个或者多个文件复制到远程文件系统( 反之亦然 )</p>
+<p>FTP 有状态！</p>
+<p>控制端口是 21，数据端口可能是 20，port 是 20，pasv 需要客户端服务端商定</p>
+</blockquote>
+<h4 id="两条连接"><a href="#两条连接" class="headerlink" title="两条连接"></a>两条连接</h4><p>FTP使用了两条并行的 <strong>TCP 连接</strong> 来传输文件</p>
+<p>一个是控制连接，一个是数据连接</p>
+<ul>
+<li>控制连接 用于在两主机之间 <strong>传输控制信息</strong>，如用户标识、口令、改变远程目录的命令以及“存放( put )”和“获取( get )”文件的命令</li>
+<li>数据连接 用于 <strong>实际发送文件</strong></li>
+</ul>
+<blockquote>
+<p>也称 <strong>FTP</strong> 的 <strong>控制信息</strong> 是 <strong>带外</strong> ( out-of-band )传送的</p>
+<p><strong>HTTP</strong> 是在传输文件的 <strong>同一个 TCP</strong> 发送请求和响应首部行的，因此 HTTP 是 <strong>带内</strong> ( in-band )发送控制信息的</p>
+</blockquote>
+<h5 id="建立过程"><a href="#建立过程" class="headerlink" title="建立过程"></a>建立过程</h5><p>当用户主机与远程主机开始一个 <strong>FTP会话</strong> 时，FTP 的 <strong>客户端</strong> 首先与 <strong>服务器( 21 号端口 )</strong> 发起一个 <strong>用于控制</strong> 的 <strong>TCP 连接</strong></p>
+<ul>
+<li>客户端通过 <strong>该控制连接发送命令</strong> ( 用户的标识、口令和改变远程目录 )</li>
+</ul>
+<p>当 FTP 的服务端从该连接上 <strong>收到</strong> 一个文件传输的命令后( 无论是发向还是来自远程主机 )，就 <strong>发起</strong> 一个到客户端的 <strong>TCP数据连接</strong></p>
+<ul>
+<li>FTP 在该数据连接上准确地传送一个文件，然后 <strong>关闭该连接</strong></li>
+</ul>
+<blockquote>
+<p>！！！如果 <strong>还需要传输</strong> 另一个文件，FTP就 <strong>打开另一个</strong> 数据连接</p>
+<p>！！！因此对FTP来说，<strong>控制连接</strong> 贯穿了整个用户会话期间，但是对会话中的每一次文件传输都需要建立 <strong>一个新的数据连接</strong> ( 即数据连接是非持续性的 )</p>
+</blockquote>
+<p>FTP 服务器 必须在整个会话期间 <strong>保留用户的状态</strong> ( state )</p>
+<ul>
+<li>服务器必须把 **特定的 **用户账户 与 <strong>控制连接</strong> 联系起来，随着用户在远程目录树上徘徊，服务器必须追踪用户在远程目录树上的当前位置。对每个进行中的用户会话的状态信息进行追踪，大大限制了 FTP 同时维持的会话总数</li>
+<li>而HTTP是 <strong>无状态</strong> 的，即不必对任何用户状态进行追踪</li>
+</ul>
+<h4 id="两种工作模式-PASV-PORT"><a href="#两种工作模式-PASV-PORT" class="headerlink" title="两种工作模式( PASV + PORT )"></a>两种工作模式( PASV + PORT )</h4><p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/FTP%E5%8D%8F%E8%AE%AE">百度百科</a></p>
+<p>FTP 支持两种模式，一种方式叫做 <strong>Standard</strong> ( 也就是 <strong>PORT</strong> 方式，主动方式 )，一种是 <strong>Passive</strong> ( 也就是 <strong>PASV</strong>，被动方式 )</p>
+<ul>
+<li>Port<ul>
+<li>FTP <strong>客户端</strong> 首先和 FTP <strong>服务器</strong> 的 <strong>TCP 20 端口</strong> 建立连接，通过这个通道发送命令，<strong>客户端</strong> 需要接收数据的时候在这个通道上 <strong>发送 PORT 命令</strong></li>
+<li><strong>PORT 命令包含了客户端用什么端口接收数据</strong>。在传送数据的时候，<strong>服务器端</strong> 通过自己的 <strong>TCP 20 端口</strong> 连接至 <strong>客户端</strong> 的 <strong>指定端口</strong> 发送数据</li>
+</ul>
+</li>
+<li>Passive<ul>
+<li>在建立控制通道的时候和 Port 模式类似，但建立连接后发送的不是 Port 命令，而是 <strong>Pasv 命令</strong></li>
+<li>FTP <strong>服务器</strong> 收到 Pasv 命令后，<strong>随机</strong> 打开一个高端端口( 端口号 <strong>大于 1024</strong> )，并且 <strong>通知客户端</strong> 在这个端口上传送数据的请求，<strong>客户端连接 FTP 服务器此端口</strong>，通过 <strong>三次握手</strong> 建立通道，然后 FTP 服务器将通过 <strong>这个端口</strong> 进行数据的传送</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>总的来说，主动就是客户端给出端口号让服务端主动来连，被动就是服务端打开端口号让客户端来连</p>
+<p>主被动是针对服务端来说的</p>
+</blockquote>
+<blockquote>
+<p>很多防火墙在设置的时候都是不允许接受外部发起的连接的，所以许多位于防火墙后或内网的 FTP 服务器不支持 PASV 模式，因为客户端无法穿过防火墙打开 FTP 服务器的高端端口</p>
+<p>而许多内网的客户端不能用 PORT 模式登陆 FTP 服务器，因为从服务器的 TCP 20 端口无法和内部网络的客户端建立一个新的连接，造成无法工作</p>
+<p>选择用PASV方式还是PORT方式登录FTP服务器，选择权在FTP客户端，而不是在FTP服务器。</p>
+<p>一、客户端只有内网IP，没有公网IP</p>
+<p>从上面的FTP基础知识可知，如果用PORT方式，因为客户端没有公网IP，FTP将无法连接客户端建立数据链路。因此，在这种情况下，客户端必须要用PASV方式，才能连接FTP服务器。大部分FTP站长发现自己的服务器有人能登录上，有人登录不上，典型的错误原因就是因为客户端没有公网IP，但用了IE作为FTP客户端来登录（IE默认使用PORT方式）。</p>
+<p>作为FTP站长，有必要掌握FTP的基础知识，然后指导您的朋友如何正确登录您的FTP。</p>
+<p>二、客户端有公网IP，但安装了防火墙</p>
+<p>如果用PASV方式登录FTP服务器，因为建立数据链路的时候，是由客户端向服务器发送连接请求，没有问题。反过来，如果用PORT方式登录FTP服务器，因为建立数据链路的时候，是由服务器向客户端发送连接请求，此时连接请求会被防火墙拦截。如果要用PORT方式登录FTP服务器，请在防火墙上打开1024以上的高端端口。</p>
+<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/234007">https://developer.aliyun.com/article/234007</a></p>
+</blockquote>
+<h4 id="FTP指令和响应码"><a href="#FTP指令和响应码" class="headerlink" title="FTP指令和响应码"></a>FTP指令和响应码</h4><p>为了区分连续的命令，每个命令后跟 <strong>回车换行符</strong></p>
+<p>每个命令由 4 个大写字母ASCII字符组成</p>
+<ul>
+<li>USER username：用于向服务器发送用户标识。user</li>
+<li>PASS password：用户口令。pass</li>
+<li>LIST：用于请求服务器回送当前远程目录中的所有文件列表。这个列表是数据连接传送的。list</li>
+<li>RETR filename：检索( 即 get )文件。该命令引起远程主机发起一个数据连接。retr</li>
+<li>STOR filename：存放( 即 put )文件。stor</li>
+<li>put 或 send：上传</li>
+<li>mput：批量上传</li>
+<li>get 或 recv：下载</li>
+<li>mget：批量下载</li>
+<li>size：查看服务器端已接收文件的大小</li>
+<li>restart：设置断点位置( 已接收文件的大小 )</li>
+</ul>
+<p>响应码</p>
+<ul>
+<li>331 Username OK，Password required</li>
+<li>125 Data connection already open; transfer starting</li>
+<li>425 Can’t open data connection</li>
+<li>452 Error writing file</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq981378640/article/details/51254177">详细</a></p>
+</blockquote>
+<h4 id="FTP-传输模式"><a href="#FTP-传输模式" class="headerlink" title="FTP 传输模式"></a>FTP 传输模式</h4><p>ASCII &#x2F; 二进制</p>
+<ul>
+<li>使用 <strong>TYPE</strong> 命令设置</li>
+</ul>
+<h4 id="FTP断点续传"><a href="#FTP断点续传" class="headerlink" title="FTP断点续传"></a>FTP断点续传</h4><p>使用 <strong>REST</strong> 命令</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/duanxz/p/5127105.html">参考</a></p>
+</blockquote>
+<p>最重要的一点，断点续传 <strong>需要服务器的支持</strong>，这个是必要条件</p>
+<p>其次，客户端要知道使用 REST 等一系列指令来作断点续传</p>
+<p>下载：</p>
+<ul>
+<li>首先使用 <strong>TYPE I</strong> 命令告诉 FTP 服务器使用 <strong>BINARY</strong> ( 二进制 )模式传送文件</li>
+<li>然后使用 <strong>PASV</strong> 命令告诉 <strong>FTP 服务器</strong> 使用 <strong>被动打开</strong> 模式来传送文件</li>
+<li>接着使用 <strong>REST 187392</strong> 指令告诉 <strong>FTP服务器</strong> 要 <strong>从</strong> 文件的 187392 字节 <strong>开始</strong> 传送( 用 SIZE 获取 )</li>
+<li>使用 <strong>RETR + 文件名</strong> 来下载文件</li>
+</ul>
+<p>REST 0 表示从文件 <strong>最开始处</strong> 下载</p>
+<p>上传：</p>
+<ul>
+<li>用 <strong>APPE</strong> 或 <strong>STOR</strong>，都是追加数据</li>
+<li>获取服务器上和本地要上传文件的同名文件大小</li>
+<li>向服务器发送 “APPE ＋ 文件名”，通知服务器，接下来从数据通道发送给你的数据要附加到这个文件末尾</li>
+<li>定位本地文件指针</li>
+<li>从文件指针处读数据并发送( restart )</li>
+</ul>
+<h4 id="匿名FTP"><a href="#匿名FTP" class="headerlink" title="匿名FTP"></a>匿名FTP</h4><p>只适用于那些 <strong>提供了这项服务的主机</strong></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8C%BF%E5%90%8DFTP">百度百科</a></p>
+</blockquote>
+<p>匿名 FTP 的机制：用户可通过它连接到远程主机上，并从其下载文件，而 <strong>无需成为其注册用户</strong></p>
+<p>系统管理员建立了一个特殊的用户 ID，名为 <strong>anonymous</strong>， Internet 上的任何人在任何地方都可使用该用户 ID</p>
+<p>通过 FTP 程序连接匿名 FTP 主机的方式同连接普通 FTP 主机的方式差不多，只是在要求提供用户标识 ID 时 <strong>必须输入 anonymous</strong>(&#x2F;əˈnɑː.nə.məs&#x2F;)，该用户 ID 的 <strong>口令( pass )</strong> 可以是 <strong>任意的字符串</strong></p>
+<p>一般用自己的 <strong>E-mail地址</strong> 作为口令，使系统维护程序能够记录下来谁在存取这些文件</p>
+<p>匿名 FTP 不适用于所有 Internet 主机，它只适用于那些 <strong>提供了这项服务的主机</strong></p>
+<hr>
+<blockquote>
+<p>关羽跨域</p>
+<p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/04/cors.html">https://www.ruanyifeng.com/blog/2016/04/cors.html</a></p>
+</blockquote>
+<h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>超文本传输协议</p>
+<p>B&#x2F;S、请求&#x2F;响应</p>
+<p>传输的类型由 Content-Type 决定</p>
+<p>无连接</p>
+<ul>
+<li>服务器处理完请求，并收到客户的应答后，即断开连接<ul>
+<li>为了保持会话连接，有了 Cookie 和 Session</li>
+</ul>
+</li>
+</ul>
+<p>无状态</p>
+<ul>
+<li>不保留之前的状态</li>
+</ul>
+<p>URI 和 URL</p>
+<ul>
+<li>URI 是标识符( Identifier )</li>
+<li>URL 是定位符( Location )</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/72616216">参考文章</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21950864/answer/154309494">https://www.zhihu.com/question/21950864/answer/154309494</a></p>
+</blockquote>
+<h4 id="报文格式"><a href="#报文格式" class="headerlink" title="报文格式"></a>报文格式</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000004093321">参考文章</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/eb3e5ec98a66">https://www.jianshu.com/p/eb3e5ec98a66</a></p>
+</blockquote>
+<p>( 请求报文、响应报文、请求头各种字段、响应头各种字段 )</p>
+<h5 id="通用首部字段"><a href="#通用首部字段" class="headerlink" title="通用首部字段"></a>通用首部字段</h5><ul>
+<li>Connection: close ( 搞完就关闭连接 )&#x2F; keep-alive<ul>
+<li>HTTP&#x2F;1.1 默认都是持久连接，使用 close 后会明确断开连接</li>
+<li>HTTP&#x2F;1.1 之前的版本默认都是非持久连接，使用 keep-alive 可以维持持久连接</li>
+</ul>
+</li>
+<li>Transfer-Encoding：传输报文主体时采用的编码方式</li>
+</ul>
+<h5 id="通用缓存首部字段"><a href="#通用缓存首部字段" class="headerlink" title="通用缓存首部字段"></a>通用缓存首部字段</h5><ul>
+<li>Cache-Control：管理缓存信息，HTTP&#x2F;1.1引入</li>
+</ul>
+<h5 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a>请求报文</h5><ul>
+<li>请求行( 第一行 )：包括请求方法、URL、协议&#x2F;版本( 三者之间用空格分隔 )</li>
+<li>请求头( Request Header )<ul>
+<li>Host：服务器的主机名和端口号</li>
+<li>其他</li>
+</ul>
+</li>
+<li>空行</li>
+<li>请求正文</li>
+</ul>
+<h6 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h6><ul>
+<li>GET( 数据放 url 后面，且有长度限制，具体由浏览器决定 )</li>
+<li>POST( 比 GET 多了 body，没有长度限制 )</li>
+<li>PUT、DELETE……</li>
+<li>HEAD：类似 GET，只返回响应报头，不返回响应主体</li>
+</ul>
+<h5 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h5><ul>
+<li>状态行：HTTP 版本、状态码、原因短语</li>
+<li>响应头<ul>
+<li>Location：客户端应重定向到指定 URI，基本配合 3** 响应出现</li>
+<li>Server：HTTP 服务器的应用程序信息</li>
+</ul>
+</li>
+<li>空行</li>
+<li>响应正文</li>
+</ul>
+<h5 id="实体首部字段"><a href="#实体首部字段" class="headerlink" title="实体首部字段"></a>实体首部字段</h5><p>实体首部字段是在请求报文和响应报文中的实体部分所使用的首部，用于补充内容的更新时间等与实体相关的信息</p>
+<ul>
+<li>Content-Encoding 告诉客户端实体的主体部分选用的内容编码方式</li>
+<li>Content-Language 告诉客户端实体主体使用的自然语言( 中文、英文等 )</li>
+<li>Content-Length 表明实体主体部分的大小( 单位：字节 )。对实体主体进行内容编码传输时，不能再使用该首部字段</li>
+<li>Content-Type 响应报文中对象的媒体类型</li>
+</ul>
+<h4 id="HTTP-状态码"><a href="#HTTP-状态码" class="headerlink" title="HTTP 状态码"></a>HTTP 状态码</h4><ul>
+<li>1XX- 信息型，服务器收到请求，需要请求者继续操作</li>
+<li>2XX- 成功型，请求成功收到，理解并处理</li>
+<li>3XX - 重定向，需要进一步的操作以完成请求</li>
+<li>4XX - 客户端错误，请求包含语法错误或无法完成请求</li>
+<li>5XX - 服务器错误，服务器在处理请求的过程中发生了错误</li>
+</ul>
+<h5 id="常见"><a href="#常见" class="headerlink" title="常见"></a>常见</h5><ul>
+<li>200 OK - 客户端请求成功</li>
+<li>301 - 永久性重定向。资源( 网页等 )被永久转移到其它 URL</li>
+<li>302 - 临时跳转，常见应用场景是通过 302 跳转将所有的 HTTP 流量重定向到 HTTPS</li>
+<li>303：和 302 有着相同的功能，但是 303 明确要求客户端应该采用 GET 方法获取资源</li>
+<li>400 Bad Request - 客户端请求有语法错误，不能被服务器所理解</li>
+<li>401 Unauthorized - 未认证（没有登录）请求未经授权，这个状态代码和 请求报头 Authorization、响应报头 WWW-Authenticate 一起使用</li>
+<li>403 Forbidden：没有权限（登录了但没有权限）</li>
+<li>404 - 请求资源不存在，可能是输入了错误的 URL</li>
+<li>500 - 服务器内部发生了不可预期的错误</li>
+<li>503 Server Unavailable - 服务器当前不能处理客户端的请求，一段时间后可能恢复正常</li>
+</ul>
+<hr>
+<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5abb6c8651882555784e051d">非对称加密</a></p>
+<p>加密、解密使用不同的密钥</p>
+<p>一把作为公开的公钥，另一把作为私钥</p>
+<p>公钥加密的信息，只有私钥才能解密</p>
+<p>反之，私钥加密的信息，只有公钥才能解密</p>
+<p>缺点：加密和解密花费时间长、速度慢，只适合对少量数据进行加密</p>
+</blockquote>
+<h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><p>HTTPS 简单来说就是 <strong>非对称加密 + 对称加密</strong></p>
+<h5 id="实现的具体步骤"><a href="#实现的具体步骤" class="headerlink" title="实现的具体步骤"></a>实现的具体步骤</h5><ul>
+<li>某网站拥有用于非对称加密的公钥 A、私钥 A’</li>
+<li>浏览器向网站服务器请求，服务器把公钥 A 传输给浏览器</li>
+<li>浏览器随机生成一个用于对称加密的密钥 X，用公钥 A 加密后传给服务器</li>
+<li>服务器拿到后用私钥 A’ 解密得到密钥 X</li>
+<li>这样双方就都拥有密钥 X 了，且别人无法知道它</li>
+<li>之后双方所有数据都用密钥 X 加密解密</li>
+</ul>
+<p>非对称加密的是证书的数据( 非对称更适合用于认证对方的合法性 )，对称加密的是实际传输的数据</p>
+<blockquote>
+<p>如何证明浏览器收到的公钥一定是该网站的公钥？</p>
+<ul>
+<li>使用数字证书</li>
+</ul>
+<p>对于为什么不用CA证书的公钥：</p>
+<ul>
+<li>CA证书公钥只为了浏览器解密证书验证真伪。不用于加密数据。加密数据使用协商的加密算法</li>
+</ul>
+</blockquote>
+<h5 id="CA-证书"><a href="#CA-证书" class="headerlink" title="CA 证书"></a>CA 证书</h5><ul>
+<li>CA 生成 <strong>明文数字证书</strong>，然后将 <strong>明文数字证书</strong> 运行 Hash 算法，生成 <strong>Message Digest</strong>，用 CA 的私钥加密 <strong>Message Digest</strong>，生成 <strong>数字签名</strong>( Digital Signature )，这样 <strong>明文数字证书 + 数字签名</strong> 就是用户拿到的 <strong>数字证书</strong>( Certificate )</li>
+<li>客户端&#x2F;个体得到 <strong>明文数字证书 + 数字签名</strong>，然后将 <strong>明文数字证书</strong> 运行相同的 Hash 算法，得到本地的 <strong>Message Digest</strong> ( A )</li>
+<li>客户端&#x2F;个体用 CA 公钥解开在服务端被私钥加密过的 <strong>数字签名</strong>，得到绝对正确的 <strong>Message Digest</strong> ( B )</li>
+<li><strong>比较 A 和 B</strong>，如果一样，那就安全可信，认证通过</li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/52466748">详细说明</a></li>
+</ul>
+<h4 id="详细握手过程"><a href="#详细握手过程" class="headerlink" title="详细握手过程"></a>详细握手过程</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6863295544828444686">参考文章</a></p>
+</blockquote>
+<p>两张图解释清楚</p>
+<ul>
+<li>上面的是 RSA 加密，下面的是 DH 加密</li>
+</ul>
+<p><img src="https://img.kebabshell.space/image-20201226211852324.png" alt="image-20201226211852324"></p>
+<p><img src="http://img.kebabshell.space/image-20201226212830332.png" alt="image-20201226212830332"></p>
+<hr>
+<p>访问 <a target="_blank" rel="noopener" href="https://www.baidu.com/">百度</a>，通过 大白鲨 wireshark 抓包( 下面用的是 DH  )：<br><img src="https://i.loli.net/2020/12/05/CbnIjzwd7sgLH1r.png" alt="SSL和TLS2"></p>
+<h5 id="Client-Hello"><a href="#Client-Hello" class="headerlink" title="Client Hello"></a>Client Hello</h5><ul>
+<li>一个客户端可用的版本号( 版本是向下兼容的 )</li>
+<li>一个随机数</li>
+<li>一个加密套件( 客户端支持的所有的加密套件，在这里包含 16 个 )<br><img src="https://i.loli.net/2020/12/05/TsPwJb6LomIu5Zj.png" alt="SSL和TLS3"></li>
+</ul>
+<h5 id="Server-Hello"><a href="#Server-Hello" class="headerlink" title="Server Hello"></a>Server Hello</h5><ul>
+<li><p>一个版本号( 版本向下兼容 )</p>
+</li>
+<li><p>一个随机数</p>
+</li>
+<li><p>一个从客户端发送的加密套件中选用的双方都支持的加密套件</p>
+<ul>
+<li>选用不同的套件会对后续的交互产生不一样的动作</li>
+</ul>
+<p><img src="https://i.loli.net/2020/12/05/KasDi9gTex2fuGA.png" alt="SSL和TLS4"></p>
+</li>
+</ul>
+<p>此时客户端和服务端就已经协商好了版本号，密码套件，并且客户端和服务端都拥有了两个随机数</p>
+<h5 id="Server-Certificate"><a href="#Server-Certificate" class="headerlink" title="Server Certificate"></a>Server Certificate</h5><p>服务端会立刻发送一个 Server Certificate 信息，该信息包含了一个很重要的东西：CA 证书，即数字证书</p>
+<p><img src="https://i.loli.net/2020/12/05/zgFDsGf2TJq9Nb8.png" alt="SSL和TLS5"></p>
+<blockquote>
+<p>Certificates -&gt; [CA 证书](#CA 证书)，包括 <strong>明文数字证书 + 数字签名</strong>，还有服务器公钥</p>
+<p>证书的作用：</p>
+<ul>
+<li>一个是身份验证</li>
+<li>一个是证书中包含服务器的公钥( 不关 CA 的事 )，该公钥结合密码套件的密钥协商算法协商出预备主密钥 pre-master</li>
+</ul>
+</blockquote>
+<h5 id="Server-Key-Exchange"><a href="#Server-Key-Exchange" class="headerlink" title="Server Key Exchange"></a>Server Key Exchange</h5><p>该消息是有条件才发送的，刚刚在 [Server Hello](#Server Hello) 中说的，选择不同的密码套件会有不同的动作产生，该信息的发送就是属于不同的动作</p>
+<p>它发送的条件是，如果证书包含的信息不足以进行密钥交换，那么必须发送该信息。通常协商的加密套件属于下面的类型，就会发送：</p>
+<ul>
+<li>DHE_DSS</li>
+<li>DHE_RSA</li>
+<li>ECDHE_ECDSA</li>
+<li>ECDHE_RSA</li>
+</ul>
+<p>之前协商的密码套件就是 ECDHE_RSA：</p>
+<p><img src="https://i.loli.net/2020/12/05/xMLQfG9p8hYeNBJ.png" alt="SSL和TLS6"></p>
+<p>所以这里我们可以看到该信息的发送，并且该信息是紧跟着 Server Certificate 信息的</p>
+<p><img src="https://i.loli.net/2020/12/05/5L6ek9WpziZfMoA.png" alt="SSL和TLS7"></p>
+<blockquote>
+<p>RSA 与 DH</p>
+<ul>
+<li><p>加密：RSA&#x2F;DH</p>
+</li>
+<li><p>身份验证&#x2F;数字签名：RSA</p>
+</li>
+</ul>
+<p>最上面的时序图中展示的密钥协商方式就是 RSA，该方式较为简单：</p>
+<ul>
+<li>客户端生成一个随机数作为 pre-master</li>
+<li>从证书中获取服务端的 RSA 公钥，加密 pre-master，传给服务端</li>
+<li>服务端使用自己的 RSA 私钥解密，得到 pre-master</li>
+</ul>
+<p>由于传递时，pre-master 经过 RSA 公钥加密，只有掌握着 RSA 私钥的服务端才能解开获得内容，满足密钥协商的条件</p>
+<p>与RSA方式中 pre-master 完全由客户端生成不同，在DH算法中，pre-master 是客户端和服务器端共同计算出来的，只有经过消息互换才能计算出预备主密钥，流程如下：</p>
+<ul>
+<li>服务端内部：生成 DH 参数和 DH 密钥对</li>
+<li>服务端( [Server Key Exchange](#Server Key Exchange) )发送给客户端<ul>
+<li>用自己的 RSA 私钥、签名、DH 参数 和 DH 公钥，最后将签名值、DH 参数、DH 公钥全部发送给客户端</li>
+</ul>
+</li>
+<li>客户端内部：使用服务器 RSA 的公钥( 从证书获取 )校验签名，确保获取到的 DH 参数和 DH 公钥是由服务端签发的</li>
+<li>客户端( [Client Key Exchange](#Client Key Exchange) )发送给服务端<ul>
+<li>通过 DH 参数生成客户端的 DH 密钥对，并将客户端 DH 公钥发送给服务端</li>
+</ul>
+</li>
+<li>客户端( [Change Cipher Spec](#Change Cipher Spec) )告知服务端准备好了<ul>
+<li>通过客户端DH私钥和服务器端 DH 公钥计算出预备主密钥，并告知服务端准备好了</li>
+</ul>
+</li>
+<li>服务端内部：接收到客户端的 DH 公钥，结合服务器的 DH 私钥计算出预备主密钥 pre-master</li>
+<li>最终客户端和服务器端计算出的预备主密钥 pre-master 能够保持一致</li>
+</ul>
+</blockquote>
+<p>客户端每次连接服务器的时候，服务器都会发送动态 DH 信息( DH 参数和 DH 公钥，DH 公钥并不是证书上的那个公钥 )，这些信息不存在证书中，需要通过 [Server Key Exchange](Server Key Exchange) 来进行信息传递，并且传递的 DH 信息需要使用服务器的私钥进行签名</p>
+<p>DH 公钥就是 Pubkey，签名就是 Signatrue，DH 参数由 Curve Type、Named Curve、Pubkey 组成的</p>
+<p>该信息是用于密钥交换</p>
+<blockquote>
+<p>HTTPS 在真正的通信阶段，是通过对称加密来对内容进行加密的，那么对称加密的密钥交换的安全性就显得非常重要，如果安全的保证客户端和服务端都能获得这个对称加密的密钥就是该信息需要做的事情了</p>
+</blockquote>
+<h5 id="Server-Hello-Done"><a href="#Server-Hello-Done" class="headerlink" title="Server Hello Done"></a>Server Hello Done</h5><p><img src="https://i.loli.net/2020/12/05/AD7Po9LTmzWHh5i.png" alt="SSL和TLS8"></p>
+<p>服务器发送完上述信息之后，会立刻发送该信息，然后等到客户端的响应</p>
+<p>接下来可以和客户端一起协商出预备主密钥</p>
+<h5 id="Client-Key-Exchange"><a href="#Client-Key-Exchange" class="headerlink" title="Client Key Exchange"></a>Client Key Exchange</h5><p>一般有两种方式：</p>
+<ul>
+<li>客户端通过 RSA&#x2F;ECDSA 算法加密预备主密钥，然后发送给服务器</li>
+<li>通过服务器发送的 DH 参数计算出客户端的 DH 公钥，并传递给服务器</li>
+<li>这里使用的是第二种方式</li>
+</ul>
+<p><img src="https://i.loli.net/2020/12/05/qjrPBJm6o7gE1z2.png" alt="SSL和TLS9"></p>
+<h5 id="Change-Cipher-Spec"><a href="#Change-Cipher-Spec" class="headerlink" title="Change Cipher Spec"></a>Change Cipher Spec</h5><p>该信息用于告诉对方，我已经计算好需要使用的对称密钥了，我们接下来的通信都需要使用该密钥进行加密之后再发送</p>
+<p><img src="https://i.loli.net/2020/12/05/sLKt5c4oZFrG3jH.png" alt="SSL和TLS10"></p>
+<h5 id="Encrypted-Handshake-Message"><a href="#Encrypted-Handshake-Message" class="headerlink" title="Encrypted Handshake Message"></a>Encrypted Handshake Message</h5><p>即加密的握手信息<br><img src="https://i.loli.net/2020/12/05/2FVPQwTSOKeNuWM.png" alt="SSL和TLS11"></p>
+<hr>
+<h3 id="运输层的多路复用和多路分解"><a href="#运输层的多路复用和多路分解" class="headerlink" title="运输层的多路复用和多路分解"></a>运输层的多路复用和多路分解</h3><ul>
+<li>将运输层报文段的数据交付到正确的套接字的工作称为 <strong>多路分解</strong></li>
+<li>在源主机从不同套接字中收集数据块，并为每个数据块封装上首部信息( 这将在以后用于分解 )从而产生报文段，然后将报文段传递到网络层，所有这些工作称为 <strong>多路复用</strong></li>
+</ul>
+<hr>
+<h3 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247484322&idx=7&sn=cde9aa52b0c62efc642401c87e9a8c01&chksm=ebd742a3dca0cbb53a459c500e310dc49fccf8df577b95806aaf34d3220c288337cc6d4132fe&token=620000779&lang=zh_CN&scene=21###wechat_redirect">参考文章</a></p>
+</blockquote>
+<p>UDP( 用户数据报协议 )</p>
+<ul>
+<li><p>在发送报文段之前，发送方和接收方的运输层实体之间没有握手。所以 UDP 被称为无连接的</p>
+</li>
+<li><p>无须执行任何与运行在目的端系统中的 UDP 实体之间的握手，主机端的 UDP 为此报文添加首部字段，然后将形成的报文段交给网络层</p>
+<ul>
+<li>网络层将此 UDP 报文段封装进一个 IP 数据报中，然后将其发送给一个名字服务器……</li>
+</ul>
+</li>
+<li><p>UDP 首部开销小，仅有 8 字节</p>
+</li>
+</ul>
+<h4 id="UDP首部"><a href="#UDP首部" class="headerlink" title="UDP首部"></a>UDP首部</h4><p>UDP首部只有 4 个字段，每个字段由 2 个字节组成，即首部 8 个字节</p>
+<p><img src="https://i.loli.net/2020/12/05/KGsTcju7SQZm4tN.png" alt="UDP1"></p>
+<p>长度字节 -&gt; UDP 报文段中的字节数( 首部 + 数据 )</p>
+<h4 id="UDP校验和"><a href="#UDP校验和" class="headerlink" title="UDP校验和"></a>UDP校验和</h4><p>把报文段的所有 16 比特字求和( 溢出要回卷 )，然后 取反，得到 校验和( 回卷就是进位加到末位 )</p>
+<p>接收方将全部 16 比特之和 + 校验和，若都为 1，就没有出错</p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
+<li><p>提供无连接服务</p>
+</li>
+<li><p>在传送数据之前不需要先建立连接</p>
+</li>
+<li><p>传送的数据单位协议是 UDP 报文或用户数据报</p>
+</li>
+<li><p>对方的运输层在收到 UDP 报文后，不需要给出任何确认</p>
+</li>
+<li><p>虽然 UDP 不提供可靠交付，但在某些情况下 UDP 是一种最有效的工作方式</p>
+</li>
+<li><p>UDP 支持一对一、一对多、多对一和多对多的交互通信</p>
+</li>
+<li><p>UDP 的首部开销小，只有 8 个字节，比 TCP 的 20 个字节的首部要短</p>
+</li>
+</ul>
+<blockquote>
+<p>UDP 对应用层交下来的报文，既不合并，也不拆分，而是 <strong>保留这些报文的边界</strong></p>
+<p>应用层交给 UDP 多长的报文，UDP 就照样发送，即一次发送一个报文</p>
+<p><img src="https://i.loli.net/2020/12/05/LRzsGwQlKUJxW9j.png" alt="UDP2"></p>
+</blockquote>
+<h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><blockquote>
+<p>！！！<a href="/2020/12/07/TCP/" title="看这篇，下面都很乱，且有错！！！">看这篇，下面都很乱，且有错！！！</a></p>
+</blockquote>
+<p>就是类似“打电话”</p>
+<ul>
+<li><p>TCP ( 传输控制协议 )：面向连接</p>
+</li>
+<li><p>TCP 是可靠的</p>
+</li>
+<li><p>可靠传输、流量控制、避免网络拥塞</p>
+</li>
+<li><p>TCP 连接提供的是 <strong>全双工服务</strong>：有A到B的一条TCP连接，那么数据能从A到B，也能B到A(<strong>同时</strong>)。</p>
+</li>
+<li><p>也是 <strong>点对点</strong></p>
+</li>
+<li><p>TCP 是面向字节流的，就是一个文件，TCP 先把数据块拿到 TCP 发送缓存，然后发送到接收方的接收缓存，然后再到文件系统</p>
+</li>
+</ul>
+<h4 id="TCP是如何实现可靠传输的"><a href="#TCP是如何实现可靠传输的" class="headerlink" title="TCP是如何实现可靠传输的"></a>TCP是如何实现可靠传输的</h4><h5 id="校验和"><a href="#校验和" class="headerlink" title="校验和"></a>校验和</h5><h5 id="序列号"><a href="#序列号" class="headerlink" title="序列号"></a>序列号</h5><h5 id="确认应答"><a href="#确认应答" class="headerlink" title="确认应答"></a>确认应答</h5><h5 id="超时重传"><a href="#超时重传" class="headerlink" title="超时重传"></a>超时重传</h5><h5 id="连接管理"><a href="#连接管理" class="headerlink" title="连接管理"></a>连接管理</h5><h5 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h5><h5 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h5><h5 id="停止等待协议"><a href="#停止等待协议" class="headerlink" title="停止等待协议"></a>停止等待协议</h5><p><img src="https://i.loli.net/2020/12/05/KXpJ4qhEbgNonV7.png" alt="TCP1"></p>
+<p>（超时重传在下面）</p>
+<p>（RTT：往返时间）</p>
+<h5 id="确认丢失和确认迟到"><a href="#确认丢失和确认迟到" class="headerlink" title="确认丢失和确认迟到"></a>确认丢失和确认迟到</h5><p><img src="https://i.loli.net/2020/12/05/HaSkFoRZNA6dgM1.png" alt="TCP2"></p>
+<p>总结就是：只要你没告诉我收到，我就认为你没收到，就要重发</p>
+<p>使用上述的确认和重传机制，就能在不可靠的传输网络上实现可靠的通信</p>
+<p>这种可靠传输协议称为 <strong>自动重传请求(Automatic RepeatQuest)</strong> (《计算机网络自顶向下》P138)</p>
+<h5 id="ARQ"><a href="#ARQ" class="headerlink" title="ARQ"></a>ARQ</h5><p>ARQ 表明重传的请求是 <strong>自动</strong> 进行的。接收方不需要请求发送方重传</p>
+<p><img src="https://i.loli.net/2020/12/05/ZEIUagXfL7GYzkr.png" alt="TCP3"><br>Td是发的时间，Ta是收的时间，RTT是往返时间，大部分时间在等……</p>
+<p>信道利用率：<br><img src="https://i.loli.net/2020/12/05/tPs7dFInqr42Al5.png" alt="TCP4"></p>
+<p>提高信道利用率，因为RTT和Ta几乎不变，就要提高Td，即发送的时间，即数据进入链路的时间：</p>
+<p><img src="https://i.loli.net/2020/12/05/aNjJPiGovfXw1nH.png" alt="TCP5"><br>这就是 <strong>流水线传输</strong><br>就不等它确认了，那是怎么保证可靠呢？</p>
+<h5 id="GBN-回退N步-协议"><a href="#GBN-回退N步-协议" class="headerlink" title="GBN (回退N步)协议"></a>GBN (回退N步)协议</h5><p><strong>连续ARQ协议</strong>，也就是 <strong>滑动窗口</strong>，也称为 <strong>GBN (回退N步)协议</strong></p>
+<p><img src="https://i.loli.net/2020/12/05/9hfSNAclGkTvsKw.png" alt="TCP6"></p>
+<p>发送窗口5就是5个可以连续发送<br>开始等确认，如果1确认<br>窗口往右移1</p>
+<p><img src="https://i.loli.net/2020/12/05/mK3Zs8HdpGkOt2W.png" alt="TCP7"></p>
+<p>2确认，右移1，以此类推……已经确定的就能从缓存清掉</p>
+<p>但是这样每个数据都要确认，效率还是低<br>然后就有了 <strong>累计确认</strong></p>
+<p><img src="https://i.loli.net/2020/12/05/tsglnV1qC6Uamvj.png" alt="TCP8"></p>
+<p>上面是接收方，下面是发送方</p>
+<p>发送方累计确认123后，证明123都收到了，就滑动3个</p>
+<p>如果3丢了，4确认了</p>
+<p><img src="https://i.loli.net/2020/12/05/MEpwkIHSBaQ1dxi.png" alt="TCP9"></p>
+<p>会认为发送方累积确认到2，就会重传3，接收方<strong>会丢弃后面的失序分组</strong>。</p>
+<p>丢了又可惜，就有了 SACK(选择确认选项)</p>
+<h5 id="SACK"><a href="#SACK" class="headerlink" title="SACK"></a>SACK</h5><p>当接收方接收到乱序的数据时，能提供一个SACK来描述</p>
+<p>SACK 包含了不连续块的第一个数据的序列号和不连续块的最后一个数据的序列号之后的序列号</p>
+<h4 id="TCP报文段首部"><a href="#TCP报文段首部" class="headerlink" title="TCP报文段首部"></a>TCP报文段首部</h4><p><img src="https://i.loli.net/2020/12/05/sJ6rQBZVpaWnekD.png" alt="TCP10"></p>
+<p>选项一般为空，使用首部一般为20字节(UDP首部8个)</p>
+<p><strong>序号：</strong><br>因为TCP是面向字节流的，序号就是建立在字节流之上，而不是建立在传送的报文段的序列之上，因此一个报文段的序号是这个报文段首字节的字节流编码</p>
+<p><strong>确认号：</strong><br>因为 <strong>全双工</strong>，主机A发送的报文段的确认号就是A期望从主机B收到的下一个字节的序号。<br>假设主机A已经收到了来自B的编号为0-535的所有字节，同时假设A <strong>打算</strong> 发一个报文段给B。如果A期望B的字节流中的536及以后的字节，就会在A发往B的报文段的 <strong>确认号</strong> 中填上 <strong>536</strong></p>
+<p><strong>数据偏移</strong><br>4位，1111，十进制15，也就是说选项部分最多40个字节(这里我也不懂是啥意思)<br>记录TCP报文段的第多少个字节后就是数据，<strong>数据偏移</strong> 也叫 <strong>首部长度</strong></p>
+<p><img src="https://i.loli.net/2020/12/05/ZL34TeSpavAkH5C.png" alt="TCP12"></p>
+<p><img src="https://i.loli.net/2020/12/05/nwIM1VrzYvDQXdp.png" alt="TCP13"></p>
+<p><img src="https://i.loli.net/2020/12/05/MSxY1coerWlON58.png" alt="TCP14"></p>
+<p><strong>标记位</strong><br>就是 ACK什么的那些，有这些就能在缓存中不用排队，直接优先<br>注意：ACK、SYN(三次握手)</p>
+<p>PSH 是 push，123发过去，接收方按顺序读123，如果3的标记位PSH 为 1，就是312，就是急着交作业</p>
+<p>RST 是 reset，严重错误，需要重新来建立连接</p>
+<p>URG urgent，为1时，假设紧急指针为50，就代表TCP数据部分前50(包括50)字节需要紧急处理</p>
+<p><strong>窗口</strong><br>用于指示接收方愿意接受的字节数量，常用于 <strong>流量控制</strong></p>
+<p><img src="https://i.loli.net/2020/12/05/O13PhUtbfryomJT.png" alt="TCP15"></p>
+<p>MSS 最大报文段长度</p>
+<h4 id="TCP连接控制"><a href="#TCP连接控制" class="headerlink" title="TCP连接控制"></a>TCP连接控制</h4><p>传输连接有三个阶段：连接建立、数据传输、连接释放</p>
+<h5 id="三次握手、四次挥手"><a href="#三次握手、四次挥手" class="headerlink" title="三次握手、四次挥手"></a>三次握手、四次挥手</h5><p><strong>三次握手</strong> say hello：<br>SYN 为 1 代表这是用于连接的报文段，不包含应用层数据<br>1、客户端发送 SYN 报文段，即 SYN 置为1、ACK 0、序号随机 x (client_isn)、确认号 0<br>2、服务端收到了 客户端的SYN报文段，发送 SYN 1、确认号 x + 1、ACK 1、序号 y(server_isn)<br>3、客户端 收到了，发送 ACK 1、确认号 y + 1、SYN 0、序号 x + 1</p>
+<p><img src="https://i.loli.net/2020/12/05/LBlcK3DgjbqU6Fn.jpg" alt="TCP21"><br><img src="https://i.loli.net/2020/12/05/WMnQXfiTFHc9CN6.png" alt="TCP22"><br>SYN_SENT、ESTAB_LISHED<br>LISTEN、SYN_RCVD(receive)、ESTAB_LISHED</p>
+<p>ACK 0 -&gt; 确认号无效<br>ACK 1 -&gt; 确认号有效</p>
+<p>SYN 常被用来 SYN 洪泛攻击，频繁请求会话</p>
+<p><strong>四次挥手</strong> say goodbye：</p>
+<p><img src="https://i.loli.net/2020/12/05/HMp4kwcXS5C6jaE.png" alt="TCP23"><br><img src="https://i.loli.net/2020/12/05/MB2v9dHrOs63Ypg.jpg" alt="TCP24"></p>
+<p>1、发送方：我要结束了；<br>2、接收方：好的<br>3、接收方：我也要关掉了；<br>4、发送方：好的<br>即：<br>1、发送方发送一个FIN，希望接收方看到自己的序号Seq(K)，还包含了一个ACK(L)用于确认对方最近一次发来的数据<br>2、接收方设置响应的ACK为K+1，表明它已经成功收到了发送方主动关闭的FIN，并设置序号Seq(L)<br>3、接收方再次发送自己的FIN，且序号Seq为L，ACK为K+1<br>4、发送方为了完成连接的关闭，要发送一个确认，包含ACK (L+1)(确认上一个FIN)、Seq (K)。<br>如果出现FIN丢失的情况，那么发送方会一直发，直到收到ACK为止</p>
+<h5 id="同时打开、同时关闭、半关闭"><a href="#同时打开、同时关闭、半关闭" class="headerlink" title="同时打开、同时关闭、半关闭"></a>同时打开、同时关闭、半关闭</h5><p><strong>半关闭</strong> (渣？)：<br>我发送了一个FIN给对方，但是我仍然希望接收对方的数据，直到对方发送一个FIN给我<br>当第二个FIN被确认后，整个连接才完全关闭。</p>
+<p><img src="https://i.loli.net/2020/12/05/L2HpQYtNTbR4yjg.jpg" alt="TCP25"></p>
+<p><strong>同时打开 and 同时关闭</strong>：</p>
+<p><img src="https://i.loli.net/2020/12/05/P1ZzKTsehtAQvyf.jpg" alt="TCP26"></p>
+<p>注意：同时打开只是建立一条TCP连接。同时关闭和正常关闭类似，只是顺序是交叉的</p>
+<h4 id="TCP实现可靠传输"><a href="#TCP实现可靠传输" class="headerlink" title="TCP实现可靠传输"></a>TCP实现可靠传输</h4><h5 id="以字节单位的滑动窗口"><a href="#以字节单位的滑动窗口" class="headerlink" title="以字节单位的滑动窗口"></a>以字节单位的滑动窗口</h5><p>就是上面的 <strong>TCP实现可靠传输</strong></p>
+<h4 id="TCP流量控制机制"><a href="#TCP流量控制机制" class="headerlink" title="TCP流量控制机制"></a>TCP流量控制机制</h4><p>就是滑动窗口(连续ARQ)，调节 <strong>窗口的大小</strong> 来控制</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37379780">https://zhuanlan.zhihu.com/p/37379780</a></p>
+<p>这里如果 <strong>死锁</strong> 呢？<br>死锁：当发送者收到了一个窗口为0的应答，发送者便停止发送，等待接收者的下一个应答。但是如果下一个窗口不为0的应答在传输过程丢失，发送者一直等待下去，而接收者以为发送者已经收到该应答，等待接收新数据，这样双方就相互等待，从而产生死锁。<br>为了避免流量控制引发的死锁，TCP使用了<strong>持续计时器</strong>。每当发送者收到一个零窗口的应答后就启动该计时器。时间一到便主动发送报文询问接收者的窗口大小。若接收者仍然返回零窗口，则重置该计时器继续等待；若窗口不为0，则表示应答报文丢失了，此时重置发送窗口后开始发送，这样就避免了死锁的产生。</p>
+<p><img src="https://i.loli.net/2020/12/05/epiA3MqnrSFPztB.png" alt="TCP18"></p>
+<h4 id="TCP超时重传机制"><a href="#TCP超时重传机制" class="headerlink" title="TCP超时重传机制"></a>TCP超时重传机制</h4><h5 id="基于计时器的重传-RTO"><a href="#基于计时器的重传-RTO" class="headerlink" title="基于计时器的重传(RTO)"></a>基于计时器的重传(RTO)</h5><p>TCP发送数据时会设置计时器</p>
+<h6 id="设置时间"><a href="#设置时间" class="headerlink" title="设置时间"></a>设置时间</h6><p>超时重传的时间应略大于下面得出的加权平均往返时间RTTs</p>
+<p><img src="https://i.loli.net/2020/12/05/btewlyNB5iqDa8W.png" alt="TCP16"></p>
+<p>推荐的 α 值为 1&#x2F;8</p>
+<p>每个数据包都有相应的计时器，一旦超过 RTO 而没有收到 ACK，就重发该数据包。没收到 ACK 的数据包都会存在重传缓冲区里，等到 ACK 后，就从缓冲区里删除。</p>
+<h5 id="快速重传"><a href="#快速重传" class="headerlink" title="快速重传"></a>快速重传</h5><p>服务器如果收到乱序的包，也给客户端回复 ACK，只不过是重复的 ACK。收到乱序的包 6,7,8,9 时，服务器全都发 ACK &#x3D; 5。这样，客户端就知道 5 发生了空缺。一般来说，如果客户端<strong>连续三次</strong>收到重复的 ACK，就会重传对应包，而不需要等到计时器超时。</p>
+<p>但快速重传仍然没有解决：到底该重传多少个包？</p>
+<h5 id="带选择确认的重传-SACK"><a href="#带选择确认的重传-SACK" class="headerlink" title="带选择确认的重传(SACK)"></a>带选择确认的重传(SACK)</h5><p>参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/101702312">https://zhuanlan.zhihu.com/p/101702312</a></p>
+<p>在快速重传的基础上，返回最近收到的报文段的序列号范围，这样客户端就知道，哪些数据包已经到达服务器了。<br>Left Edge，Right Edge 就是这些乱序包的左右边界。</p>
+<p><img src="https://i.loli.net/2020/12/05/aPUXzWY7G1CEo5F.png" alt="TCP17"></p>
+<h4 id="拥塞控制-1"><a href="#拥塞控制-1" class="headerlink" title="拥塞控制"></a>拥塞控制</h4><p><strong>拥塞控制</strong> 主要包括：1、慢启动；2、拥塞避免；3、快重传；4、快恢复</p>
+<p>MSS：最大报文段长度，典型值就是1460，拨号光纤好像是1440</p>
+<p><img src="https://i.loli.net/2020/12/05/YKfNHIR4y5mxwPT.png" alt="TCP19"><br><img src="https://i.loli.net/2020/12/05/9kWT1deBJuf6loj.png" alt="TCP27"></p>
+<p>假设当前发送方 <strong>拥塞窗口cwnd</strong> 为1个(拥塞窗口cwnd的值是几，就能发送几个数据报文段，实际上书里就是设置为1个MSS，具体看系统)，接收方收到报文段后回复一个确认，发送方首次收到确认后将cwnd设为2，接下来，cwnd 4、8、16……以<strong>指数增长</strong>，这就是 <strong>慢启动</strong></p>
+<p>当达到 <strong>慢启动阈值 ssthresh</strong> 时，TCP会谨慎增加cwnd，即进入 <strong>拥塞避免</strong> 阶段，<strong>每次cwnd增加1</strong>，然后分两种版本：</p>
+<ul>
+<li><p>如果发生 <strong>超时重传</strong>，就 <strong>重新进入慢启动</strong>，ssthresh设置为cwnd的一半，新的cwnd设置为1(TCP Tahoe版本)</p>
+</li>
+<li><p>如果 <strong>连续有三个冗余的ACK</strong> 时，就是出现丢包，就将相应的报文段重传(<strong>快速重传</strong>)，开始执行 <strong>快恢复</strong>，将ssthresh设置为cwnd的一半，新的cwnd设置为新的ssthresh(TCP Reno版本)，然后每次+1。新的cwnd也可以设置为ssthresh + 3</p>
+<p><img src="https://i.loli.net/2020/12/05/y326jplbv5XmwZT.png" alt="TCP20"></p>
+</li>
+</ul>
+<p>参考：《自顶向下》P186</p>
+<hr>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><ul>
+<li>负责在不同网络之间尽力转发数据包</li>
+<li>基于数据包的 IP 地址转发</li>
+<li><strong>不负责丢失重传</strong></li>
+<li><strong>不负责顺序</strong></li>
+</ul>
+<p>发送数据的过程：</p>
+<p><img src="https://i.loli.net/2020/12/05/uoGEXwQK8rnhCzk.png" alt="TCP28"></p>
+<h4 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h4><p>IPv4数据报格式：</p>
+<p><img src="https://i.loli.net/2020/12/05/LPeHmvldaFx23rq.jpg" alt="TCP29"></p>
+<p>标识、标志、片偏移。和[ IP 分片](#IP 分片) 有关</p>
+<p>偏移字段表示：</p>
+<ul>
+<li>该分片负载字节中的第一个字节在原始 IPv4 数据中的偏移量( 以 8 字节为单位 )</li>
+</ul>
+<p>MF 字段表明：</p>
+<ul>
+<li>该数据报后面是否还有更多的分组，只有最后一个才被设置为 0</li>
+</ul>
+<h4 id="IP-分片"><a href="#IP-分片" class="headerlink" title="IP 分片"></a>IP 分片</h4><p>一个链路层帧能承载的最大数据量叫 <strong>最大传输单元(MTU)</strong></p>
+<p>最后一个片的标志位 MF 被设置为 0，其他所有片被设置为 1</p>
+<p><img src="https://i.loli.net/2020/12/05/vpYNaMd9GBSiz7w.jpg" alt="TCP30"></p>
+<hr>
+<h4 id="IP-选路"><a href="#IP-选路" class="headerlink" title="IP 选路"></a>IP 选路</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1595656">参考文章</a></p>
+</blockquote>
+<hr>
+<h4 id="ICMP-协议"><a href="#ICMP-协议" class="headerlink" title="ICMP 协议"></a>ICMP 协议</h4><p>ICMP（Internet Control Message Protocol：Internet 控制报文协议）用来记录诊断信息</p>
+<p>ICMP 报文是在 IP 数据报内被封装的</p>
+<img src="https://i.loli.net/2020/12/05/OtPniWKlGcQwMp1.jpg" alt="TCP31" style="zoom: 25%;" />
+
+<ul>
+<li>类型字段保留了 42 个不同的值，用于确定特定的报文。只有大概 8 个是经常使用的</li>
+<li>许多类型的 ICMP 报文也使用不同的代码字段进一步指定报文的含义</li>
+<li>校验和时段覆盖整个 ICMPv4 报文</li>
+</ul>
+<p>ICMP 数据报可以分为两大类：</p>
+<ul>
+<li>有关 IP 数据报传递的 ICMP 报文( 称为 差错报文 )</li>
+<li>有关信息采集和配置的 ICMP 报文( 称为 查询或信息类报文 )</li>
+</ul>
+<p>信息类报文包括回显请求( 类型 8 )和回显应答( 类型 0 )，以及路由器通告( 类型 9 )和路由器请求( 类型 10 )( 9 和 10 统称为路由器发现 )</p>
+<p>常见的差错报文包括目的不可达( 类型 3 )、重定向( 类型 5 )、超时( 类型 11 )和参数问题( 类型 12 )</p>
+<img src="https://i.loli.net/2020/12/05/25AtqV8GFTBZsJe.jpg" alt="TCP32" style="zoom:33%;" />
+
+<hr>
+<h3 id="以太网帧"><a href="#以太网帧" class="headerlink" title="以太网帧"></a>以太网帧</h3><img src="https://i.loli.net/2020/12/05/917S4JEBUXZrn2C.jpg" alt="TCP33" style="zoom: 25%;" />
+
+<img src="https://i.loli.net/2020/12/05/9OtXumn4PzFhEVk.png" alt="TCP35" style="zoom: 50%;" />
+
+<p>FCS( 帧检验序列 )常用 CRC( 循环冗余检验 ) 《协议》P59</p>
+<hr>
+<h3 id="PPP-协议"><a href="#PPP-协议" class="headerlink" title="PPP 协议"></a>PPP 协议</h3><p>点到点协议</p>
+<p><img src="https://i.loli.net/2020/12/05/cpAS58U7loKN3se.png" alt="TCP34"></p>
+<p>PPP里面还包含：</p>
+<ul>
+<li>链路控制协议( LCP )</li>
+<li>网络控制协议( NCP )</li>
+<li>高级数据链路控制协议( HDLC )</li>
+<li>……</li>
+</ul>
+<p>PPP协议的六个阶段:</p>
+<ol>
+<li>链路不可用阶段： 初始阶段</li>
+<li>链路建立阶段： LCP 协商，( 协商认证方式等 )</li>
+<li>验证阶段： PAP&#x2F;CHAP 验证</li>
+<li>网络层协议阶段：NCP 协商</li>
+<li>PPP 会话维持阶段： 维持 PPP 会话， 定时发送 Echo Request 报文，并等待 Echo Reply 报文</li>
+<li>网络终止阶段： 终止PPP 会话，回到链路不可用阶段</li>
+</ol>
+<p>详见：《协议》P89</p>
+<hr>
+<h3 id="MTU"><a href="#MTU" class="headerlink" title="MTU"></a>MTU</h3><p>以太网的最大传输单元 &#x3D; 1500字节</p>
+<hr>
+<h3 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h3><blockquote>
+<p>ARP：地址解析协议</p>
+<p>在 OSI 中，ARP 是属于链路层，在 TCP&#x2F;IP 中，ARP 属于 网络层。我觉得都有。。。</p>
+</blockquote>
+<p>ARP 几乎用于 IPv4 和以太网 MAC 地址之间的映射，简单说就是能通过 IP 找到 MAC 地址</p>
+<p>ARP 正常模式下，仅适用于广播网络</p>
+<p>链路层广播：在一个共享的链路层网段上，ARP 向所有主机发送一个称为 <strong>ARP 请求</strong> 的以太网帧</p>
+<p>同一广播域中的所有系统都能接收 ARP 请求</p>
+<p>响应一个 ARP 应答，告诉发送 ARP 请求的主机“我的 IP 和 MAC”</p>
+<ul>
+<li>这个应答不是广播，而是直接发给发送请求的主机</li>
+</ul>
+<p>之后发送方就能将数据报封装在以太网帧中 <strong>直接</strong> 发给目的主机( 同一域 )，不需要经过路由器</p>
+<p><strong>ARP缓存</strong><br>在内存</p>
+<p>RARP：逆向ARP，通过 MAC 能知道 IP，已经很少使用</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag"># 网络</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/07/17/Redis/" rel="prev" title="Redis">
+                  <i class="fa fa-chevron-left"></i> Redis
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/12/03/LeetCode-Learn/" rel="next" title="LeetCode-Learn">
+                  LeetCode-Learn <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KebabShell</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

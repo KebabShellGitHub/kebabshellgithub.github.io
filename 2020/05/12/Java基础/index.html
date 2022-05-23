@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/rocket_132px_1222543_easyicon.net.png">
+  <link rel="mask-icon" href="/images/rocket_1222543_easyicon.net.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kebabshellgithub.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":80,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"slideLeftIn","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础">
+<meta property="og:url" content="https://kebabshellgithub.github.io/2020/05/12/Java%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="秋早亦朝">
+<meta property="og:description" content="Java基础">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210402165050662.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210329192032372.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210531114839065.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210601144832738.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210601144910496.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210603115252491.png">
+<meta property="og:image" content="https://img.kebabshell.space/image-20210628104442184.png">
+<meta property="article:published_time" content="2020-05-12T22:47:35.000Z">
+<meta property="article:modified_time" content="2022-05-23T16:10:17.270Z">
+<meta property="article:author" content="KebabShell">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.kebabshell.space/image-20210402165050662.png">
+
+
+<link rel="canonical" href="https://kebabshellgithub.github.io/2020/05/12/Java%E5%9F%BA%E7%A1%80/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kebabshellgithub.github.io/2020/05/12/Java%E5%9F%BA%E7%A1%80/","path":"2020/05/12/Java基础/","title":"Java基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java基础 | 秋早亦朝</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?5e2684a539c5d87042f60cb2b8d78c36"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="秋早亦朝" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">秋早亦朝</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">KebabShell</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">错题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E7%95%8C%E6%B3%9B%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">上下界泛型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Integer"><span class="nav-number">3.</span> <span class="nav-text">Integer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL"><span class="nav-number">3.1.</span> <span class="nav-text">MySQL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interface"><span class="nav-number">4.</span> <span class="nav-text">Interface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F"><span class="nav-number">5.</span> <span class="nav-text">乱七八糟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">6.</span> <span class="nav-text">二叉树</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="KebabShell"
+      src="/images/hexo.jpg">
+  <p class="site-author-name" itemprop="name">KebabShell</p>
+  <div class="site-description" itemprop="description">纯个人记录</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KebabShellGitHub" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KebabShellGitHub" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kebabshell@163.com" title="E-Mail → mailto:kebabshell@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2837329130" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2837329130" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kebabshellgithub.github.io/2020/05/12/Java%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/hexo.jpg">
+      <meta itemprop="name" content="KebabShell">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋早亦朝">
+      <meta itemprop="description" content="纯个人记录">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java基础 | 秋早亦朝">
+      <meta itemprop="description" content="Java基础">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-12 22:47:35" itemprop="dateCreated datePublished" datetime="2020-05-12T22:47:35+00:00">2020-05-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">Java基础</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="错题"><a href="#错题" class="headerlink" title="错题"></a>错题</h2><p>1、</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> -<span class="number">5</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> -<span class="number">12</span>;</span><br><span class="line">        System.out.println(y % x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>取余取头，取模取尾</p>
+<p>1.取余 rem(3,2)&#x3D;1 rem(-3,-2)&#x3D;-1 rem(3,-2)&#x3D;1 rem(-3,2)&#x3D;-1</p>
+<p>2.取模 mod(3,2)&#x3D;1 mod(-3,-2)&#x3D;-1 mod(3,-2)&#x3D;-1 mod(-3,2)&#x3D;1</p>
+<p>2、</p>
+<p>重载 overload 就是同一个类中，有多个方法名相同，但参数列表不同（包括参数个数和参数类型），与返回值无关，与权限修饰符也无关</p>
+<p>调用重载的方法时通过传递给它们不同的参数个数和参数类型来决定具体使用哪个方法，这叫多态</p>
+<p>重写就是子类重写基类的方法，方法名，参数列表和返回值都必须相同，否则就不是重写而是重载</p>
+<p>权限修饰符不能小于被重写方法的修饰符。重写方法不能抛出新的异常或者是比被重写方法声明更加宽泛的检查型异常</p>
+<p>重写（overriding）：指在继承情况下，子类中定义了与其父类中方法具有相同型构的新方法，就称为子类把父类的方法重写了。这是实现多态必须的步骤。</p>
+<p>重载（overloading）：指在同一个类中定义了一个以上具有相同名称，但是型构不同的方法。</p>
+<p>返回值不能作为重载的依据</p>
+<p>3、</p>
+<p>Java 面向对象编程有三大特性：封装、继承、多态。</p>
+<p>封装：隐藏对象的属性和实现细节，仅对外公开访问方法，控制在程序中属性的读和写的访问级别</p>
+<p>继承：可以理解为，在一个现有类的基础之上，增加新的方法或重写已有方法，从而产生一个新类</p>
+<ul>
+<li>继承都是单继承</li>
+<li>接口是多继承多实现</li>
+</ul>
+<p>多态：相同的事物，调用其相同的方法，参数也相同时，但表现的行为却不同。</p>
+<ul>
+<li>继承是多态得以实现的基础</li>
+<li>实现多态的三个必要条件<ol>
+<li>继承：在多态中必须存在有继承关系的子类和父类。</li>
+<li>重写：子类对父类中某些方法进行重新定义，在调用这些方法时就会调用子类的方法。</li>
+<li>向上转型：在多态中需要将子类的引用赋给父类对象，只有这样该引用才能够具备技能调用父类的方法和子类的方法。</li>
+</ol>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">private</th>
+<th align="center">无修饰</th>
+<th align="center">protected</th>
+<th align="center">public</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">同一类</td>
+<td align="center">可访问</td>
+<td align="center">可访问</td>
+<td align="center">可访问</td>
+<td align="center">可访问</td>
+</tr>
+<tr>
+<td align="center">同一包中的子类</td>
+<td align="center">不可访问</td>
+<td align="center">可访问</td>
+<td align="center">可访问</td>
+<td align="center">可访问</td>
+</tr>
+<tr>
+<td align="center">同一包中的非子类</td>
+<td align="center">不可访问</td>
+<td align="center">可访问</td>
+<td align="center">可访问</td>
+<td align="center">可访问</td>
+</tr>
+<tr>
+<td align="center">不同包中的子类</td>
+<td align="center">不可访问</td>
+<td align="center">不可访问</td>
+<td align="center">可访问</td>
+<td align="center">可访问</td>
+</tr>
+<tr>
+<td align="center">不同包中的非子类</td>
+<td align="center">不可访问</td>
+<td align="center">不可访问</td>
+<td align="center">不可访问</td>
+<td align="center">可访问</td>
+</tr>
+</tbody></table>
+<p>Java 中类可分为以下三种：</p>
+<ul>
+<li>普通类：使用 <code>class</code> 定义且不含有抽象方法的类。<ul>
+<li>普通类可以继承（<code>extends</code>）普通类，可以继承（<code>extends</code>）抽象类，可以继承（<code>implements</code>）接口。</li>
+</ul>
+</li>
+<li>抽象类：使用 <code>abstract class</code> 定义的类，它可以含有或不含有抽象方法。<ul>
+<li>抽象类可以继承（<code>extends</code>）普通类，可以继承（<code>extends</code>）抽象类，可以继承（<code>implements</code>）接口。</li>
+</ul>
+</li>
+<li>接口：使用 <code>interface</code> 定义的类<ul>
+<li>接口只能继承（<code>extends</code>）接口</li>
+</ul>
+</li>
+</ul>
+<p>4、</p>
+<p>sleep()方法（休眠）是线程类（Thread）的静态方法，调用此方法让当前线程暂停执行指定的时间，将执行机会（CPU）让给其他线程，但是对象的锁依然保持，因此休眠时间结束后会自动恢复（线程回到就绪状态，请参考第66题中的线程状态转换图）。wait()是Object类的方法，调用对象的wait()方法导致当前线程放弃对象的锁（线程暂停执行），进入对象的等待池（wait pool），只有调用对象的notify()方法（或notifyAll()方法）时才能唤醒等待池中的线程进入等锁池（lock pool），如果线程重新获得对象的锁就可以进入就绪状态。</p>
+<p>5、</p>
+<p><img src="https://img.kebabshell.space/image-20210402165050662.png" alt="image-20210402165050662"></p>
+<p>java中long类型自动转换为float类型</p>
+<p>6、</p>
+<p>volatile保证了其他线程的立即可见性，就没有保证原子性</p>
+<p>由于有些时候对 volatile的操作，不会被保存，说明不会造成阻塞。不可用与多线程环境下的计数器</p>
+<h2 id="上下界泛型"><a href="#上下界泛型" class="headerlink" title="上下界泛型"></a>上下界泛型</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test_2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        List&lt;? <span class="keyword">extends</span> <span class="title class_">B</span>&gt; list1 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();  <span class="comment">// 上界</span></span><br><span class="line">        List&lt;? <span class="built_in">super</span> B&gt; list2 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();    <span class="comment">// 下界</span></span><br><span class="line">        <span class="type">A</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">A</span>();</span><br><span class="line">        <span class="type">B</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">B</span>();</span><br><span class="line">        <span class="type">C</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">C</span>();</span><br><span class="line">        <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">        <span class="comment">// list1.add(o); 不能添加任何元素，因为List中具体是B的哪种子类无法确定</span></span><br><span class="line">        <span class="comment">// list1.add(a);</span></span><br><span class="line">        <span class="comment">// list1.add(b);</span></span><br><span class="line">        <span class="comment">// list1.add(c);</span></span><br><span class="line">        o = list1.get(<span class="number">0</span>);</span><br><span class="line">        a = list1.get(<span class="number">0</span>);</span><br><span class="line">        b = list1.get(<span class="number">0</span>);</span><br><span class="line">        <span class="comment">// c = list1.get(0); 编译错误，编译器无法向下转型</span></span><br><span class="line">        <span class="comment">// list2.add(o); 编译错误，</span></span><br><span class="line">        <span class="comment">// list2.add(a); 因为List中具体是B的哪种父类无法确定</span></span><br><span class="line">        list2.add(b);</span><br><span class="line">        list2.add(c);</span><br><span class="line">        o = list2.get(<span class="number">0</span>);</span><br><span class="line">        <span class="comment">// a = list2.get(0); 编译错误，因为List中具体是B的哪种父类无法确定，无法向下转型，而Object是所有类的父类</span></span><br><span class="line">        <span class="comment">// b = list2.get(0);</span></span><br><span class="line">        <span class="comment">// c = list2.get(0);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> <span class="keyword">extends</span> <span class="title class_">A</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> <span class="keyword">extends</span> <span class="title class_">B</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上界</p>
+<p>上界用 <code>extends</code> 关键字声明，表示参数化的类型可能是所指定的类或者其任意子类。例如<code>&lt;? extends B&gt;</code>，泛型的上界就是 B 类。</p>
+<p>形如 <code>List&lt;? extends B&gt;</code>，具体哪一种不能确定，既可以是 B，也可以是 C。在尝试执行 add() 方法时，List中的类型不能确定是具体哪一种，所以会编译报错。在执行 get() 方法时，不管是 B 还是 Ｃ，都可以以 Ａ 类对象来接收。所以 <code>List&lt;? extends B&gt;</code> 不能添加元素，具有只读属性，只能获取。</p>
+<p>下界</p>
+<p>下界用 <code>super</code> 关键字声明，表示参数化的类型可能是所指定的类型或者其任意父类。例如<code>&lt;? super B&gt;</code>，泛型的下界就是 B 类。</p>
+<p>形如 <code>List&lt;? super B&gt;</code>，具体哪一种不能确定，既可以是 B，也可以是 A，直至 Object类。在尝试执行 <code>add()</code> 方法时，虽然 List 的具体类型不能确定，但是根据多态， B 类及其子类的对象肯定都可以被赋值给 B 的对象，所以只能添加 B 类及其子类的对象。在尝试执行 <code>get()</code> 方法时，List 中的类型是 B 类或者其父类的具体一种，向上直至 Object 类，所以只能将获取的元素赋值给 Object 对象。</p>
+<h2 id="Integer"><a href="#Integer" class="headerlink" title="Integer"></a>Integer</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1000</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">System.out.println(a == b); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="type">Integer</span> <span class="variable">c</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">d</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">System.out.println(c == d); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>Debug 进入第一行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Integer <span class="title function_">valueOf</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)</span><br><span class="line">        <span class="keyword">return</span> IntegerCache.cache[i + (-IntegerCache.low)];</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>IntegerCache.low</code> 是 -128</p>
+<p><code>IntegerCache.high</code> 是 127</p>
+<p>Integer 有个内部类 <code>IntegerCache</code>，缓存了 -128 ~ 127 的 Integer 对象</p>
+<p>这个范围内都是一个对象，超过这个范围就 new ，所以 1000 为 false</p>
+<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><p>一个字段同时满足多个条件</p>
+<p><img src="https://img.kebabshell.space/image-20210329192032372.png" alt="image-20210329192032372"></p>
+<h2 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h2><p>接口是一种特殊的抽象类</p>
+<p>接口中的变量默认是public static final 的，方法默认是public abstract 的</p>
+<p><img src="https://img.kebabshell.space/image-20210531114839065.png" alt="image-20210531114839065"></p>
+<blockquote>
+<p>接口就是提供一种统一的’协议’,而接口中的属性也属于’协议’中的成员.它们是公共的,静态的,最终的常量.相当于全局常量.<br>抽象类是不’完全’的类,相当于是接口和具体类的一个中间层.即满足接口的抽象,也满足具体的实现.<br>如果接口可以定义变量，但是接口中的方法又都是抽象的，在接口中无法通过行为来修改属性。有的人会说了，没有关系，可以通过实现接口的对象的行为来修改接口中的属性。这当然没有问题，但是考虑这样的情况。如果接口A中有一个public访问权限的静态变量a。按照Java的语义，我们可以不通过实现接口的对象来访问变量a，通过A.a &#x3D; xxx;就可以改变接口中的变量a的值了。正如抽象类中是可以这样做的，那么实现接口A的所有对象也都会自动拥有这一改变后的a的值了，也就是说一个地方改变了a，所有这些对象中a的值也都跟着变了。这和抽象类有什么区别呢，怎么体现接口更高的抽象级别呢，怎么体现接口提供的统一的协议呢，那还要接口这种抽象来做什么呢？所以接口中不能出现变量，如果有变量，就和接口提供的统一的抽象这种思想是抵触的。所以接口中的属性必然是常量，只能读不能改，这样才能为实现接口的对象提供一个统一的属性。</p>
+<p>通俗的讲，你认为是要变化的东西，就放在你自己的实现中，不能放在接口中去，接口只是对一类事物的属性和行为更高层次的抽象。对修改关闭，对扩展（不同的实现implements）开放，接口是对开闭原则的一种体现。</p>
+</blockquote>
+<h2 id="乱七八糟"><a href="#乱七八糟" class="headerlink" title="乱七八糟"></a>乱七八糟</h2><p>String 内部是 byte[] 字节数组实现</p>
+<p>Java 中的 char 是 Unicode 编码，Unicode 编码占两个字节，就是 16 位，足够存储一个汉字</p>
+<p>abstract 类</p>
+<ul>
+<li>abstract 类不能与 final，static 一起使用。final修饰方法，子类可以调用，但不能覆盖。</li>
+<li>abstract 类可以有 private 成员，但最好不要，因为私有和抽象放在一起，子类如果想重写父类的私有方法根本继承不过来，也就无法重写</li>
+<li>abstract 类中可以有非抽象方法</li>
+<li>abstract 类中可以都是非抽象的，但是抽象方法一定要在类和接口中</li>
+</ul>
+<p>在 main() 方法中给出的字节数组，如果将其显示到控制台上，直接标准输出流 System.out.println()</p>
+<ul>
+<li>out 是 java.lang.System 类中的一个字段，out 是“标准“”输出流，public static final PrintStream out，<br><strong>out是PrintStream类型，PrintStream是包装流，你传入什么，他就输出什么</strong></li>
+</ul>
+<p>类变量 &#x3D; 静态变量，区分成员变量</p>
+<ul>
+<li>类加载过程中只是对类变量进行初始化赋值（非真正的值），并没有对成员变量初始化，成员变量是实例化的时候才搞的</li>
+</ul>
+<p><img src="https://img.kebabshell.space/image-20210601144832738.png" alt="image-20210601144832738"></p>
+<p><img src="https://img.kebabshell.space/image-20210601144910496.png" alt="image-20210601144910496"></p>
+<p>在集合中</p>
+<ul>
+<li>vector：就比arraylist多了个同步化机制（线程安全），因为效率较低，现在已经不太建议使用。在web应用中，特别是前台页面，往往效率（页面响应速度）是优先考虑的。</li>
+<li>stack：堆栈类，先进后出</li>
+<li>hashtable：就比hashmap多了个线程安全</li>
+<li>enumeration：枚举，相当于迭代器</li>
+<li>除了这些之外，其他的都是非线程安全的类和接口。</li>
+</ul>
+<p>Java程序初始化顺序：</p>
+<ol>
+<li>父类的静态代码块</li>
+<li>子类的静态代码块</li>
+<li>父类的普通代码块</li>
+<li>父类的构造方法</li>
+<li>子类的普通代码块</li>
+<li>子类的构造方法</li>
+</ol>
+<p>日志的级别之间的大小关系如右所示：ALL &lt; TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL &lt; OFF </p>
+<p>Log4j建议只使用四个级别，优先级从高到低分别是 ERROR &gt; WARN &gt; INFO &gt; DEBUG</p>
+<p>log4j在运行期间是不可以重新设置的（springboot可以动态修改日志级别（<a target="_blank" rel="noopener" href="https://blog.didispace.com/spring-boot-1-5-x-feature-1/%EF%BC%89%EF%BC%89">https://blog.didispace.com/spring-boot-1-5-x-feature-1/））</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> <span class="title function_">func3</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">long</span> i= <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">long</span>转<span class="type">float</span>，这个是对的</span><br><span class="line"></span><br><span class="line">loat占<span class="number">4</span>个字节为什么比<span class="type">long</span>占<span class="number">8</span>个字节大呢，因为底层的实现方式不同。</span><br><span class="line">浮点数的<span class="number">32</span>位并不是简单直接表示大小，而是按照一定标准分配的。</span><br><span class="line">第<span class="number">1</span>位，符号位，即S</span><br><span class="line">接下来<span class="number">8</span>位，指数域，即E。</span><br><span class="line">剩下<span class="number">23</span>位，小数域，即M，取值范围为[<span class="number">1</span> ,<span class="number">2</span> ) 或[<span class="number">0</span> , <span class="number">1</span>)</span><br><span class="line">然后按照公式： V=(-<span class="number">1</span>)^s * M * <span class="number">2</span>^E</span><br><span class="line">也就是说浮点数在内存中的<span class="number">32</span>位不是简单地转换为十进制，而是通过公式来计算而来，通过这个公式虽然，只有<span class="number">4</span>个字节，但浮点数最大值要比长整型的范围要大。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>方法重写 两同两小一大原则：</p>
+<ol>
+<li>两同：方法名和参数列表相同</li>
+<li>两小：返回值或声明异常比父类小（或相同）  </li>
+<li>一大：访问修饰符比父类的大（或相同）</li>
+</ol>
+<p>方法重写要注意的事项：<br>    1.方法重写时， 方法名与形参列表必须一致。<br>    2.方法重写时，子类的权限修饰符必须要大于或者等于父类的权限修饰符。<br>    3.方法重写时，子类的返回值类型必须要小于或者等于父类的返回值类型。<br>    4.方法重写时， 子类抛出的异常类型要小于或者等于父类抛出的异常类型。</p>
+<p>default：<a target="_blank" rel="noopener" href="https://my.oschina.net/dongtianxi/blog/757554">https://my.oschina.net/dongtianxi/blog/757554</a></p>
+<p>javac.exe是编译.java文件</p>
+<p>java.exe是java虚拟机</p>
+<p>javadoc.exe用来制作java文档</p>
+<p>jdb.exe是java的调试器</p>
+<p>javaprof.exe是剖析工具</p>
+<p>Java体系结构包括四个独立但相关的技术：</p>
+<ul>
+<li><p>Java程序设计语言</p>
+</li>
+<li><p>Java.class文件格式</p>
+</li>
+<li><p>Java应用编程接口（API）</p>
+</li>
+<li><p>Java虚拟机</p>
+<p>当我们编写并运行一个Java程序时，就同时运用了这四种技术，用<strong>Java程序设计语言</strong>编写源代码，把它编译成<strong>Java.class文件格式</strong>，然后再在<strong>Java虚拟机中运行class文件</strong>。当程序运行的时候，它通过调用class文件实现了<strong>Java API的方法</strong>来满足程序的Java API调用</p>
+</li>
+</ul>
+<p>String对象不可变、StringBuffer对象可变的含义：</p>
+<p>举个例子：</p>
+<p>String str &#x3D; “aa”; str &#x3D; “aa”+”bb”; 此时str的值为”aabb”，但是”aabb”不是在开始的字符串”aa”后面直接连接的”bb”，而是又新生成了字符串”aabb”，字符串”aa”一旦被初始化，那么它的值不可能再改变了。 </p>
+<p>StringBuffer strb &#x3D; StringBuffer(“aa”); strb.append(“bb”); 此时的strb的值也为”aabb”，但是”aabb”是直接在开始的字符串”aa”后面连接的“bb”，并没有生成新的字符串。</p>
+<p>String str &#x3D;<br>“”;<br>System.out.print(str.split(“,”).length);</p>
+<p>输出1</p>
+<p>str.split(&quot;,&quot;)方法是把str字符串根据分割符&quot;,&quot;划分成一个字符串数组，如果str字符串中找不到分隔符&quot;,&quot;，则把整个str字符串放入字符串数组的第一个元素。因此str.split(&quot;,&quot;).length&#x3D;1。</p>
+<p><img src="https://img.kebabshell.space/image-20210603115252491.png" alt="image-20210603115252491"></p>
+<p>抽象类中可以构造方法，接口不可以</p>
+<p>线性结构</p>
+<p>线性结构是一个有序数据元素的集合。 其中数据元素之间的关系是一对一的关系，即除了第一个和最后一个数据元素之外，其它数据元素都是首尾相接的。<br>常用的线性结构有：线性表，栈，队列，双队列，数组，串。<br>非线性结构中各个数据元素不再保持在一个线性序列中，每个数据元素可能与零个或者多个其他数据元素发生联系。根据关系的不同，可分为层次结构和群结构。<br>常见的非线性结构有：二维数组，数组，广义表，树(二叉树等)，图。（其中数组是由多个一维数组组成的，所以不再是线性结构）</p>
+<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903953751097351">参考</a></p>
+</blockquote>
+<p>二叉树、平衡二叉树、满二叉树、完全二叉树、二叉搜索树、平衡二叉搜索树、红黑树、线索二叉树、哈夫曼树</p>
+<p><img src="https://img.kebabshell.space/image-20210628104442184.png" alt="image-20210628104442184"></p>
+<p>完全二叉树是到最后一个叶子结点之前每个节点都不为空</p>
+<p>平衡二叉树父节点的左子树和右子树的高度之差不能大于1</p>
+<p>二叉搜索树是左边小于根节点，右边大于根节点</p>
+<p>平衡二叉搜索树既满足平衡二叉树条件有满足二叉搜索树条件（红黑树）</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/54714101">哈夫曼树</a>是最优二叉树，是一种带权路径长度最短的二叉树</p>
+<ul>
+<li>权值越大的叶子节点越靠近根节点，权值越小的叶子节点越远离根节点。</li>
+<li>只有度为0（叶子节点）和度为2（分支节点）的节点，没有度为1的节点。</li>
+<li>没有强行说限制一定要0表示左子树，1表示右子树</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/b59db381561a">图的拓扑排序</a></p>
+<p>线索二叉树</p>
+<p>二叉树在线索化后，仍不能有效求解的问题是后序线索二叉树中求后序后继</p>
+<p>无向图边数的两倍等于各顶点度数的总和</p>
+<p>array.sort((a,b)&#x3D;&gt;Math.abs(a-3)-Math.abs(b-3));</p>
+<p>(a,b)&#x3D;&gt;Math.abs(a-3)-Math.abs(b-3)；</p>
+<p>箭头函数表示：当Math.abs(a-3)&gt;Math.abs(b-3)时，a放在b后面，Math.abs(a-3)&lt;Math.abs(b-3)时，不交换位置，也就是说数组中的每一项减去3的绝对值越大越靠后。这里主要考的是对sort()方法的掌握。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/05/03/%E5%AF%B9%E4%BA%8EJava-208%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9A%84%E8%BD%AC%E8%BD%BD%E5%92%8C%E8%A1%A5%E5%85%85/" rel="prev" title="Java 208道面试题">
+                  <i class="fa fa-chevron-left"></i> Java 208道面试题
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/05/20/MySQL/" rel="next" title="MySQL">
+                  MySQL <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KebabShell</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>
